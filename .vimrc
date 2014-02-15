@@ -1,3 +1,3 @@
-:let $VIMRUNTIME = $HOME/myenv/gvim
+:let $VIMRUNTIME = "$HOME/myenv/gvim"
 source $VIMRUNTIME/vimrc
 
