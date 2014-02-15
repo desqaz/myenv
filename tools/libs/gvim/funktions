@@ -1,0 +1,30 @@
+#------------------------------------------------------------------------------
+# Grep in vim
+vgp () {
+   if [ $# = "0" ]; then
+      echo "Error : Need to specify a Pattern"
+      echo "Usage : vgp Pattern [directory]"
+      return;
+   fi
+   if [ $# -gt 2 ]; then
+      echo "Error : To many directories, only none or one supported"
+      echo "Usage : vgp Pattern [directory]"
+      return;
+   fi
+   if [ "$2" = "" ]; then
+      arg2="**"
+   else
+      arg2="$2/**"
+   fi
+   vi -geometry 100x68 +'GREP /'"$1"'/j '"$arg2"''
+}
+
+#------------------------------------------------------------------------------
+#Open a greped file with vi at the right line :
+vig () {
+   vi_file=`echo "$1" | gawk -F : '{print $1}'`;
+   vi_line=`echo "$1" | gawk -F : '{print $2}'`;
+   vi $vi_file +$vi_line;
+}
+
+ 

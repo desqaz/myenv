@@ -1,0 +1,337 @@
+"#####################
+"# VIM CONFIGURATION #
+"#####################
+
+"-------------------------------------------------------------------------
+"Color and font
+"-------------------------------------------------------------------------
+so $VIMRUNTIME/colors/desert.vim
+
+set guifont=Monospace\ 8
+
+" Font
+set gfn=Monospace\ 8
+
+" enable syntax highlighting
+syntax on
+
+if $VIM_FROM_ECLIPSE != "y"
+if $TAGS_HL != ""
+   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_f Function
+   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight c_t gui=bold,italic
+   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_d Tag
+   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_m Tag
+   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_e Tag
+   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    source $TAGS_HL
+endif
+endif
+
+"-------------------------------------------------------------------------
+"Colorsheme Scroller, Chooser, and Browser
+"-------------------------------------------------------------------------
+source $VIMRUNTIME/plugin/ScrollColor.vim
+source $VIMRUNTIME/plugin/color_sample_pack.vim
+
+" Pathogen
+"source $VIMRUNTIME/autoload/pathogen.vim
+"call pathogen#infect()
+
+"-------------------------------------------------------------------------
+" Various
+"-------------------------------------------------------------------------
+"Allow special Vim improvements like multiple-undo
+set nocompatible
+
+"Set improve Backspace
+set bs=2
+
+" visualbell
+set visualbell
+
+"Show the current edition mode on last line, number of column and line
+set showmode
+set ruler
+set nu
+set ls=2
+
+"Mouse popup
+set mousemodel=popup_setpos
+
+" Set indentation corresponding to filetype
+filetype indent on
+
+" Make command line two lines high
+"set ch=2
+
+" Highlight search strings
+set hlsearch
+
+" "search as we type" on
+set incsearch
+
+" cindent option
+set cinoptions=t0,(0,W4,l1,g0,hs
+
+" I starts at the first non-blank character
+set cpoptions+=H
+
+" highlighting strings inside C comments
+let c_comment_strings=1
+
+" Backup dir
+set aw
+
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
+
+set listchars+=tab:\|-
+
+set backupdir=~/temp/vim_temp//
+set directory=~/temp/vim_temp//
+
+if $VIM_FROM_ECLIPSE == "y"
+set guioptions-=m
+set guioptions-=T
+endif
+
+"---------------------------------------------------------------------------
+" Mapping
+"---------------------------------------------------------------------------
+map <F2>          :call Show80col()<CR>
+map <F3>          :TlistUpdate<CR>
+map <F4>          :TlistToggle<CR>
+map <F5>          ^i/* <C-[>$a */<C-[>
+map <F6>          ^3x$2h3x
+map <F7>          :bdelete<CR>
+map <F9>          :noh<CR>
+map <C-N>         :noh<CR>
+map <C-Del>       :bdelete<CR>
+map <C-PageUp>    [c
+map <C-PageDown>  ]c
+
+map ,l            :so ~/.vimrc<CR>
+map ,#            :s/^/#/<CR><C-N>
+map ,/            :s@^@//@<CR><C-N>
+map ,"            :s@^@"@<CR><C-N>
+map ,c            :set filetype=c<CR>
+map ,z            :set filetype=zsh<CR>
+map ,m            :set filetype=make<CR>
+map ,p            :set filetype=pantalk<CR>
+
+"tal : align "\" in multiple lines defines
+vmap ,t !tal<CR>
+
+" --------------------------------------------------------------------------
+" Cscope 
+"---------------------------------------------------------------------------
+if $VIM_FROM_ECLIPSE != "y"
+if has("cscope")
+	" change this to 1 to search ctags DBs first
+	set csto=0
+	set cst
+	set nocsverb
+	" add any database in current directory
+	if filereadable(".vimtags/cscope.out")
+	    cs add .vimtags/cscope.out
+	" else add database pointed to by environment
+	elseif $CSCOPE_DB != ""
+	    cs add $CSCOPE_DB
+	endif
+	set csverb
+
+	" Using 'CTRL-AltGr \' then a search type makes the vim window
+	" "shell-out", with search results displayed on the bottom
+
+	nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+	nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+	nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+	" Using 'CTRL-AltGr ^' then a search type makes the vim window
+	" split horizontally, with search result displayed in
+	" the new window.
+
+	nmap <C-^>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-^>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-^>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-^>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-^>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-^>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
+	nmap <C-^>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+	nmap <C-^>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+endif
+endif
+
+
+"--------------------------------------------------------------------------
+" Omnicompletion, needs tags
+"---------------------------------------------------------------------------
+set omnifunc=ccomplete#Complete
+set shiftwidth=3 tabstop=3 expandtab
+
+if $VIMTAGSPATH != ""
+   set tags+=$VIMTAGSPATH/tags
+elseif filereadable(".vimtags/tags") 
+   set tags+=.vimtags/tags
+endif
+
+source $VIMRUNTIME/autoload/ccomplete.vim
+
+"---------------------------------------------------------------------------
+" tab completion from tags or cscope
+"---------------------------------------------------------------------------
+function! InsertTabWrapper(direction)
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] =~ '\s'
+        return "\<Tab>"
+    elseif "backward" == a:direction
+        return "\<C-P>"
+    else
+        return "\<C-N>"
+    endif
+endfunction
+
+inoremap <Tab> <C-R>=InsertTabWrapper("forward")<cr>
+inoremap <s-tab> <C-R>=InsertTabWrapper("backward")<cr>
+inoremap <leader><Tab> <Tab>
+
+"Completion in commands like 
+cnoremap <Tab> <C-L><C-D>
+
+"---------------------------------------------------------------------------
+" Mini buffer explorer plugin
+" -------------------------------------------------------------------------
+if $VIM_FROM_ECLIPSE != "y"
+let g:miniBufExplMapWindowNavVim = 1 
+let g:miniBufExplMapWindowNavArrows = 1 
+let g:miniBufExplMapCTabSwitchBufs = 1 
+let g:miniBufExplModSelTarget = 1
+endif
+
+" Do not save modified buffer when switching
+set hidden
+
+"---------------------------------------------------------------------------
+" Tlist
+" -------------------------------------------------------------------------
+"Fermer Vim s'il ne reste que Tlist
+let Tlist_Exit_OnlyWindow = 1
+" La panneau gagne le focus dès qu'il est ouvert
+let Tlist_GainFocus_On_ToggleOpen = 1
+" Une fois une fonction sélectionnée, on ferme le panneau
+"let Tlist_Close_On_Select = 0
+" Mettre à jour automatiquement quand un fichier est en édition
+let Tlist_Auto_Update = 1
+" Toujours parser le fichier même si le panneau n'est pas ouvert
+let Tlist_Process_File_Always = 0
+" Ouvrir le panneau à droite
+"let Tlist_Use_Right_Window = 0
+" Largeur du panneau
+let Tlist_WinWidth = 50
+" Le contenu du panneau ne représente que le fichier courant
+let Tlist_Show_One_File = 1
+" Afficher dans le menu
+let Tlist_Show_Menu = 1
+" Replie automatiquement les fichiers inactifs
+let Tlist_File_Fold_Auto_Close = 1
+" Persistance
+"autocmd TabLeave * wincmd p
+"autocmd TabEnter * execute ResumeTList()
+
+"---------------------------------------------------------------------------
+" Diff style
+"---------------------------------------------------------------------------
+if &diff
+    au BufWritePost * diffupdate
+endif
+
+highlight DiffText guifg=black 
+
+"---------------------------------------------------------------------------
+"Highlight when line > 80 columns
+"---------------------------------------------------------------------------
+let g:isshow = 0
+function! Show80col()
+    if g:isshow == 0
+      let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+      let g:isshow = 1
+      echo 'Showing lines with more than 80 columns'
+    else
+      call matchdelete(w:m2)
+      let g:isshow = 0
+      echo 'Hiding lines with more than 80 columns'
+    endif
+endfunction
+
+"---------------------------------------------------------------------------
+" Spelling
+"---------------------------------------------------------------------------
+au BufNewFile,BufRead *.c,*.h,*.cpp,*.patch 
+ \ set spell spelllang=en_us
+
+au BufNewFile,BufRead Makefile*,GNUmakefile*,*.mk,*.patch,*.mak 
+ \ set spell spelllang=en_us
+
+au BufNewFile,BufRead __Tag_List__
+ \ set nospell 
+
+let g:netrw_altv = 1
+let g:netrw_alto = 1
+
+"---------------------------------------------------------------------------
+" Doxygen syntax and toolkit
+"---------------------------------------------------------------------------
+let g:load_doxygen_syntax=1
+let g:DoxygenToolkit_compactDoc="yes"
+let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
+set formatoptions+=ro
+
+map ,d           :Dox<CR>
+
+"-------------------------------------------------------------------------
+" force use of tabs in Makefiles and python
+"---------------------------------------------------------------------------
+au BufNewFile,BufRead Smakefile,Makefile*,GNUmakefile*,*.mk,*.mak,makefile*,*.py
+    \ set shiftwidth=4 tabstop=4 noexpandtab
+
+" Remove newline added by vim automatically at end-of-file
+set noeol
+
+" action script
+au BufNewFile,BufRead *.as
+   \ set ft=actionscript
+
+
+"---------------------------------------------------------------------------
+" Pegasus tag
+"---------------------------------------------------------------------------
+if $PGS_CTAGS_DB != ""
+   if filereadable($PGS_CTAGS_DB)
+      set tags+=$PGS_CTAGS_DB
+   endif
+endif
+
+if has("cscope")
+   if $PGS_CSCOPE_DB != ""
+      if filereadable($PGS_CSCOPE_DB)
+         set csto=0
+         set cst
+         set nocsverb
+         cs add $PGS_CSCOPE_DB
+         set csverb
+      endif
+   endif
+endif
+
+if $PGS_VIM_HIGHLIGHTS != ""
+   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_f Function
+   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight c_t gui=bold,italic
+   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_d Tag
+   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_m Tag
+   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_e Tag
+   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    source $PGS_VIM_HIGHLIGHTS
+endif
+

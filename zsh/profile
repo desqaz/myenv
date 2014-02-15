@@ -1,0 +1,13 @@
+. $LIBS_PATH/colors
+. $LIBS_PATH/debug
+. $LIBS_PATH/gvim/funktions
+. $ZSH_PATH/aliases
+. $ZSH_PATH/splash
+. $ZSH_PATH/options
+. $ZSH_PATH/compcfg
+. $ZSH_PATH/config
+. $ZSH_PATH/bindkeys
+
+eval $(dircolors)
+
+

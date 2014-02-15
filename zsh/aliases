@@ -1,0 +1,35 @@
+alias e='export'
+alias a='alias'
+alias u='unset'
+alias so='setopt'
+alias uo='unsetopt'
+
+alias rcz='source ~/.zshrc'
+alias ls='ls --color=auto'
+alias ll='ls -lh --color=auto'
+alias lu='ls | xargs du -sh'
+alias lt='tree -aCl    -I .svn'
+alias ltr='tree -paCl   -I .svn'
+alias lts='tree -shaCl  -I .svn'
+alias ltd='tree -aCld   -I .svn'
+alias lta='tree -pshaCl -I .svn'
+alias md=mkdir
+alias cpf='cp -rf'
+alias rmf='rm -rf'
+alias gp='grep  -r -n --color=auto'
+alias gpi='grep -ri -n --color=auto'
+alias h=history
+alias hh='h -50'
+alias tp='top -d 1'
+alias k='$TOOLS_ROOT/k.sh'
+alias ka='$TOOLS_ROOT/k.sh -a'
+alias _='$TOOLS_ROOT/dt.sh'
+
+alias vi='gvim -g -geometry 185x80'
+
+alias -g V=' | vi -R -'
+a -g CEW='2>&1 | sed -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\([wW]arning\)/[0;1;35m\1[0m[0;1;36m\2[0m\3[0;1;33m\4[0m/g;" \
+                     -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\([nN]ote\)/[0;1;35m\1[0m[0;1;36m\2[0m\3[0;1m\4[0m/g;" \
+                     -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\(fatal[[:space:]]error\)/[0;1;35m\1[0m[0;1;36m\2[0m\3[0;1;31m\4[0m/g;" \
+                     -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\([eE]rror\)/[0;1;35m\1[0m[0;1;36m\2[0m\3[0;1;31m\4[0m/g;"'
+
