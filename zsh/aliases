@@ -27,6 +27,8 @@ alias _='$TOOLS_ROOT/dt.sh'
 
 alias vi='gvim -g -geometry 100x80'
 
+alias 7tags='7tags.sh && source .vimtags/export_var_for_vim'
+
 alias -g V=' | vi -R -'
 a -g CEW='2>&1 | sed -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\([wW]arning\)/[0;1;35m\1[0m[0;1;36m\2[0m\3[0;1;33m\4[0m/g;" \
                      -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\([nN]ote\)/[0;1;35m\1[0m[0;1;36m\2[0m\3[0;1m\4[0m/g;" \
