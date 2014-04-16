@@ -19,9 +19,10 @@ zstyle :compinstall filename '/home3/jlabarth/.zshrc'
 autoload -Uz compinit
 compinit
 
-autoload -U promptinit 
+autoload -Uz promptinit 
 promptinit
-prompt modrivers
+#prompt modrivers
+prompt myenv
 
 autoload zsh/complist
 
