@@ -129,7 +129,7 @@ myenv_title() {
 }
 
 myenv_git_resume() {
-   RemoteRepo=$(git remote show | head -n 1)
+   RemoteRepo=$(git remote show 2>/dev/null | head -n 1)
    if [[ "$RemoteRepo" != "" ]] {
       RemoteRepoUrl=$(git remote show $RemoteRepo -n | sed -n -e 's/^\s*Fetch\s\+URL:\s\+\(.*$\)/\1/p')
       echo "$RemoteRepoUrl"
