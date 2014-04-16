@@ -73,7 +73,7 @@ prompt_myenv_setup () {
    myenv_setup_prompt
 
    PROMPT='$PR_SET_CHARSET\
-$PR_UL$PR_PTS$PR_PWD$PR_GIT$PR_IN${(e)PR_FILLBAR}$PR_OUT$PR_LOGIN$PR_HOST$PR_UR
+$PR_UL$PR_PTS$PR_PWD$PR_GIT$PR_GIT_RURL$PR_IN${(e)PR_FILLBAR}$PR_OUT$PR_LOGIN$PR_HOST$PR_UR
 $PR_LL$PR_HISTERR$PR_HB$PR_NO_COLOR '
 
    RPROMPT=' $PR_HB$PR_CT$PR_TIME$PR_LR$PR_NO_COLOR'
@@ -129,11 +129,63 @@ myenv_title() {
 }
 
 myenv_git_resume() {
-   RemoteRepo=$(git remote show 2>/dev/null | head -n 1)
-   if [[ "$RemoteRepo" != "" ]] {
-      RemoteRepoUrl=$(git remote show $RemoteRepo -n | sed -n -e 's/^\s*Fetch\s\+URL:\s\+\(.*$\)/\1/p')
-      echo "$RemoteRepoUrl"
-   }
+   local gitstatus="gitstatus.py"
+   _GIT_STATUS=`${gitstatus}`
+   __CURRENT_GIT_STATUS=("${(@f)_GIT_STATUS}")
+   GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
+   GIT_REMOTE_URL=$__CURRENT_GIT_STATUS[2]
+   GIT_REMOTE=$__CURRENT_GIT_STATUS[3]
+   GIT_REMOTE_NOSYM=$__CURRENT_GIT_STATUS[4]
+   GIT_STAGED=$__CURRENT_GIT_STATUS[5]
+   GIT_CONFLICTS=$__CURRENT_GIT_STATUS[6]
+   GIT_CHANGED=$__CURRENT_GIT_STATUS[7]
+   GIT_UNTRACKED=$__CURRENT_GIT_STATUS[8]
+   GIT_CLEAN=$__CURRENT_GIT_STATUS[9]
+
+   ZSH_THEME_GIT_PROMPT_SEPARATOR="|"
+   ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[magenta]%}"
+   ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[red]%}●"
+   ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}✖"
+   ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}✚"
+   ZSH_THEME_GIT_PROMPT_REMOTE=""
+   ZSH_THEME_GIT_PROMPT_UNTRACKED="…"
+   ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}✔"
+
+   local PromptMODGitStatusSize=0
+   if [ -n "$__CURRENT_GIT_STATUS" ]; then
+      STATUS="$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{${reset_color}%}"
+      (( PromptMODGitStatusSize = $PromptMODGitStatusSize + ${#${GIT_BRANCH}} ))
+      if [ -n "$GIT_REMOTE" ]; then
+         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_REMOTE$GIT_REMOTE%{${reset_color}%}"
+      (( PromptMODGitStatusSize = $PromptMODGitStatusSize + 1 + ${#${GIT_REMOTE_NOSYM}} ))
+      fi
+      STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
+      (( PromptMODGitStatusSize = $PromptMODGitStatusSize + 1 ))
+      if [ "$GIT_STAGED" -ne "0" ]; then
+         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STAGED$GIT_STAGED%{${reset_color}%}"
+      (( PromptMODGitStatusSize = $PromptMODGitStatusSize + 1 + ${#${GIT_STAGED}} ))
+      fi
+      if [ "$GIT_CONFLICTS" -ne "0" ]; then
+         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CONFLICTS$GIT_CONFLICTS%{${reset_color}%}"
+      (( PromptMODGitStatusSize = $PromptMODGitStatusSize + 1 + ${#${GIT_CONFLICTS}} ))
+      fi
+      if [ "$GIT_CHANGED" -ne "0" ]; then
+         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CHANGED$GIT_CHANGED%{${reset_color}%}"
+      (( PromptMODGitStatusSize = $PromptMODGitStatusSize + 1 + ${#${GIT_CHANGED}} ))
+      fi
+      if [ "$GIT_UNTRACKED" -ne "0" ]; then
+         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED%{${reset_color}%}"
+      (( PromptMODGitStatusSize = $PromptMODGitStatusSize + 1))
+      fi
+      if [ "$GIT_CLEAN" -eq "1" ]; then
+         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
+      (( PromptMODGitStatusSize = $PromptMODGitStatusSize + 1))
+      fi
+      STATUS="$STATUS%{${reset_color}%}"
+      echo "$STATUS"
+      echo "$PromptMODGitStatusSize"
+      echo "$GIT_REMOTE_URL"
+   fi
 }
 
 #------------------------------------------------------------------------------
@@ -159,6 +211,7 @@ myenv_setup_prompt () {
    PR_PTS=""
    PR_PWD=""
    PR_GIT=""
+   PR_GIT_RURL=""
    PR_LOGIN=""
    PR_HOST=""
    PR_HISTERR="$PR_OPEN$PR_HISTORY_COLOR%h%(?..$PR_ERROR_COLOR %?)$PR_CLOSE"
@@ -176,21 +229,33 @@ myenv_setup_prompt () {
          PR_PWD="$PR_OPEN$PR_PWD_COLOR%d$PR_CLOSE"
          (( cursize  = $cursize + $pwdsize ))
 
-         PR_GIT_RESUME=$(myenv_git_resume)
-         gitsize=${#${(%):-($PR_GIT_RESUME)}}
+         __PR_GIT_RESUME_RAW=$(myenv_git_resume)
+         _PR_GIT_RESUME_RAW=("${(@f)__PR_GIT_RESUME_RAW}")
+         PR_GIT_RESUME=$_PR_GIT_RESUME_RAW[1]
+         PR_GIT_RESUME_SIZE=$_PR_GIT_RESUME_RAW[2]
+         PR_GIT_REMOTE_URL=$_PR_GIT_RESUME_RAW[3]
+         (( gitsize = $PR_GIT_RESUME_SIZE + 2 ))
+         gitremotesize=${#${(%):-($PR_GIT_REMOTE_URL)}}
          if [[ "$cursize + $gitsize" -le $termwidth ]] {
             if [[ ${#${PR_GIT_RESUME}} -gt 0 ]] {
                PR_GIT="$PR_LINE_COLOR($PR_GIT_COLOR$PR_GIT_RESUME$PR_LINE_COLOR)"
                (( cursize  = $cursize + $gitsize ))
             }
 
-            if [[ "$cursize + $loginsize" -le $termwidth ]] {
-               PR_LOGIN="$PR_OPEN$PR_LOGIN_COLOR%n$PR_CLOSE"
-               (( cursize  = $cursize + $loginsize ))
+            if [[ "$cursize + $gitremotesize" -le $termwidth ]] {
+               if [[ ${#${PR_GIT_REMOTE_URL}} -gt 0 ]] {
+                  PR_GIT_RURL="$PR_LINE_COLOR($PR_GIT_COLOR$PR_GIT_REMOTE_URL$PR_LINE_COLOR)"
+                  (( cursize  = $cursize + $gitremotesize ))
+               }
 
-               if [[ "$cursize + $hostsize" -le $termwidth ]] {
-                  PR_HOST="$PR_OPEN$PR_HOST_COLOR%m$PR_CLOSE"
-                  (( cursize  = $cursize + $hostsize ))
+               if [[ "$cursize + $loginsize" -le $termwidth ]] {
+                  PR_LOGIN="$PR_OPEN$PR_LOGIN_COLOR%n$PR_CLOSE"
+                  (( cursize  = $cursize + $loginsize ))
+
+                  if [[ "$cursize + $hostsize" -le $termwidth ]] {
+                     PR_HOST="$PR_OPEN$PR_HOST_COLOR%m$PR_CLOSE"
+                     (( cursize  = $cursize + $hostsize ))
+                  }
                }
             }
          }
