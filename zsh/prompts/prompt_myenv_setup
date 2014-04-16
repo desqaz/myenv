@@ -180,7 +180,7 @@ myenv_setup_prompt () {
             PR_GIT_RESUME=$(myenv_git_resume)
             if [[ ${#${PR_GIT_RESUME}} -gt 0 ]] {
                PR_GIT="$PR_LINE_COLOR($PR_GIT_COLOR$PR_GIT_RESUME$PR_LINE_COLOR)"
-               gitsize=${#${(%):--($PR_GIT_RESUME)-}}
+               gitsize=${#${(%):-($PR_GIT_RESUME)}}
                (( cursize  = $cursize + $gitsize ))
             }
 
