@@ -176,11 +176,11 @@ myenv_setup_prompt () {
          PR_PWD="$PR_OPEN$PR_PWD_COLOR%d$PR_CLOSE"
          (( cursize  = $cursize + $pwdsize ))
 
-         if [[ "$cursize + $pwdsize" -le $termwidth ]] {
-            PR_GIT_RESUME=$(myenv_git_resume)
+         PR_GIT_RESUME=$(myenv_git_resume)
+         gitsize=${#${(%):-($PR_GIT_RESUME)}}
+         if [[ "$cursize + $gitsize" -le $termwidth ]] {
             if [[ ${#${PR_GIT_RESUME}} -gt 0 ]] {
                PR_GIT="$PR_LINE_COLOR($PR_GIT_COLOR$PR_GIT_RESUME$PR_LINE_COLOR)"
-               gitsize=${#${(%):-($PR_GIT_RESUME)}}
                (( cursize  = $cursize + $gitsize ))
             }
 
