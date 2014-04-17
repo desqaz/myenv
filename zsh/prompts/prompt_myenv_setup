@@ -21,6 +21,7 @@ prompt_myenv_preview () {
 declare -x PromptMODPromptMODCmdTimeProcess="no"
 declare -x PromptMODCmdLaunched="no"
 declare -x PromptMODTimeUnity=""
+declare -x PromptMODExitCode=0
 
 declare -ix PromptMODCmdTime=0
 declare -ix PromptMODTimeMs=0
@@ -82,6 +83,7 @@ $PR_LL$PR_HISTERR$PR_HB$PR_NO_COLOR '
 
 #------------------------------------------------------------------------------
    precmd () {
+      PromptMODExitCode="${?}"
       setopt prompt_subst
 # For command time
       PromptMODCmdTime=0
@@ -188,6 +190,22 @@ myenv_git_resume() {
    fi
 }
 
+myenv_get_exit_status() {
+   local exitstatus
+   (( exitstatus = $1 ))
+   if [[ ${exitstatus} -ge 128 && $exitstatus -le (127+${#signals}) ]]; then
+      # Last process was killed by a signal. Find out what it was from
+      # the $signals environment variable.
+      echo "<${signals[${exitstatus}-127]}>"
+   else
+      if [[ ${exitstatus} -ne 0 ]]; then
+         echo "${exitstatus}"
+      else
+         echo ""
+      fi
+   fi
+}
+
 #------------------------------------------------------------------------------
 # Prompt
 #------------------------------------------------------------------------------
@@ -202,6 +220,7 @@ myenv_setup_prompt () {
    local termwidth=${COLUMNS}
    local fillsize
    local cursize
+   local exitstuff=$(myenv_get_exit_status ${PromptMODExitCode})
 
    PR_FILLBAR=""
    PR_PWDLEN=""
@@ -214,7 +233,7 @@ myenv_setup_prompt () {
    PR_GIT_RURL=""
    PR_LOGIN=""
    PR_HOST=""
-   PR_HISTERR="$PR_OPEN$PR_HISTORY_COLOR%h%(?..$PR_ERROR_COLOR %?)$PR_CLOSE"
+   PR_HISTERR="$PR_OPEN$PR_HISTORY_COLOR%h%(?..$PR_ERROR_COLOR $exitstuff)$PR_CLOSE"
    PR_PS2="$PR_OPEN$PR_PS2_COLOR%_$PR_CLOSE"
    PR_CT="$PR_OPEN$PR_CT_COLOR$PromptMODCmdTime$PromptMODTimeUnity$PR_CLOSE"
    PR_TIME="$PR_OPEN$PR_TIME_COLOR%D{%H:%M:%S}$PR_CLOSE"
