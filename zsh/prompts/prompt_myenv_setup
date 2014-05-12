@@ -131,7 +131,11 @@ myenv_title() {
 }
 
 myenv_git_resume() {
-   local gitstatus="gitstatus.py"
+   if [ "$MYENV_NO_GIT_STATUS" = "y" ]; then 
+      local gitstatus=""
+   else
+      local gitstatus="gitstatus.py"
+   fi
    _GIT_STATUS=`${gitstatus}`
    __CURRENT_GIT_STATUS=("${(@f)_GIT_STATUS}")
    GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
