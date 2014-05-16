@@ -106,6 +106,8 @@ map <F6>          ^3x$2h3x
 map <F7>          :bdelete<CR>
 map <F9>          :noh<CR>
 map <C-N>         :noh<CR>
+map <C-B>         :MRU<CR>
+map <C-V>         :WMToggle<CR>
 map <C-Del>       :bdelete<CR>
 map <C-PageUp>    [c
 map <C-PageDown>  ]c
