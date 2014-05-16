@@ -136,7 +136,7 @@ myenv_git_resume() {
    else
       local gitstatus="gitstatus.py"
    fi
-   _GIT_STATUS=`${gitstatus}`
+   _GIT_STATUS=`${gitstatus} 2>/dev/null || echo ""`
    __CURRENT_GIT_STATUS=("${(@f)_GIT_STATUS}")
    GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
    GIT_REMOTE_URL=$__CURRENT_GIT_STATUS[2]
