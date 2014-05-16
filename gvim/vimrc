@@ -2,6 +2,12 @@
 "# VIM CONFIGURATION #
 "#####################
 
+" disable vi compatibility
+set nocp
+
+" Pathogen
+execute pathogen#infect()
+
 "-------------------------------------------------------------------------
 "Color and font
 "-------------------------------------------------------------------------
@@ -31,10 +37,6 @@ endif
 "-------------------------------------------------------------------------
 source $VIMRUNTIME/plugin/ScrollColor.vim
 source $VIMRUNTIME/plugin/color_sample_pack.vim
-
-" Pathogen
-"source $VIMRUNTIME/autoload/pathogen.vim
-"call pathogen#infect()
 
 "-------------------------------------------------------------------------
 " Various
