@@ -14,6 +14,12 @@ if [[ $- == *i* ]]; then
    export ZSH_PATH=$MYENV_ROOT/zsh
    
    . $ZSH_PATH/profile
+
+	for file in $(find $ZSH_PATH/customrc -type f); do
+		. $file
+	done
    
+   export PATH=$TOOLS_ROOT:$PATH
+
    umask 007
 fi
