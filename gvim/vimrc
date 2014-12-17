@@ -124,6 +124,8 @@ map ,p            :set filetype=pantalk<CR>
 "tal : align "\" in multiple lines defines
 vmap ,t !tal<CR>
 
+map <C-g>         :vsp <CR>:exec("tag ".expand("<cword>"))<CR> 
+
 " --------------------------------------------------------------------------
 " Cscope 
 "---------------------------------------------------------------------------
@@ -174,7 +176,8 @@ endif
 " Omnicompletion, needs tags
 "---------------------------------------------------------------------------
 set omnifunc=ccomplete#Complete
-set shiftwidth=3 tabstop=3 expandtab
+set shiftwidth=3 tabstop=3
+"set shiftwidth=3 tabstop=3 expandtab
 
 if $VIMTAGSPATH != ""
    set tags+=$VIMTAGSPATH/tags
