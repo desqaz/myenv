@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash --norc 
 
 title1=$(echo $3 | sed 's/ /\\\ /g')
 title2=$(echo $5 | sed 's/ /\\\ /g' | sed 's/.*\((.*)\)/\1/g')

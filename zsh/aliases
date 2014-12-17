@@ -36,3 +36,4 @@ alias -g CEW='2>&1 | sed -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\([wW]arni
                      -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\(fatal[[:space:]]error\)/[0;1;35m\1[0m[0;1;36m\2[0m\3[0;1;31m\4[0m/g;" \
                      -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\([eE]rror\)/[0;1;35m\1[0m[0;1;36m\2[0m\3[0;1;31m\4[0m/g;"'
 alias -g XGP='| xargs grep --color=auto -IsHnr'
+alias -g VGP='|awk -F ':' "{print $1}" | sort -u | xargs gvim'
