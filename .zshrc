@@ -15,7 +15,7 @@ if [[ $- == *i* ]]; then
    
    . $ZSH_PATH/profile
 
-	for file in $(find $ZSH_PATH/customrc -type f); do
+	for file in $(find $ZSH_PATH/customrc -type f 2>/dev/null); do
 		. $file
 	done
    
