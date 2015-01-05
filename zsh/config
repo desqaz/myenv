@@ -4,5 +4,5 @@ SAVEHIST=1000
 bindkey -e
 export WORDCHARS='*?_-.[]~=&;&%^(){}<>'
 
-prmptcmd() { echo "$(pwd) $(history -1)" >> ~/.zsh_eternal_history }
+prmptcmd() { echo "$(pwd) $(date) $(history -1)" >> ~/.zsh_eternal_history }
 precmd_functions=(prmptcmd)
