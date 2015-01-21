@@ -1,0 +1,43 @@
+#! /bin/sh
+
+# Prepare temp dir
+TmpDir=$(mktemp -d)
+ 
+# Gen diff script
+DiffScript=$TmpDir/diff_cmd_script
+OrigTreeDir=$TmpDir/OrigTree
+ModifiedTreeDir=$TmpDir/ModifiedTree
+mkdir $OrigTreeDir $ModifiedTreeDir
+cat << EOF > $DiffScript
+#! /bin/sh
+
+OrigFile=\$6
+ModifiedFile=\$7
+
+OrigFileDir=$OrigTreeDir/\$(echo \$OrigFile | sed 's?/\.svn.*\$??')
+OrigFileName=\$(basename \$OrigFile | sed 's?\.svn-base\$??')
+mkdir -p \$OrigFileDir
+cp -f \$OrigFile \$OrigFileDir/\$OrigFileName
+
+ModifiedFileDir=$ModifiedTreeDir/\$(dirname \$ModifiedFile)
+mkdir -p \$ModifiedFileDir
+cp -f \$ModifiedFile \$ModifiedFileDir/.
+EOF
+chmod +x $DiffScript
+
+# execute svn diff
+svn diff --diff-cmd=$DiffScript
+
+# Build git repo
+cd $OrigTreeDir
+git init
+git add .
+git commit -m "Original files"
+cp -rf $ModifiedTreeDir/. .
+
+# execute gitk
+gitk
+
+# Remove temp dir
+cd -
+rm -rf $TmpDir
