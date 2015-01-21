@@ -1,0 +1,2 @@
+bcompare "$6" "$7" -title1="$3" -title2="$5" -ro1
+exit 0

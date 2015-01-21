@@ -1,0 +1,12 @@
+#!/bin/sh
+
+Title="$1"
+File1="$2"
+Ver1="$3"
+File2="$5"
+Ver2="$6"
+
+cmd="$File1 ->> $File2"
+echo $cmd
+bcompare "$File1" "$File2" | cat
+
