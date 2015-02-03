@@ -24,22 +24,22 @@ matchList = [
 	#
 	{
 			"name"   : "gcc warning"
-		,	"match"  : "^.*([^:]+):([0-9]+)\s*([wW]arning).*$"
+		,	"match"  : "^\*\*\*\s+([^:]+):([0-9]+):\s*([wW]arning).*$"
 		,	"colors" : [ ansiColors['magenta'], ansiColors['cyan'], ansiColors['yellow'] ]
 	}
 	,{
 			"name"   : "gcc error"
-		,	"match"  : "^.*([^:]+):([0-9]+)\s*([eE]rror).*$"
+		,	"match"  : "^\*\*\*\s+([^:]+):([0-9]+):\s*([eE]rror).*$"
 		,	"colors" : [ ansiColors['magenta'], ansiColors['cyan'], ansiColors['red'] ]
 	}
 	,{
 			"name"   : "gcc fatal error"
-		,	"match"  : "^.*([^:]+):([0-9]+)\s*(fatal\s*error).*$"
+		,	"match"  : "^\*\*\*\s+([^:]+):([0-9]+):\s*(fatal\s*error).*$"
 		,	"colors" : [ ansiColors['magenta'], ansiColors['cyan'], ansiColors['red'] ]
 	}
 	,{
 			"name"   : "gcc note"
-		,	"match"  : "^.*([^:]+):([0-9]+)\s*([nN]ote).*$"
+		,	"match"  : "^\*\*\*\s+([^:]+):([0-9]+):\s*([nN]ote).*$"
 		,	"colors" : [ ansiColors['magenta'], ansiColors['cyan'], ansiColors['white'] ]
 	}
 	#
