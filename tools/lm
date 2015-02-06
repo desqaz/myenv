@@ -24,22 +24,22 @@ matchList = [
 	#
 	{
 			"name"   : "gcc warning"
-		,	"match"  : "^\*\*\*\s+([^:]+):([0-9]+):\s*([wW]arning).*$"
+		,	"match"  : "([^:]+):([0-9]+):\s*([wW]arning).*$"
 		,	"colors" : [ ansiColors['magenta'], ansiColors['cyan'], ansiColors['yellow'] ]
 	}
 	,{
 			"name"   : "gcc error"
-		,	"match"  : "^\*\*\*\s+([^:]+):([0-9]+):\s*([eE]rror).*$"
+		,	"match"  : "([^:]+):([0-9]+):\s*([eE]rror).*$"
 		,	"colors" : [ ansiColors['magenta'], ansiColors['cyan'], ansiColors['red'] ]
 	}
 	,{
 			"name"   : "gcc fatal error"
-		,	"match"  : "^\*\*\*\s+([^:]+):([0-9]+):\s*(fatal\s*error).*$"
+		,	"match"  : "([^:]+):([0-9]+):\s*(fatal\s*error).*$"
 		,	"colors" : [ ansiColors['magenta'], ansiColors['cyan'], ansiColors['red'] ]
 	}
 	,{
 			"name"   : "gcc note"
-		,	"match"  : "^\*\*\*\s+([^:]+):([0-9]+):\s*([nN]ote).*$"
+		,	"match"  : "([^:]+):([0-9]+):\s*([nN]ote).*$"
 		,	"colors" : [ ansiColors['magenta'], ansiColors['cyan'], ansiColors['white'] ]
 	}
 	#
@@ -52,7 +52,7 @@ matchList = [
 	}
 	,{
 			"name"   : "summary error"
-		,	"match"  : "^\*\*\*\s+(error)\s+(\w+)\s+\|(.*)$"
+		,	"match"  : "^\*\*\*\s+(error)\s+([>\w]+)\s+\|(.*)$"
 		,	"colors" : [ ansiColors['red'], ansiColors['yellow'], ansiColors['magenta'] ]
 	}
 ]
@@ -87,11 +87,18 @@ def colorLine(line):
 def sigInthandler(signal, frame):
 	sys.stdout.flush()
 	sys.stderr.write("--< Interrupted >--\n")
+	p.send_signal(signal)
+
+signal.signal(signal.SIGINT,  sigInthandler)
+signal.signal(signal.SIGTERM, sigInthandler)
+
+try:
+	p = subprocess.Popen(["lmake"] + sys.argv[1:], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+except OSError as e:
+	sys.stderr.write("ERROR : %s (%d)\n" % (e.strerror, e.errno))
+	sys.stderr.write("maybe lmake not present in PATH\n")
 	sys.exit(1)
 
-signal.signal(signal.SIGINT, sigInthandler)
-
-p = subprocess.Popen(["lmake"] + sys.argv[1:], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 while True:
 	line = p.stdout.readline()
 	if not line:
