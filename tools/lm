@@ -100,8 +100,12 @@ except OSError as e:
 	sys.exit(1)
 
 while True:
-	line = p.stdout.readline()
-	if not line:
-		break
-	colorLine(line)
+	try:
+		line = p.stdout.readline()
+		if not line:
+			break
+		colorLine(line)
+	except:
+		sys.stderr.write("ERROR (while reading stdout)\n")
+		p.send_signal(signal.SIGINT)
 
