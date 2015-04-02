@@ -10,7 +10,7 @@ if [[ $- == *i* ]]; then
    export TOOLS_BIN=$MYENV_ROOT/bin
 
 	export MYPATH__PATH=$TOOLS_ROOT:$TOOLS_BIN
-	export PATH=$MYPATH__PATH:$PATH
+	export PATH=$MYPATH__PATH:$PATH:/usr/sbin:/sbin
 	
 	export GVIM_PATH=$MYENV_ROOT/gvim
    export VIM=$GVIM_PATH

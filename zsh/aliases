@@ -16,8 +16,19 @@ alias lta='tree -pshaCl -I .svn'
 alias md=mkdir
 alias cpf='cp -rf'
 alias rmf='rm -rf'
-alias gp='grep  -r -n --color=auto'
-alias gpi='grep -ri -n --color=auto'
+rmsf() {
+	chmod -R 777 "$*"
+	rm -rf "$*"
+}
+alias gp='grep  -Is --exclude-dir='.svn' --exclude-dir='.git' --exclude-dir='%MAKE' --exclude-dir='%STATE' --exclude-dir='products' -r -n --color=auto'
+alias gpi='grep -Is --exclude-dir='.svn' --exclude-dir='.git' --exclude-dir='%MAKE' --exclude-dir='%STATE' --exclude-dir='products' -ri -n --color=auto'
+alias gpa='grep -r -n --color=auto'
+fn() {
+	find . \( -name "products" -o -name "imports" -o -name "\.svn" -o -name "\.git" -o -name "%*" \) -prune -o -name "$*" -print
+}
+fni() {
+	find . \( -name "products" -o -name "imports" -o -name "\.svn" -o -name "\.git" -o -name "%*" \) -prune -o -iname "$*" -print
+}
 alias h=history
 alias hh='h -50'
 alias tp='top -d 1'
@@ -26,7 +37,10 @@ alias ka='$TOOLS_ROOT/k.sh -a'
 alias _='$TOOLS_ROOT/dt.sh'
 alias glog='git log --graph --format="%Cgreen%h%Creset %Cblue[%an - %ar]%Creset %s"'
 
-alias vi='gvim -g -geometry 100x80'
+alias sdi='svn diff --diff-cmd=/home/jlabarthe/myenv/tools/svn_diff_wrapper_bc'
+alias sdiv='svn diff --diff-cmd=/home/jlabarthe/myenv/tools/svn_diff_wrapper_vi'
+
+alias vi='gvim -g -geometry 160x60'
 
 alias 7tags='7tags.sh && source .vimtags/export_var_for_vim'
 
@@ -36,4 +50,4 @@ alias -g CEW='2>&1 | sed -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\([wW]arni
                      -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\(fatal[[:space:]]error\)/[0;1;35m\1[0m[0;1;36m\2[0m\3[0;1;31m\4[0m/g;" \
                      -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\([eE]rror\)/[0;1;35m\1[0m[0;1;36m\2[0m\3[0;1;31m\4[0m/g;"'
 alias -g XGP='| xargs grep --color=auto -IsHnr'
-alias -g VGP='|awk -F ':' "{print $1}" | sort -u | xargs gvim'
+alias -g VGP='| awk -F ':' "{print $1}" | sort -u | xargs gvim'
