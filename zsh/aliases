@@ -6,9 +6,10 @@ alias uo='unsetopt'
 
 alias rcz='source ~/.zshrc'
 alias ls='ls --color=auto'
-alias ll='ls -lh --color=auto'
+alias ll='ls -lh'
+alias la='ll -a'
 alias lu='ls | xargs du -sh'
-alias lt='tree -aCl    -I .svn'
+alias lt='tree  -aCl    -I .svn'
 alias ltr='tree -paCl   -I .svn'
 alias lts='tree -shaCl  -I .svn'
 alias ltd='tree -aCld   -I .svn'
@@ -17,8 +18,11 @@ alias md=mkdir
 alias cpf='cp -rf'
 alias rmf='rm -rf'
 rmsf() {
-	chmod -R 777 "$*"
-	rm -rf "$*"
+	chmod -R 777 "$@"
+	rm -rf "$@"
+}
+gpf() {
+	grep -r "$@" | awk -F ':' '{print $1}' | sort -u 
 }
 alias gp='grep  -Is --exclude-dir='.svn' --exclude-dir='.git' --exclude-dir='%MAKE' --exclude-dir='%STATE' --exclude-dir='products' -r -n --color=auto'
 alias gpi='grep -Is --exclude-dir='.svn' --exclude-dir='.git' --exclude-dir='%MAKE' --exclude-dir='%STATE' --exclude-dir='products' -ri -n --color=auto'
@@ -41,6 +45,13 @@ alias sdi='svn diff --diff-cmd=/home/jlabarthe/myenv/tools/svn_diff_wrapper_bc'
 alias sdiv='svn diff --diff-cmd=/home/jlabarthe/myenv/tools/svn_diff_wrapper_vi'
 
 alias vi='gvim -g -geometry 160x60'
+vip() {
+	if [ -z "$VIMPROJSERVERNAME" ]; then
+		echo "VIMPROJSERVERNAME env var not set (use 7tags before using vip)"
+	else
+		vi --servername $VIMPROJSERVERNAME --remote-tab-silent "$@"
+	fi
+}
 
 alias 7tags='7tags.sh && source .vimtags/export_var_for_vim'
 
@@ -51,3 +62,4 @@ alias -g CEW='2>&1 | sed -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\([wW]arni
                      -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\([eE]rror\)/[0;1;35m\1[0m[0;1;36m\2[0m\3[0;1;31m\4[0m/g;"'
 alias -g XGP='| xargs grep --color=auto -IsHnr'
 alias -g VGP='| awk -F ':' "{print $1}" | sort -u | xargs gvim'
+alias mwstat="lmstat -c 27020@signisntp -f"
