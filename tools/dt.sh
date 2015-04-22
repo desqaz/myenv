@@ -21,6 +21,7 @@ declare -i start_date_ms=`date +%N | sed s@'^0'@@`
 
 $*
 ret=$?
+echo $ret
 
 declare -i end_date_ms=`date +%N | sed s@'^0'@@`
 declare -i end_date_sec=`date +%s`
@@ -67,9 +68,9 @@ DirName="`dirname $PWD`/"
 ListArg=`echo $* | sed s@"$DirName"@@g`
 
 
-disp-frame "--------------------------------------------------------------------------------"
-echo "[$date] ${COL_BOLD}${ListArg}${COL_RST} [$status] ($duration_msg)" | tee .dt.log
-disp-frame "--------------------------------------------------------------------------------"
+#disp-frame "------------------------------------------------------------------------------------------------------------------------------------------------------"
+echo "[$date] ${COL_BOLD}${ListArg}${COL_RST} [$status] ($duration_msg)"
+#disp-frame "------------------------------------------------------------------------------------------------------------------------------------------------------"
 
 exit $ret
 

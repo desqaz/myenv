@@ -16,15 +16,23 @@ vgp () {
    else
       arg2="$2/*"
    fi
-   vi +'grep -rIs '"$1"' '"$arg2"''
+   _vi +'grep -rIs '"$1"' '"$arg2"''
 }
 
 #------------------------------------------------------------------------------
-#Open a greped file with vi at the right line :
-vig () {
-   vi_file=`echo "$1" | gawk -F : '{print $1}'`;
-   vi_line=`echo "$1" | gawk -F : '{print $2}'`;
-   vi $vi_file +$vi_line;
+#Open a greped file with vi at the right line or simply a file:
+vi () {
+	if [ $# -eq 1 ]; then 
+		if [ -e "$1" ]; then 
+			_vi "$1"
+		else
+		   vi_file=`echo "$1" | gawk -F : '{print $1}'`;
+   		vi_line=`echo "$1" | gawk -F : '{print $2}'`;
+		   _vi $vi_file +$vi_line;
+		fi
+	else
+		_vi "$@"
+	fi
 }
 
  
