@@ -1,8 +1,111 @@
-#!/bin/bash --norc
+#! /usr/bin/env python
 
-#| sed 's@\(.*\)\(rerun\)\(.*\)@\1[0;35m\2[0m\3@g'\
-#| sed 's@\(.*\)\(done\)\(.*\)@\1[0;1;32m\2[0;32m\3[0m[0m@g'\
+import sys
+import signal
+import subprocess
+import re
 
-lmake $@ \
-| sed 's@\(.*\)\(fail[ed]*\|[Ee]rror\|undefined\)\(.*\)@[0;31m\1[1m\2[0;31m\3[0m@g'\
-| sed 's@\(.*\)\([Ww]arning\|WARNING\)\(.*\)@[0;33m\1[1m\2[0;33m\3[0m@g'
+ansiColors = {
+	"black"   : "\x1b[0;1;30m"
+,	"red"     : "\x1b[0;1;31m"
+,	"green"   : "\x1b[0;1;32m"
+,	"yellow"  : "\x1b[0;1;33m"
+,	"blue"    : "\x1b[0;1;34m"
+,	"magenta" : "\x1b[0;1;35m"
+,	"cyan"    : "\x1b[0;1;36m"
+,	"white"   : "\x1b[0;1;37m"
+,	"reset"   : "\x1b[0m"
+}
+
+
+matchList = [
+	#
+	# gcc
+	#
+	{
+			"name"   : "gcc warning"
+		,	"match"  : "([^:]+):([0-9]+):\s*([wW]arning).*$"
+		,	"colors" : [ ansiColors['magenta'], ansiColors['cyan'], ansiColors['yellow'] ]
+	}
+	,{
+			"name"   : "gcc error"
+		,	"match"  : "([^:]+):([0-9]+):\s*([eE]rror).*$"
+		,	"colors" : [ ansiColors['magenta'], ansiColors['cyan'], ansiColors['red'] ]
+	}
+	,{
+			"name"   : "gcc fatal error"
+		,	"match"  : "([^:]+):([0-9]+):\s*(fatal\s*error).*$"
+		,	"colors" : [ ansiColors['magenta'], ansiColors['cyan'], ansiColors['red'] ]
+	}
+	,{
+			"name"   : "gcc note"
+		,	"match"  : "([^:]+):([0-9]+):\s*([nN]ote).*$"
+		,	"colors" : [ ansiColors['magenta'], ansiColors['cyan'], ansiColors['white'] ]
+	}
+	#
+	# lmake
+	#
+	,{
+			"name"   : "summary"
+		,	"match"  : "^\*\*\*\s+(SUMMARY).*$"
+		,	"colors" : [ ansiColors['cyan'] ]
+	}
+	,{
+			"name"   : "summary error"
+		,	"match"  : "^\*\*\*\s+(error)\s+([>\w]+)\s+\|(.*)$"
+		,	"colors" : [ ansiColors['red'], ansiColors['yellow'], ansiColors['magenta'] ]
+	}
+]
+
+def colorLine(line):
+	outputLine = line
+	for matchElt in matchList:
+		try:
+			m = re.match(matchElt["match"], line)
+			if m:
+				beginIdx = 0
+				outputLine = ""
+				for g in range(1, len(m.groups()) + 1):
+					outputLine +=                   \
+							line[beginIdx:m.start(g)] \
+						+  matchElt["colors"][g - 1] \
+						+  line[m.start(g):m.end(g)] \
+						+  ansiColors["reset"]
+					beginIdx = m.end(g)
+				outputLine += line[beginIdx:]
+				break
+		except:
+			sys.stdout.write("-------------- Error in lm script --------------\n")
+			sys.stdout.write(" Rule '%s' is broken\n" % matchElt["name"])
+			sys.stdout.write(" Line : %s" % line)
+			sys.stdout.write("------------------------------------------------\n")
+			outputLine = line
+	
+	sys.stdout.write(outputLine)
+		
+
+def sigInthandler(signal, frame):
+	sys.stdout.flush()
+	sys.stderr.write("--< Interrupted >--\n")
+	p.send_signal(signal)
+
+signal.signal(signal.SIGINT,  sigInthandler)
+signal.signal(signal.SIGTERM, sigInthandler)
+
+try:
+	p = subprocess.Popen(["lmake"] + sys.argv[1:], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+except OSError as e:
+	sys.stderr.write("ERROR : %s (%d)\n" % (e.strerror, e.errno))
+	sys.stderr.write("maybe lmake not present in PATH\n")
+	sys.exit(1)
+
+while True:
+	try:
+		line = p.stdout.readline()
+		if not line:
+			break
+		colorLine(line)
+	except:
+		sys.stderr.write("ERROR (while reading stdout)\n")
+		p.send_signal(signal.SIGINT)
+
