@@ -1,0 +1,92 @@
+alias h='history 50'
+alias resource='. ~/.bashrc'
+dis()  { export "DISPLAY=$1:0"; }
+edis() { echo $DISPLAY ;}
+disp() { export "DISPLAY=$1"; }
+
+dshroot() { PDSH_SSH_ARGS='-o ForwardAgent=yes -o ForwardX11=no -o ForwardX11Trusted=no' pdsh -g all$(cat /etc/dxo-site) -l root $* | dshbak -c ;}
+dsh()     { PDSH_SSH_ARGS='-o ForwardAgent=yes -o ForwardX11=no -o ForwardX11Trusted=no' pdsh -g all$(cat /etc/dxo-site)  $* | dshbak -c ;}
+dshg()    { PDSH_SSH_ARGS='-o ForwardAgent=yes -o ForwardX11=no -o ForwardX11Trusted=no' pdsh -g  $* | dshbak -c ;}
+dshw()    { PDSH_SSH_ARGS='-o ForwardAgent=yes -o ForwardX11=no -o ForwardX11Trusted=no' pdsh -w  $* | dshbak -c ;}
+
+build_path1()
+{
+    export $1=`env|sort|awk -F= '$1~/__'$1'$/ { printf "%s%s",c,$2; c=":" }'`
+}
+
+build_path()
+{
+    if [ "$A__PATH" != "" ] ; then
+        build_path1 PATH
+        build_path1 MANPATH
+        build_path1 INFOPATH
+        build_path1 LM_LICENSE_FILE
+        build_path1 CODE_MGR_LICENSE
+        build_path1 LD_LIBRARY_PATH
+    fi
+}
+
+s()
+{
+    eval `/clone/init/$1.sh -bash $2`
+    build_path
+}
+
+kchain() {
+    keychain -q
+    . ~/.keychain/`hostname`-sh
+	if [ -f ~/.keychain/`hostname`-sh-gpg ]
+	then
+	    . ~/.keychain/`hostname`-sh-gpg
+	fi
+}
+
+if [ "$A__PATH"  != "" ] ; then
+    build_path
+fi
+
+#if [ "$EMACS" == "t" ]; then
+#	echo xemacs
+#	export PAGER=cat
+#	export EDITOR=gnuclient
+#else
+#	alias ls='ls -ACF --color=tty'
+#	alias ll='ls -AlF --color=tty'
+#	alias lt='ls -Alrt --color=tty'
+#fi
+
+
+# quicker than clean (delete products dir in background process)
+function my-clean () {
+	TMPDIR=$( mktemp -p ~/tmp -d productsTMP.XXXXXXXXXX )
+	IMPDIR=$( mktemp -p ~/tmp -d imports_TMP.XXXXXXXXXX )
+	mkdir -p products
+	mkdir -p %STATE
+	mv products $TMPDIR
+	mv %STATE $TMPDIR
+	chmod 777 -R $TMPDIR && rm -rf $TMPDIR &
+	find . -type d -exec chmod u+w {} \; #fucking lmake2 rights managements !
+    if [[ $1 == "-ki" ]]; then
+        echo "keeping import directory to speed up first lmake"
+        mv imports $IMPDIR
+    fi
+	if [ -e .svn ]; then
+		svn-clean
+	elif [ -e .git ]; then
+		git clean -f -d -x
+	else
+		echo "error: don't know base type: git/svn"
+	fi
+    if [[ $1 == "-ki" ]]; then
+        mv $IMPDIR/imports .
+    fi
+}
+
+
+
+set -k
+
+#s lmake2 2.8
+s lmake2 3.1
+s insight
+s sge

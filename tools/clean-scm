@@ -1,0 +1,30 @@
+#!/bin/bash --norc
+
+filePat=__tobecleaned__
+
+function moveAndClean {
+	mv $1{,.$filePat}
+	(chmod 777 -R $1.$filePat*; rm -rf $1.$filePat*)&
+	return 0
+}
+
+function clean-svn {
+	for file in $(svn status --no-ignore | grep '^[I?]' | grep -v *.$filePat | awk '{print $2}'); do
+		echo "cleaning $file"
+		moveAndClean $file
+	done
+}
+
+function clean-git {
+	for file in $(git ls-files --others); do
+		moveAndClean $file
+	done
+}
+
+svn info 2>&1 > /dev/null
+if	[ $? -eq 0 ]; then
+  	clean-svn
+else
+	clean-git
+fi
+
