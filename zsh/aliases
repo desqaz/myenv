@@ -44,7 +44,27 @@ alias glog='git log --graph --format="%Cgreen%h%Creset %Cblue[%an - %ar]%Creset 
 alias sdi='svn diff --diff-cmd=/home/jlabarthe/myenv/tools/svn_diff_wrapper_bc'
 alias sdiv='svn diff --diff-cmd=/home/jlabarthe/myenv/tools/svn_diff_wrapper_vi'
 
-alias vi='gvim -g -geometry 160x60'
+alias mk='$TOOLS_ROOT/dt.sh lmake'
+alias lw='lshow -d'
+alias lW='lshow -D'
+alias bcp='bcompare'
+alias md5='md5sum'
+alias sha='sha1sum'
+
+alias gl=" git --no-pager log -n30 --no-merges --pretty=\"%h | %<(16)%cr | %<(20)%cn | %s\" --date=local | sed s@'\(Sidney.*Guessan\)'@'[0;32m\1[0m'@"
+alias gs=" git status"
+alias gd=" git diff"
+alias gci="git commit"
+alias gck="git checkout"
+alias ga=" git add"
+alias gb=" git branch"
+alias gm=" git commit --amend --no-edit"
+alias gme="git commit --amend"
+alias gps="git push"
+alias gpl="git pull"
+alias gpp="git pull && git push"
+
+alias _vi='gvim -g -geometry 200x60'
 vip() {
 	if [ -z "$VIMPROJSERVERNAME" ]; then
 		echo "VIMPROJSERVERNAME env var not set (use 7tags before using vip)"

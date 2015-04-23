@@ -176,3 +176,7 @@ function debugTarget() {
 	/soft/insight_7.3.50/bin/insight --args /usr/bin/python -S -B $cmd LD_PRELOAD=
 }
 
+s lmake2 3.1
+s insight
+s sge
+

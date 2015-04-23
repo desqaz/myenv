@@ -87,8 +87,8 @@ set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.i
 
 set listchars+=tab:\|-
 
-set backupdir=~/temp/vim_temp//
-set directory=~/temp/vim_temp//
+set backupdir=~/tmp/vim/
+set directory=~/tmp/vim/
 
 if $VIM_FROM_ECLIPSE == "y"
 set guioptions-=m
