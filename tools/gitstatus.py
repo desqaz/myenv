@@ -70,6 +70,9 @@ else:
 			remote += '%s%s' % (symbols['ahead of'], ahead)
 			remote_nosym += '%s' % (ahead)
 
+if not remote_url:
+	remote_url = Popen(['git','svn','info','--url'], stdout=PIPE).communicate()[0].strip()
+
 out = '\n'.join([
 	str(branch),
 	str(remote_url),
