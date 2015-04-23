@@ -32,6 +32,7 @@ s()
     build_path
 }
 
+
 kchain() {
     keychain -q
     . ~/.keychain/`hostname`-sh
@@ -82,11 +83,100 @@ function my-clean () {
     fi
 }
 
+function cleanTar (){
+find . -name "%MAKE" -prune -o -name "*.pyc"  -exec rm     {} \;
+find . -name "%MAKE" -prune -o -name ".*.swp"  -exec rm     {} \;
+find . -name "%MAKE" -prune -o -name ".*.swo"  -exec rm     {} \;
+find . -name "%STATE" -exec rm -rf {} \;
+find . -name "%MAKE"  -exec rm -rf {} \;
+}
+
+# recompress a tardir from imports to take modifications into account
+function reTar(){
+	method="czf"
+	ext="tgz"
+	mode="auto"
+	for i in $*; do
+		if [[ $i == "bz" ]]; then
+			method="cjf"
+			ext="tbz"
+			mode="forced"
+		elif [[ $i == "gz" ]]; then
+			method="czf"
+			ext="tgz"
+			mode="forced"
+		fi
+	done
+
+	fileLst=""
+	for i in $*; do
+		if [[ $i != "" ]] && [[ $i != "bz" ]] && [[ $i != "gz" ]] && [[ $i != "tbz" ]] && [[ $i != "tgz" ]]; then
+			filePath=$(dirname $i)
+			fileName=$(basename $i)
+			fileExt=${fileName##*.}
+			fileName=${fileName%.*}
+			tardir="$filePath/$fileName.tardir"
 
 
-set -k
+			if [[ $fileExt == "tbz" ]]; then
+				if [[ -d "$tardir" ]];then
+					echo "Deleting existing tardir: "$tardir
+					rm -rf $tardir
+				fi
+				$(mkdir -p "$tardir")
+				$(tar xjf $i -C "$tardir")
+				chmod 755 -R $tardir/*
+				if [[ $mode == "auto" ]]; then
+					method="cjf"
+					ext="tbz"
+				fi
+			elif [[ $fileExt == "tgz" ]]; then
+				if [[ -d "$tardir" ]];then
+					echo "Deleting existing tardir: "$tardir
+					rm -rf $tardir
+				fi
+				$(mkdir -p "$tardir")
+				$(tar xzf $i -C "$tardir")
+				chmod 755 -R $tardir/*
+				if [[ $mode == "auto" ]]; then
+					method="czf"
+					ext="tgz"
+				fi
+			elif [[ $fileExt == "tardir" ]] && [[ $mode == "auto" ]]; then
+				if [[ -f "$filePath/$fileName.tbz" ]];then
+					method="cjf"
+					ext="tbz"
+				fi
 
-#s lmake2 2.8
+			fi
+			fileLst="$fileLst $tardir"
+		fi
+	done
+
+	for i in $fileLst; do
+		if [[ $i != "" ]]; then
+		fileName=$(basename $i)
+		(
+			cd $i
+			cleanTar
+			fileName=${fileName%.*}
+			tar $method ../$fileName.$ext *
+		)
+		echo "$fileName.$ext remade with tar options $method"
+		fi
+	done
+}
+
+# simply launch a target thought insight
+function debugTarget() {
+	target=$1
+	dir=$(dirname $target)
+	base=$(basename $target)
+	cmd=$dir/%MAKE/$base/cmd
+	/soft/insight_7.3.50/bin/insight --args /usr/bin/python -S -B $cmd LD_PRELOAD=
+}
+
 s lmake2 3.1
 s insight
 s sge
+
