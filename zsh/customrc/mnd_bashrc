@@ -1,0 +1,178 @@
+alias h='history 50'
+alias resource='. ~/.bashrc'
+dis()  { export "DISPLAY=$1:0"; }
+edis() { echo $DISPLAY ;}
+disp() { export "DISPLAY=$1"; }
+
+dshroot() { PDSH_SSH_ARGS='-o ForwardAgent=yes -o ForwardX11=no -o ForwardX11Trusted=no' pdsh -g all$(cat /etc/dxo-site) -l root $* | dshbak -c ;}
+dsh()     { PDSH_SSH_ARGS='-o ForwardAgent=yes -o ForwardX11=no -o ForwardX11Trusted=no' pdsh -g all$(cat /etc/dxo-site)  $* | dshbak -c ;}
+dshg()    { PDSH_SSH_ARGS='-o ForwardAgent=yes -o ForwardX11=no -o ForwardX11Trusted=no' pdsh -g  $* | dshbak -c ;}
+dshw()    { PDSH_SSH_ARGS='-o ForwardAgent=yes -o ForwardX11=no -o ForwardX11Trusted=no' pdsh -w  $* | dshbak -c ;}
+
+build_path1()
+{
+    export $1=`env|sort|awk -F= '$1~/__'$1'$/ { printf "%s%s",c,$2; c=":" }'`
+}
+
+build_path()
+{
+    if [ "$A__PATH" != "" ] ; then
+        build_path1 PATH
+        build_path1 MANPATH
+        build_path1 INFOPATH
+        build_path1 LM_LICENSE_FILE
+        build_path1 CODE_MGR_LICENSE
+        build_path1 LD_LIBRARY_PATH
+    fi
+}
+
+s()
+{
+    eval `/clone/init/$1.sh -bash $2`
+    build_path
+}
+
+
+kchain() {
+    keychain -q
+    . ~/.keychain/`hostname`-sh
+	if [ -f ~/.keychain/`hostname`-sh-gpg ]
+	then
+	    . ~/.keychain/`hostname`-sh-gpg
+	fi
+}
+
+if [ "$A__PATH"  != "" ] ; then
+    build_path
+fi
+
+#if [ "$EMACS" == "t" ]; then
+#	echo xemacs
+#	export PAGER=cat
+#	export EDITOR=gnuclient
+#else
+#	alias ls='ls -ACF --color=tty'
+#	alias ll='ls -AlF --color=tty'
+#	alias lt='ls -Alrt --color=tty'
+#fi
+
+
+# quicker than clean (delete products dir in background process)
+function my-clean () {
+	TMPDIR=$( mktemp -p ~/tmp -d productsTMP.XXXXXXXXXX )
+	IMPDIR=$( mktemp -p ~/tmp -d imports_TMP.XXXXXXXXXX )
+	mkdir -p products
+	mkdir -p %STATE
+	mv products $TMPDIR
+	mv %STATE $TMPDIR
+	chmod 777 -R $TMPDIR && rm -rf $TMPDIR &
+	find . -type d -exec chmod u+w {} \; #fucking lmake2 rights managements !
+    if [[ $1 == "-ki" ]]; then
+        echo "keeping import directory to speed up first lmake"
+        mv imports $IMPDIR
+    fi
+	if [ -e .svn ]; then
+		svn-clean
+	elif [ -e .git ]; then
+		git clean -f -d -x
+	else
+		echo "error: don't know base type: git/svn"
+	fi
+    if [[ $1 == "-ki" ]]; then
+        mv $IMPDIR/imports .
+    fi
+}
+
+function cleanTar (){
+find . -name "%MAKE" -prune -o -name "*.pyc"  -exec rm     {} \;
+find . -name "%MAKE" -prune -o -name ".*.swp"  -exec rm     {} \;
+find . -name "%MAKE" -prune -o -name ".*.swo"  -exec rm     {} \;
+find . -name "%STATE" -exec rm -rf {} \;
+find . -name "%MAKE"  -exec rm -rf {} \;
+}
+
+# recompress a tardir from imports to take modifications into account
+function reTar(){
+	method="czf"
+	ext="tgz"
+	mode="auto"
+	for i in $*; do
+		if [[ $i == "bz" ]]; then
+			method="cjf"
+			ext="tbz"
+			mode="forced"
+		elif [[ $i == "gz" ]]; then
+			method="czf"
+			ext="tgz"
+			mode="forced"
+		fi
+	done
+
+	fileLst=""
+	for i in $*; do
+		if [[ $i != "" ]] && [[ $i != "bz" ]] && [[ $i != "gz" ]] && [[ $i != "tbz" ]] && [[ $i != "tgz" ]]; then
+			filePath=$(dirname $i)
+			fileName=$(basename $i)
+			fileExt=${fileName##*.}
+			fileName=${fileName%.*}
+			tardir="$filePath/$fileName.tardir"
+
+
+			if [[ $fileExt == "tbz" ]]; then
+				if [[ -d "$tardir" ]];then
+					echo "Deleting existing tardir: "$tardir
+					rm -rf $tardir
+				fi
+				$(mkdir -p "$tardir")
+				$(tar xjf $i -C "$tardir")
+				chmod 755 -R $tardir/*
+				if [[ $mode == "auto" ]]; then
+					method="cjf"
+					ext="tbz"
+				fi
+			elif [[ $fileExt == "tgz" ]]; then
+				if [[ -d "$tardir" ]];then
+					echo "Deleting existing tardir: "$tardir
+					rm -rf $tardir
+				fi
+				$(mkdir -p "$tardir")
+				$(tar xzf $i -C "$tardir")
+				chmod 755 -R $tardir/*
+				if [[ $mode == "auto" ]]; then
+					method="czf"
+					ext="tgz"
+				fi
+			elif [[ $fileExt == "tardir" ]] && [[ $mode == "auto" ]]; then
+				if [[ -f "$filePath/$fileName.tbz" ]];then
+					method="cjf"
+					ext="tbz"
+				fi
+
+			fi
+			fileLst="$fileLst $tardir"
+		fi
+	done
+
+	for i in $fileLst; do
+		if [[ $i != "" ]]; then
+		fileName=$(basename $i)
+		(
+			cd $i
+			cleanTar
+			fileName=${fileName%.*}
+			tar $method ../$fileName.$ext *
+		)
+		echo "$fileName.$ext remade with tar options $method"
+		fi
+	done
+}
+
+# simply launch a target thought insight
+function debugTarget() {
+	target=$1
+	dir=$(dirname $target)
+	base=$(basename $target)
+	cmd=$dir/%MAKE/$base/cmd
+	/soft/insight_7.3.50/bin/insight --args /usr/bin/python -S -B $cmd LD_PRELOAD=
+}
+
