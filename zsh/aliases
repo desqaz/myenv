@@ -49,13 +49,15 @@ vip() {
 	if [ -z "$VIMPROJSERVERNAME" ]; then
 		echo "VIMPROJSERVERNAME env var not set (use 7tags before using vip)"
 	else
-		vi --servername $VIMPROJSERVERNAME --remote-tab-silent "$@"
+		vi --servername $VIMPROJSERVERNAME --remote-silent "$@"
 	fi
 }
 
 alias 7tags='7tags.sh && source .vimtags/export_var_for_vim'
 
 alias -g V=' | vi -R -'
+alias -g F=' | sed -e "s/\x1B\[[0-9;]*[mK]//g" '
+alias -g VF=' | sed -e "s/\x1B\[[0-9;]*[mK]//g" | vi -R -'
 alias -g CEW='2>&1 | sed -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\([wW]arning\)/[0;1;35m\1[0m[0;1;36m\2[0m\3[0;1;33m\4[0m/g;" \
                      -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\([nN]ote\)/[0;1;35m\1[0m[0;1;36m\2[0m\3[0;1m\4[0m/g;" \
                      -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\(fatal[[:space:]]error\)/[0;1;35m\1[0m[0;1;36m\2[0m\3[0;1;31m\4[0m/g;" \
