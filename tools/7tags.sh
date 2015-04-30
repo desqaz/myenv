@@ -11,6 +11,7 @@ CSCOPE_DB="$VIMTAGSPATH/cscope.out"
 tagsfile="$VIMTAGSPATH/tags"
 TAGS_HL="$VIMTAGSPATH/tags_hl.vim"
 FilesList=$VIMTAGSPATH/files.list
+VimServerName="$WorksetPath"
 
 # Set default behaviour
 UpdateFilesList=y
@@ -93,5 +94,6 @@ export VIMTAGSPATH="$VIMTAGSPATH"
 export CSCOPE_DB="$CSCOPE_DB"
 export tagsfile="$tagsfile"
 export TAGS_HL="$TAGS_HL"
+export VIMPROJSERVERNAME="$VimServerName"
 EOF
 
