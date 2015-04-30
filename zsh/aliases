@@ -9,16 +9,17 @@ alias ls='ls --color=auto'
 alias ll='ls -lh'
 alias la='ll -a'
 alias lu='ls | xargs du -sh'
-alias lt='tree  -aCl    -I .svn'
-alias ltr='tree -paCl   -I .svn'
-alias lts='tree -shaCl  -I .svn'
-alias ltd='tree -aCld   -I .svn'
-alias lta='tree -pshaCl -I .svn'
-alias md=mkdir
+alias lt='tree  -aCl      -I .svn'
+alias ltr='tree -paCl     -I .svn'
+alias lts='tree -shaCl    -I .svn'
+alias ltd='tree -aCld     -I .svn'
+alias lta='tree -pshaClug -I .svn'
+alias md=mkdir -vp
 alias cpf='cp -rf'
 alias rmf='rm -rf'
 alias gp='grep  -r -n --color=auto --exclude-dir="*.vimtags*" --exclude-dir="*.svn*" --exclude-dir="*%*" --exclude-dir="products/tag*"'
 alias gpi='gp -i'
+alias cls=clear
 alias h=history
 alias hh='h -50'
 alias tp='top -d 1'

@@ -1,0 +1,3 @@
+#!/bin/bash
+unset PAGER
+meld $2 $5
