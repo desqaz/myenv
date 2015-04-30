@@ -1,0 +1,12 @@
+a -s pdf="kpdf "
+a -s c="vi "
+a -s cpp="vi "
+a -s h="vi "
+a -s txt="vi "
+a -s cfg="vi "
+a -s env="vi "
+a -s log="vi "
+a -s htm="google-chrome "
+a -s html="google-chrome "
+a -s doc="openoffice "
+

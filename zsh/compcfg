@@ -14,7 +14,7 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle '*:processes-names' command 'ps -e -o comm='
 zstyle '*:processes' command 'ps -au$USER'
 
-zstyle :compinstall filename '/home3/jlabarth/.zshrc'
+zstyle :compinstall filename '/home/${USER}/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -26,3 +26,5 @@ prompt myenv
 
 autoload zsh/complist
 
+autoload -U select-word-style
+select-word-style bash
