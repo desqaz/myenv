@@ -9,32 +9,20 @@ alias ls='ls --color=auto'
 alias ll='ls -lh'
 alias la='ll -a'
 alias lu='ls | xargs du -sh'
-alias lt='tree  -aCl    -I .svn'
-alias ltr='tree -paCl   -I .svn'
-alias lts='tree -shaCl  -I .svn'
-alias ltd='tree -aCld   -I .svn'
-alias lta='tree -pshaCl -I .svn'
-alias md=mkdir
+alias lt='tree  -aCl      -I .svn'
+alias ltr='tree -paCl     -I .svn'
+alias lts='tree -shaCl    -I .svn'
+alias ltd='tree -aCld     -I .svn'
+alias lta='tree -pshaClug -I .svn'
+alias md=mkdir -vp
 alias cpf='cp -rf'
 alias rmf='rm -rf'
-rmsf() {
-	chmod -R 777 "$@"
-	rm -rf "$@"
-}
-gpf() {
-	grep -r "$@" | awk -F ':' '{print $1}' | sort -u 
-}
-alias gp='grep  -Is --exclude-dir='.svn' --exclude-dir='.git' --exclude-dir='%MAKE' --exclude-dir='%STATE' --exclude-dir='products' -r -n --color=auto'
-alias gpi='grep -Is --exclude-dir='.svn' --exclude-dir='.git' --exclude-dir='%MAKE' --exclude-dir='%STATE' --exclude-dir='products' -ri -n --color=auto'
-alias gpa='grep -r -n --color=auto'
-fn() {
-	find . \( -name "products" -o -name "imports" -o -name "\.svn" -o -name "\.git" -o -name "%*" \) -prune -o -name "$*" -print
-}
-fni() {
-	find . \( -name "products" -o -name "imports" -o -name "\.svn" -o -name "\.git" -o -name "%*" \) -prune -o -iname "$*" -print
-}
+alias gp='grep  -r -n --color=auto --exclude-dir="*.vimtags*" --exclude-dir="*.svn*" --exclude-dir="*%*" --exclude-dir="products/tag*"'
+alias gpi='gp -i'
+alias cls=clear
 alias h=history
 alias hh='h -50'
+alias which='\which'
 alias tp='top -d 1'
 alias k='$TOOLS_ROOT/k.sh'
 alias ka='$TOOLS_ROOT/k.sh -a'
@@ -51,7 +39,7 @@ alias bcp='bcompare'
 alias md5='md5sum'
 alias sha='sha1sum'
 
-alias gl="git --no-pager log -n30 --no-merges --pretty=\"%h | %<(16)%cr | %<(20)%cn | %<(160,trunc)%s\" --date=local\
+alias gl="git --no-pager log -n30 --no-merges --pretty=\"%h | %<(16)%cr | %<(20)%cn | %<(140,trunc)%s\" --date=local\
           | sed \"s@\($(git config user.name)\|$USER\)@[0;32m\1[0m@g\""
 
 alias gls="git log -2 --stat"

@@ -11,7 +11,7 @@ execute pathogen#infect()
 "-------------------------------------------------------------------------
 "Color and font
 "-------------------------------------------------------------------------
-so $VIMRUNTIME/colors/desert.vim
+so $VIMRUNTIME/colors/inkpot.vim
 
 set guifont=Monospace\ 8
 
@@ -41,6 +41,62 @@ source $VIMRUNTIME/plugin/color_sample_pack.vim
 "-------------------------------------------------------------------------
 " Various
 "-------------------------------------------------------------------------
+
+" Syntastic!!
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loclist=1
+let g:syntastic_quiet_warnings=0
+
+" un historique raisonnable
+set history=100
+
+" undo, pour revenir en arrière
+set undolevels=300
+
+" Quand un fichier est changé en dehors de Vim, il est relu automatiquement
+"set autoread
+
+" Ne pas nous afficher un message quand on enregistre un readonly
+set writeany
+
+" Afficher les commandes incomplètes
+set showcmd
+
+" Améliore l'affichage en disant à vim que nous utilisons un terminal rapide
+set ttyfast
+
+" When vimrc is edited, reload it
+"autocmd! bufwritepost vimrc source $VIMRUNTIME/vimrc
+
+set path+=.
+set path+=$PWD
+set path+=$PWD/**
+
+"Persistent undo
+"set undodir=~/.vim/undodir
+"set undofile
+
+"#set shell=/bin/bash
+set shell=/bin/zsh
+
+" make backup files
+set backup
+
+" where to put backup files
+set backupdir=~/.vim/backup
+
+" share windows clipboard
+set clipboard+=unnamed
+
+" directory to place swap files in
+"set directory=~/.vim/tmp
+
+" support all three, in this order
+set fileformats=unix,dos,mac
+
+" use mouse everywhere
+"set mouse=a
+
 "Allow special Vim improvements like multiple-undo
 set nocompatible
 
@@ -49,6 +105,9 @@ set bs=2
 
 " visualbell
 set visualbell
+
+" don't make noise
+"set noerrorbells
 
 "Show the current edition mode on last line, number of column and line
 set showmode
@@ -91,7 +150,9 @@ set backupdir=~/tmp/vim/
 set directory=~/tmp/vim/
 
 if $VIM_FROM_ECLIPSE == "y"
+" menubar
 set guioptions-=m
+" tools bar
 set guioptions-=T
 endif
 
@@ -111,6 +172,7 @@ map <C-M>         :WMToggle<CR>
 map <C-Del>       :bdelete<CR>
 map <C-PageUp>    [c
 map <C-PageDown>  ]c
+map <C-x>         :call CloseSomething()<CR>
 
 map ,l            :so ~/.vimrc<CR>
 map ,#            :s/^/#/<CR><C-N>
@@ -120,6 +182,10 @@ map ,c            :set filetype=c<CR>
 map ,z            :set filetype=zsh<CR>
 map ,m            :set filetype=make<CR>
 map ,p            :set filetype=pantalk<CR>
+map ,d            :Dox<CR>
+
+" Sélectionner tout
+map <C-a> ggVG
 
 "tal : align "\" in multiple lines defines
 vmap ,t !tal<CR>
@@ -171,6 +237,13 @@ if has("cscope")
 endif
 endif
 
+function! CloseSomething()
+   if winnr("$") == 1 && tabpagenr("$") > 1 && tabpagenr() > 1 && tabpagenr() < tabpagenr("$")
+      tabclose | tabprev
+   else
+      q
+   endif
+endfunction
 
 "--------------------------------------------------------------------------
 " Omnicompletion, needs tags
@@ -247,6 +320,17 @@ let Tlist_File_Fold_Auto_Close = 1
 " Persistance
 "autocmd TabLeave * wincmd p
 "autocmd TabEnter * execute ResumeTList()
+" Automatically highlight the current tag in the taglist
+let Tlist_Auto_Highlight_Tag = 1
+" Open the taglist window when Vim starts.
+let Tlist_Auto_Open = 0
+" Single click on a tag jumps to it
+let Tlist_Use_SingleClick = 1
+"On entering a buffer, automatically highlight the current tag
+let Tlist_Highlight_Tag_On_BufEnter = 1
+" cols wide, so i can (almost always)
+let Tlist_Show_One_File = 1
+let Tlist_Inc_Winwidth = 1
 
 "---------------------------------------------------------------------------
 " Diff style
@@ -273,6 +357,20 @@ function! Show80col()
     endif
 endfunction
 
+
+"---------------------------------------------------------------------------
+"Highlight Patch like TODO :
+au BufNewFile,BufRead *.c,*.h,*.cpp,*.patch 
+         \ let g:m4=matchadd('Todo', '\c/\*.*PATCH.*', -1) |
+ \ let g:m5=matchadd('Todo', '\c//.*PATCH.*', -1)  |
+" \ set spell spelllang=en_us
+ \ set nospell 
+
+au BufNewFile,BufRead Makefile*,GNUmakefile*,*.mk,*.patch,*.mak,makefile*
+ \ let g:m6=matchadd('Todo', '\c#.*PATCH.*', -1) |
+" \ set spell spelllang=en_us
+ \ set nospell 
+ 
 "---------------------------------------------------------------------------
 " Spelling
 "---------------------------------------------------------------------------
@@ -296,7 +394,6 @@ let g:DoxygenToolkit_compactDoc="yes"
 let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
 set formatoptions+=ro
 
-map ,d           :Dox<CR>
 
 "-------------------------------------------------------------------------
 " force use of tabs in Makefiles and python
@@ -314,6 +411,11 @@ au BufNewFile,BufRead *.as
 
 "---------------------------------------------------------------------------
 " Pegasus tag
+
+"-------------------------------------------------------------------------
+"SU write
+command! W w !sudo tee % > /dev/null
+
 "---------------------------------------------------------------------------
 if $PGS_CTAGS_DB != ""
    if filereadable($PGS_CTAGS_DB)

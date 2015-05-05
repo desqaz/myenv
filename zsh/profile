@@ -1,7 +1,10 @@
+for f in $(find $LIBS_PATH -type d); do
+	[ -f $f/funktions ] && . $f/funktions
+done
+
 . $LIBS_PATH/colors
 . $LIBS_PATH/debug
 . $ZSH_PATH/aliases
-. $LIBS_PATH/gvim/funktions
 . $ZSH_PATH/splash
 . $ZSH_PATH/options
 . $ZSH_PATH/compcfg
