@@ -11,7 +11,7 @@ execute pathogen#infect()
 "-------------------------------------------------------------------------
 "Color and font
 "-------------------------------------------------------------------------
-so $VIMRUNTIME/colors/desert.vim
+so $VIMRUNTIME/colors/inkpot.vim
 
 set guifont=Monospace\ 8
 
