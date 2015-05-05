@@ -103,3 +103,8 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 . $HOME/myenv/bash/prompt
+
+[ -f $HOME/.myenvrc ] && . $HOME/.myenvrc
+
+export MYENV_CUSTOM_USER_ROOT=$MYENV_ROOT/custom/user/$MYENV_NAME
+[ -f $MYENV_CUSTOM_USER_ROOT/bashrc ] && . $MYENV_CUSTOM_USER_ROOT/bashrc

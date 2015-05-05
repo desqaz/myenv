@@ -13,10 +13,10 @@ execute pathogen#infect()
 "-------------------------------------------------------------------------
 so $VIMRUNTIME/colors/inkpot.vim
 
-set guifont=Monospace\ 8
+set guifont=Monospace\ 11
 
 " Font
-set gfn=Monospace\ 8
+set gfn=Monospace\ 11
 
 " enable syntax highlighting
 syntax on
@@ -409,38 +409,15 @@ au BufNewFile,BufRead *.as
    \ set ft=actionscript
 
 
-"---------------------------------------------------------------------------
-" Pegasus tag
 
 "-------------------------------------------------------------------------
 "SU write
 command! W w !sudo tee % > /dev/null
 
+
 "---------------------------------------------------------------------------
-if $PGS_CTAGS_DB != ""
-   if filereadable($PGS_CTAGS_DB)
-      set tags+=$PGS_CTAGS_DB
-   endif
+" Myenv custo
+"---------------------------------------------------------------------------
+if filereadable($MYENV_CUSTOM_USER_ROOT . "/vimrc")
+    so $MYENV_CUSTOM_USER_ROOT/vimrc
 endif
-
-if has("cscope")
-   if $PGS_CSCOPE_DB != ""
-      if filereadable($PGS_CSCOPE_DB)
-         set csto=0
-         set cst
-         set nocsverb
-         cs add $PGS_CSCOPE_DB
-         set csverb
-      endif
-   endif
-endif
-
-if $PGS_VIM_HIGHLIGHTS != ""
-   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_f Function
-   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight c_t gui=bold,italic
-   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_d Tag
-   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_m Tag
-   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_e Tag
-   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    source $PGS_VIM_HIGHLIGHTS
-endif
-

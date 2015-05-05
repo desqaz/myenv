@@ -38,4 +38,9 @@ if [[ $- == *i* ]]; then
 	done
 
 	umask 007
+
+	[ -f $HOME/.myenvrc ] && . $HOME/.myenvrc
+
+	export MYENV_CUSTOM_USER_ROOT=$MYENV_ROOT/custom/user/$MYENV_NAME
+	[ -f $MYENV_CUSTOM_USER_ROOT/zshrc ] && . $MYENV_CUSTOM_USER_ROOT/zshrc
 fi
