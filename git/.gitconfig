@@ -1,0 +1,23 @@
+[user]
+	name = Sidney N'Guessan
+	email = snguessan@dxo.com
+[color]
+ 	ui = auto
+ 	diff = auto
+ 	status = auto
+ 	branch = auto
+[diff]
+	external = git_diff_wrapper_bc
+[alias]
+	st = status
+	di = diff
+	co = checkout
+	ci = commit
+	pl = pull
+	ps = push
+	llg = log --format='%Cgreen%h%Creset %Cblue[%an - %ar]%Creset %s' --graph
+[core]
+	excludesfile = /home/snguessan/.gitignore_global
+	pager = cat
+[push]
+	default = simple
