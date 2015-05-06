@@ -1,9 +1,12 @@
-language: python
-python:
-  - "2.6"
-  - "2.7"
-  - "3.3"
-  - "3.4"
-  - "pypy"
+language: bash
 script:
-  - python --version
+  - ./setup.sh
+  - tests/bash.sh
+  - tests/custom.sh
+  - tests/git.sh
+  - tests/gvim.sh
+  - tests/tools.sh
+  - tests/zsh.sh
+
+after_success: travis/merge-master.sh
+
