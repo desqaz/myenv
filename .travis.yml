@@ -10,3 +10,7 @@ script:
 
 after_success: travis/merge-master.sh
 
+env:
+  global:
+    - secure: "i29iQGaD1NUP9ETKPLsAodcjXEiIhcOksFoZU/IdgrXdq7VK0EwktjxGwBrvbBO2DamWQQ5yyQ2Rw5h00uVip1XPaJ/+U3mm+F1eA13Ff00RzAivYjhxfSw2NcFoEvvv1NOwJFZMzZ1kHcjUNkMvaLQ/BfT7IWiLnellPhJ2LuU="
+
