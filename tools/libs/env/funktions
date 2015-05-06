@@ -40,6 +40,23 @@ function srm () {
 }
 
 #------------------------------------------------------------------------------
+rmsf() {
+	chmod -R 777 "$@"
+	rm -rf "$@"
+}
+
+gpf() {
+	grep -r "$@" | awk -F ':' '{print $1}' | sort -u 
+}
+
+fn() {
+	find . \( -name "products" -o -name "imports" -o -name "\.svn" -o -name "\.git" -o -name "%*" \) -prune -o -name "$*" -print
+}
+
+fni() {
+	find . \( -name "products" -o -name "imports" -o -name "\.svn" -o -name "\.git" -o -name "%*" \) -prune -o -iname "$*" -print
+}
+
 printvar()
 {
   typeset strVarName
