@@ -68,7 +68,7 @@ set ttyfast
 " When vimrc is edited, reload it
 "autocmd! bufwritepost vimrc source $VIMRUNTIME/vimrc
 
-set autochdir
+"set autochdir
 
 set path+=.
 set path+=$PWD
@@ -97,7 +97,7 @@ set clipboard+=unnamed
 set fileformats=unix,dos,mac
 
 " use mouse everywhere
-set mouse=a
+"set mouse=a
 
 "Allow special Vim improvements like multiple-undo
 set nocompatible
