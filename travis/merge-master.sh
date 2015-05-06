@@ -9,5 +9,8 @@ fi
 git fetch origin master:master || exit 1
 git checkout master  	       || exit 255
 git merge "$TRAVIS_BRANCH"     || exit 254
-git push origin master         || exit 253
+
+git remote add origin_http https://github.com/desqaz/myenv.git || exit 250
+
+git push origin_http master    || exit 253
 
