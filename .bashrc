@@ -98,8 +98,13 @@ fi
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
 . $HOME/myenv/bash/prompt
+
+[ -f $HOME/.myenvrc ] && . $HOME/.myenvrc
+
+export MYENV_CUSTOM_USER_ROOT=$MYENV_ROOT/custom/user/$MYENV_NAME
+[ -f $MYENV_CUSTOM_USER_ROOT/bashrc ] && . $MYENV_CUSTOM_USER_ROOT/bashrc

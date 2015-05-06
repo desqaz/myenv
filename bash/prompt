@@ -1,6 +1,3 @@
-MY_HOST=schest
-ME=snguessan.dxo
-
 User= 
 Host="\[\e[0;1;34m\]$HOSTNAME\[\e[0m\]"
 Separator=
@@ -9,16 +6,16 @@ ExtraInfos="(\[\e[0;1;33m\]\!\[\e[0m\])(\t) "
 
 Prompt="\r\n\[\e[0;1;33m\]>> \[\e[0m\]"
 
-if [ "$USER" != "$ME" ]; then
+if [ "$USER" != "$MYENV_NAME" ]; then
    User="\[\[\e[0;1;31m\]NOT_ME\[\e[0m\]"
    Host=
 fi
 
-if [ "$HOSTNAME" != "$MY_HOST" ]; then
+if [ "$HOSTNAME" != "$MYENV_HOST" ]; then
    Host="\[\e[0;1;31m\]$HOSTNAME\[\e[0m\]"
 fi
 
-if [ "$USER" != "$ME" -a "$HOSTNAME" != "$MY_HOST" ]; then
+if [ "$USER" != "$MYENV_NAME" -a "$HOSTNAME" != "$MYENV_HOST" ]; then
    Separator="::"
 fi
 
