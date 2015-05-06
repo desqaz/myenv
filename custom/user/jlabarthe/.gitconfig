@@ -1,0 +1,23 @@
+[user]
+	name = Jerome Labarthe
+	email = jlabarthe@dxo.com
+[color]
+	ui = auto
+	diff = auto
+	status = auto
+	branch = auto
+[alias]
+	lg = log -M --decorate --graph
+	st = status -s
+	stm = status -s -uno
+	ci = commit
+	co = checkout
+	dt = difftool
+	cl = clean -f -d
+	llg = log --format='%Cgreen%h%Creset %Cblue[%an - %ar]%Creset %s' --graph
+[diff]
+	#external = git_diff_wrapper_vi
+	external = git_diff_wrapper_bc
+#[push]
+#	default = simple
+
