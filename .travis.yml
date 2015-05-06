@@ -1,6 +1,6 @@
 language: bash
 script:
-  - setup.sh
+  - ./setup.sh
   - tests/bash.sh
   - tests/custom.sh
   - tests/git.sh
