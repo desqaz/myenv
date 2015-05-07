@@ -17,7 +17,6 @@ if [ ! -f $myenvcusto/.myenvrc ]; then
 else
 	ln -svf $myenvcusto/.myenvrc
 	for rc in $(find $myenvcusto -follow -type f -name ".*rc"); do
-		rm -f   $rc
 		ln -svf $rc
 	done
 fi
