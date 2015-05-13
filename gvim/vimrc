@@ -333,6 +333,7 @@ let Tlist_Highlight_Tag_On_BufEnter = 1
 " cols wide, so i can (almost always)
 let Tlist_Show_One_File = 1
 let Tlist_Inc_Winwidth = 1
+let Tlist_Sort_Type = "name"
 
 "---------------------------------------------------------------------------
 " Diff style
