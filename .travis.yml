@@ -1,16 +1,14 @@
 language: bash
 script:
-  - ./setup.sh
-  - tests/bash.sh
-  - tests/custom.sh
-  - tests/git.sh
-  - tests/gvim.sh
-  - tests/tools.sh
-  - tests/zsh.sh
-
-after_success: travis/merge-master.sh
-
+- "./setup.sh"
+- tests/bash.sh
+- tests/custom.sh
+- tests/git.sh
+- tests/gvim.sh
+- tests/tools.sh
+- tests/zsh.sh
+after_success:
+- travis/merge-master.sh
 env:
   global:
-    - secure: "i29iQGaD1NUP9ETKPLsAodcjXEiIhcOksFoZU/IdgrXdq7VK0EwktjxGwBrvbBO2DamWQQ5yyQ2Rw5h00uVip1XPaJ/+U3mm+F1eA13Ff00RzAivYjhxfSw2NcFoEvvv1NOwJFZMzZ1kHcjUNkMvaLQ/BfT7IWiLnellPhJ2LuU="
-
+    secure: cJJGkIsXNHVmhND/2f2HYrEA1WwzPeYC62XqjIEVutmo+9nE6KnE5gzPjSpuklC8ihQWXaJ69sOhWZmmcigDjgdDHUT/fAndi/7wTub4fBWuC0qYELEUO70Xko/wjw3Nic51j14nC5jq36uScjzC6PmN9tVH2wZAv7bScxfxfHs=
