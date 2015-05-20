@@ -7,7 +7,7 @@ myenvcusto=$myenv/custom/user/$USER
 cd $HOME
 
 # link rc files
-for rc in $(find $myenv -follow -maxdepth 1  -type f  -name ".*rc"); do
+for rc in $myenv/.bashrc $myenv/.zshrc $myenv/.vimrc $myenv/.tmux.conf; do
 	ln -svf $rc
 done
 
