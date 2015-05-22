@@ -40,9 +40,6 @@ alias bcp='bcompare'
 alias md5='md5sum'
 alias sha='sha1sum'
 
-alias gl="git --no-pager log -n15 --no-merges --pretty=\"%h | %<(16)%cr | %<(20)%cn | %<(140,trunc)%s\" --date=local\
-          | sed \"s@\($(git config user.name)\|$USER\\|$MYENV_NAME\)@[0;32m\1[0m@g\""
-
 alias gls="git log -2 --stat"
 alias gs=" git status"
 alias gd=" git diff"
