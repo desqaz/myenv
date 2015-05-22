@@ -31,6 +31,7 @@ ln -svf $myenv/git/.gitk
 
 # needed user tree
 [ ! -d $HOME/tmp ]        && mkdir -vp $HOME/tmp
+[ ! -d $HOME/tmp/vim ]    && mkdir -vp $HOME/tmp/vim
 [ ! -d $HOME/.local/bin ] && mkdir -vp $HOME/.local/bin
 [ ! -d $HOME/.local/lib ] && mkdir -vp $HOME/.local/lib
 
@@ -64,7 +65,8 @@ fi
 #
 echo "[0;32mInstalling others deps[0m"
 
-for dep in "$(cat $myenv/tools/deps.lst | grep '^cmd' |  awk '{for(i=1;i<$$NF;i++) $i=""; print}')"; do
+IFS=$'\n'
+for dep in $(cat $myenv/tools/deps.lst | grep '^cmd' |  awk '{for(i=1;i<$$NF;i++) $i=""; print}'); do
 	echo "[0;33m$dep[0m"
 	sh -c "$dep"
 done
@@ -77,6 +79,13 @@ if [ ! -d $HOME/.ssh ]; then
 		openssl aes-256-cbc -d -in $myenvcusto/enck.txt -a | tar -C $HOME/.ssh -xjf -
 		if [ $? -ne 0 ]; then rm -rf $HOME/.ssh; fi
 	fi
+fi
+
+# Set zsh by default
+CurrentShell=$(cat /etc/passwd | grep $USER | cut -d ':' -f 7)
+if [ "$CurrentShell" != "/bin/zsh" ]; then
+	echo "[0;32mSetting zsh by default with chsh[0m"
+	chsh -s /bin/zsh
 fi
 
 # enjoy!
