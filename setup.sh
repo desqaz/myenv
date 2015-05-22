@@ -10,7 +10,7 @@ cd $HOME
 # link rc files
 echo "Linking rc files"
 
-for rc in $(find $myenv -follow -maxdepth 1  -type f  -name ".*rc"); do
+for rc in $myenv/.bashrc $myenv/.zshrc $myenv/.vimrc $myenv/.tmux.conf; do
 	ln -svf $rc
 done
 
@@ -67,6 +67,15 @@ for dep in "$(cat $myenv/tools/deps.lst | grep '^cmd' |  awk '{for(i=1;i<$$NF;i+
 	sh -c "$dep"
 done
 
+# Put keys if exists
+if [ ! -d $HOME/.ssh ]; then
+	if [ -f $myenvcusto/enck.txt ]; then
+		mkdir $HOME/.ssh
+		echo "Decrypting keys for installation ..."
+		openssl aes-256-cbc -d -in $myenvcusto/enck.txt -a | tar -C $HOME/.ssh -xjf -
+		if [ $? -ne 0 ]; then rm -rf $HOME/.ssh; fi
+	fi
+fi
 
 # enjoy!
 
