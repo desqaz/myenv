@@ -27,21 +27,23 @@ fi
 # link exotic files
 ln -svf $myenv/git/.gitk
 [ -f $myenvcusto/svn/config ] && ln -svf $myenvcusto/svn/config .subversion/config
+[ -f $myenvcusto/.gitconfig ] && ln -svf $myenvcusto/.gitconfig
 
 # needed user tree
-[ ! -d $HOME/tmp ]    && mkdir -v $HOME/tmp
-[ ! -d $HOME/.local ] && mkdir -v $HOME/.local
+[ ! -d $HOME/tmp ]        && mkdir -vp $HOME/tmp
+[ ! -d $HOME/.local/bin ] && mkdir -vp $HOME/.local/bin
+[ ! -d $HOME/.local/lib ] && mkdir -vp $HOME/.local/lib
 
 
 #
 # Packages installation
 #
 echo "[0;32mInstalling deps packages[0m"
-type apt-get 2&>1 > /dev/null
+type apt-get > /dev/null
 
 if [ $? -eq 0 ]; then
 	for dep in $(cat $myenv/tools/deps.lst | grep '^pkg' | awk '{print $2}'); do
-		sudo apt-get install "$dep"
+		sudo apt-get install "$dep" -y
 	done
 fi
 
@@ -49,7 +51,7 @@ fi
 # Binaries installation 
 #
 echo "[0;32mInstalling deps binaries[0m"
-type yum 2&>1 > /dev/null
+type pip > /dev/null
 
 if [ $? -eq 0 ]; then
 	for dep in $(cat $myenv/tools/deps.lst | grep '^pip' | awk '{print $2}'); do

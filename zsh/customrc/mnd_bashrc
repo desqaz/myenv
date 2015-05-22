@@ -176,7 +176,8 @@ function debugTarget() {
 	/soft/insight_7.3.50/bin/insight --args /usr/bin/python -S -B $cmd LD_PRELOAD=
 }
 
-s lmake2 3.2beta
-s insight
-s sge
-
+if [ -d /clone ]; then 
+	s lmake2 3.2beta
+	s insight
+	s sge
+fi
