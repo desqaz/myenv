@@ -81,11 +81,13 @@ if [ ! -d $HOME/.ssh ]; then
 	fi
 fi
 
-# Set zsh by default
-CurrentShell=$(cat /etc/passwd | grep $USER | cut -d ':' -f 7)
-if [ "$CurrentShell" != "/bin/zsh" ]; then
-	echo "[0;32mSetting zsh by default with chsh[0m"
-	chsh -s /bin/zsh
+if [ "$USER" != "travis" ]; then
+	# Set zsh by default
+	CurrentShell=$(cat /etc/passwd | grep $USER | cut -d ':' -f 7)
+	if [ "$CurrentShell" != "/bin/zsh" ]; then
+		echo "[0;32mSetting zsh by default with chsh[0m"
+		chsh -s /bin/zsh
+	fi
 fi
 
 # enjoy!
