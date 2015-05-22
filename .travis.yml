@@ -1,5 +1,4 @@
 language: bash
-sudo: required
 script:
 - "./setup.sh"
 - tests/bash.sh
