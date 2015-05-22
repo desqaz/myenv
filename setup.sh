@@ -29,6 +29,16 @@ ln -svf $myenv/git/.gitk
 [ ! -d $HOME/tmp ]    && mkdir -v $HOME/tmp
 [ ! -d $HOME/.local ] && mkdir -v $HOME/.local
 
+# Put keys if exists
+if [ ! -d $HOME/.ssh ]; then
+	if [ -f $myenvcusto/enck.txt ]; then
+		mkdir $HOME/.ssh
+		echo "Decrypting keys for installation ..."
+		openssl aes-256-cbc -d -in $myenvcusto/enck.txt -a | tar -C $HOME/.ssh -xjf -
+		if [ $? -ne 0 ]; then rm -rf $HOME/.ssh; fi
+	fi
+fi
+
 # enjoy!
 
 case $(ps -p $PPID -o comm=) in
