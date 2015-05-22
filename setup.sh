@@ -2,7 +2,7 @@
 
 currPwd=$PWD
 
-myenv=$(cd $(dirname $0) 2&>1 > /dev/null && pwd)
+myenv=$(cd $(dirname $0) 2>&1 > /dev/null && pwd)
 myenvcusto=$myenv/custom/user/$USER
 
 cd $HOME
