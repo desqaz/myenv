@@ -421,6 +421,6 @@ command! W w !sudo tee % > /dev/null
 "---------------------------------------------------------------------------
 " Myenv custo
 "---------------------------------------------------------------------------
-if filereadable($MYENV_CUSTOM_USER_ROOT . "/vimrc")
-    so $MYENV_CUSTOM_USER_ROOT/vimrc
+if filereadable($MYENV_CUSTOM_USER_ROOT . "/extra.vimrc")
+    so $MYENV_CUSTOM_USER_ROOT/extra.vimrc
 endif
