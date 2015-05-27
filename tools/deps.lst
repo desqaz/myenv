@@ -28,13 +28,6 @@ pkg   cmake
 pkg   ninja-build
 pkg   unzip
 
-#
-# Binaries
-#
-cmd   wget -P ~/tmp http://www.scootersoftware.com/bcompare-3.3.13.18981_i386.deb && sudo gdebi -n ~/tmp/bcompare-3.3.13.18981_i386.deb
-cmd   curl --progress-bar https://storage.googleapis.com/git-repo-downloads/repo > ~/.local/bin/repo && chmod a+x ~/.local/bin/repo
-cmd   sudo easy_install -U pip
-cmd   apt-file update
 
 #
 # PIP
@@ -42,4 +35,31 @@ cmd   apt-file update
 
 pip   tmuxp
 pip   jira
+
+
+#
+# Others
+#
+cmd   BinVer="3.3.13.18981"; PkgVer="3.3.13-18981";                                   \
+      ToInstall="n";                                                                  \
+      dpkg-query -l bcompare >/dev/null 2>/dev/null;                                  \
+      if [ $? -eq 0 ]; then                                                           \
+          InstalledVer=$(dpkg-query -l bcompare | grep bcompare | awk '{print $3}');  \
+          if [ "$InstalledVer" != "$PkgVer" ]; then                                   \
+              ToInstall="y";                                                          \
+          fi;                                                                         \
+      else                                                                            \
+          ToInstall="y";                                                              \
+      fi;                                                                             \
+      if [ "$ToInstall" = "y" ]; then                                                 \
+          wget -P ~/tmp http://www.scootersoftware.com/bcompare-${BinVer}_i386.deb && \
+          sudo gdebi -n ~/tmp/bcompare-${BinVer}_i386.deb;                            \
+      else                                                                            \
+          echo "bcompare version $BinVer already installed";                          \
+      fi
+cmd   curl --progress-bar https://storage.googleapis.com/git-repo-downloads/repo > ~/.local/bin/repo && \
+      chmod a+x ~/.local/bin/repo
+cmd   sudo easy_install -U pip
+cmd   apt-file update
+
 

@@ -35,6 +35,8 @@ ln -svf $myenv/git/.gitk
 [ ! -d $HOME/.local/bin ] && mkdir -vp $HOME/.local/bin
 [ ! -d $HOME/.local/lib ] && mkdir -vp $HOME/.local/lib
 
+DepsLst=$(mktemp)
+cat $myenv/tools/deps.lst | perl -p -e 's/\\\n//' > $DepsLst
 
 #
 # Packages installation
@@ -43,7 +45,7 @@ echo "[0;32mInstalling deps packages[0m"
 type apt-get > /dev/null
 
 if [ $? -eq 0 ]; then
-	for dep in $(cat $myenv/tools/deps.lst | grep '^pkg' | awk '{print $2}'); do
+	for dep in $(cat $DepsLst | grep '^pkg' | awk '{print $2}'); do
 		dpkg-query -l "$dep" >/dev/null 2>/dev/null
 		if [ "$?" -ne 0 ]; then
 			sudo apt-get install "$dep" -y
@@ -54,13 +56,13 @@ if [ $? -eq 0 ]; then
 fi
 
 #
-# Binaries installation 
+# Pip package installation 
 #
 echo "[0;32mInstalling python deps[0m"
 type pip > /dev/null
 
 if [ $? -eq 0 ]; then
-	for dep in $(cat $myenv/tools/deps.lst | grep '^pip' | awk '{print $2}'); do
+	for dep in $(cat $DepsLst | grep '^pip' | awk '{print $2}'); do
 		sudo pip install $dep
 	done
 fi
@@ -71,10 +73,12 @@ fi
 echo "[0;32mInstalling others deps[0m"
 
 IFS=$'\n'
-for dep in $(cat $myenv/tools/deps.lst | grep '^cmd' |  awk '{for(i=1;i<$$NF;i++) $i=""; print}'); do
+for dep in $(cat $DepsLst | grep '^cmd' |  awk '{for(i=1;i<$$NF;i++) $i=""; print}'); do
 	echo "[0;33m$dep[0m"
 	sh -c "$dep"
 done
+
+rm -f $DepsLst
 
 # Put keys if exists
 if [ ! -d $HOME/.ssh ]; then
