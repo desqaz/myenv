@@ -2,6 +2,10 @@
 # Packages
 #
 pkg   autoconf
+pkg   automake
+pkg   libtool
+pkg   libtool-bin
+pkg   pkg-config
 pkg   gdebi-core
 pkg   curl
 pkg   gitk
@@ -20,6 +24,9 @@ pkg   ctags
 pkg   cscope
 pkg   libpython-dev
 pkg   apt-file
+pkg   cmake
+pkg   ninja-build
+pkg   unzip
 
 #
 # Binaries

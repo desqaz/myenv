@@ -44,14 +44,19 @@ type apt-get > /dev/null
 
 if [ $? -eq 0 ]; then
 	for dep in $(cat $myenv/tools/deps.lst | grep '^pkg' | awk '{print $2}'); do
-		sudo apt-get install "$dep" -y
+		dpkg-query -l "$dep" >/dev/null 2>/dev/null
+		if [ "$?" -ne 0 ]; then
+			sudo apt-get install "$dep" -y
+		else 
+			echo "[0;32m    --> $dep already installed[0m"
+		fi
 	done
 fi
 
 #
 # Binaries installation 
 #
-echo "[0;32mInstalling deps binaries[0m"
+echo "[0;32mInstalling python deps[0m"
 type pip > /dev/null
 
 if [ $? -eq 0 ]; then
