@@ -11,12 +11,12 @@ execute pathogen#infect()
 "-------------------------------------------------------------------------
 "Color and font
 "-------------------------------------------------------------------------
-so $VIMRUNTIME/colors/inkpot.vim
+so $VIMRUNTIME/colors/darkblue.vim
 
-set guifont=Monospace\ 11
+set guifont=Monospace\ 10
 
 " Font
-set gfn=Monospace\ 11
+set gfn=Monospace\ 10
 
 " enable syntax highlighting
 syntax on
