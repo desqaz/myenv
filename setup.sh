@@ -1,11 +1,31 @@
 #!/bin/bash --norc
 
 currPwd=$PWD
+isSudo=255
+
+function SUDO () {
+	if [ $isSudo -eq 255 ]; then
+		echo "Check sudo rights..."
+		sudo -l > /dev/null 2>/dev/null
+		if [ $? -eq 0 ]; then
+			isSudo=1
+		else
+			isSudo=0
+		fi
+	fi
+	[ $isSudo -eq 1 ] && sudo $@
+}
 
 myenv=$(cd $(dirname $0) 2>&1 > /dev/null && pwd)
 myenvcusto=$myenv/custom/user/$USER
+toolsdeps=$myenv/tools/deps.d
 
 cd $HOME
+
+# Link myenv root
+if [ $myenv != $HOME/myenv ] && [ ! -e $HOME/myenv ]; then
+	ln -sv $myenv $HOME/myenv
+fi
 
 # link rc files
 echo "Linking rc files"
@@ -18,15 +38,12 @@ if [ ! -f $myenvcusto/.myenvrc ]; then
 	echo "export MYENV_NAME=$USER"      >  .myenvrc
 	echo "export MYENV_HOST=$HOSTNAME"  >> .myenvrc
 else
-	ln -svf $myenvcusto/.myenvrc
-	for rc in $(find $myenvcusto -follow -type f -name ".*rc"); do
-		ln -svf $rc
-	done
+	cp -vf $myenvcusto/.myenvrc .
 fi
 
 # link exotic files
 ln -svf $myenv/git/.gitk
-[ -f $myenvcusto/svn/config ] && ln -svf $myenvcusto/svn/config .subversion/config
+[ -f $myenvcusto/svn/config ] && mkdir -vp .subversion && ln -svf $myenvcusto/svn/config .subversion/config
 [ -f $myenvcusto/.gitconfig ] && ln -svf $myenvcusto/.gitconfig
 
 # needed user tree
@@ -48,9 +65,9 @@ if [ $? -eq 0 ]; then
 	for dep in $(cat $DepsLst | grep '^pkg' | awk '{print $2}'); do
 		dpkg-query -l "$dep" >/dev/null 2>/dev/null
 		if [ "$?" -ne 0 ]; then
-			sudo apt-get install "$dep" -y
+			SUDO apt-get install "$dep" -y
 		else 
-			echo "[0;32m    --> $dep already installed[0m"
+			echo "[0;36m    --> $dep already installed[0m"
 		fi
 	done
 fi
@@ -63,19 +80,18 @@ type pip > /dev/null
 
 if [ $? -eq 0 ]; then
 	for dep in $(cat $DepsLst | grep '^pip' | awk '{print $2}'); do
-		sudo pip install $dep
+		SUDO pip install --upgrade $dep
 	done
 fi
 
 #
 # Others installation
 #
-echo "[0;32mInstalling others deps[0m"
+echo "[0;32mInstalling deps.d[0m"
 
-IFS=$'\n'
-for dep in $(cat $DepsLst | grep '^cmd' |  awk '{for(i=1;i<$$NF;i++) $i=""; print}'); do
+for dep in $(find $toolsdeps -type f); do
 	echo "[0;33m$dep[0m"
-	sh -c "$dep"
+	. $dep
 done
 
 rm -f $DepsLst
