@@ -1,0 +1,9 @@
+#!/bin/sh
+
+Local=$1
+Remote=$2
+Base=$3
+Merged=$4
+
+bcompare $Local $Remote $Base $Merged
+
