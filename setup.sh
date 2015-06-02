@@ -59,8 +59,7 @@ cat $myenv/tools/deps.lst | perl -p -e 's/\\\n//' > $DepsLst
 # Packages installation
 #
 echo "[0;32mInstalling deps packages[0m"
-type apt-get > /dev/null
-
+type apt-get > /dev/null 2> /dev/null
 if [ $? -eq 0 ]; then
 	for dep in $(cat $DepsLst | grep '^pkg' | awk '{print $2}'); do
 		dpkg-query -l "$dep" >/dev/null 2>/dev/null
@@ -76,8 +75,7 @@ fi
 # Pip package installation 
 #
 echo "[0;32mInstalling python deps[0m"
-type pip > /dev/null
-
+type pip > /dev/null 2> /dev/null
 if [ $? -eq 0 ]; then
 	for dep in $(cat $DepsLst | grep '^pip' | awk '{print $2}'); do
 		SUDO pip install --upgrade $dep
