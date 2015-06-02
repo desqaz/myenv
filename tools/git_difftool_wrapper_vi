@@ -1,0 +1,8 @@
+#!/bin/sh
+
+Local=$1
+Remote=$2
+Base=$3
+
+gvim --nofork -d -geometry 179x85 "$Local" "$Remote" +":set titlestring=$Base"
+
