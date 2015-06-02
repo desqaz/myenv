@@ -14,8 +14,6 @@ execute pathogen#infect()
 so $VIMRUNTIME/colors/darkblue.vim
 
 set guifont=Monospace\ 10
-
-" Font
 set gfn=Monospace\ 10
 
 " enable syntax highlighting
@@ -421,6 +419,6 @@ command! W w !sudo tee % > /dev/null
 "---------------------------------------------------------------------------
 " Myenv custo
 "---------------------------------------------------------------------------
-if filereadable($MYENV_CUSTOM_USER_ROOT . "/extra.vimrc")
-    so $MYENV_CUSTOM_USER_ROOT/extra.vimrc
+if filereadable($HOME . "/.myenv.extravim")
+    so $HOME/.myenv.extravim
 endif

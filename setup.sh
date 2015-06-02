@@ -37,9 +37,9 @@ done
 if [ ! -f $myenvcusto/.myenvrc ]; then
 	echo "export MYENV_NAME=$USER"      >  .myenvrc
 	echo "export MYENV_HOST=$HOSTNAME"  >> .myenvrc
-else
-	cp -vf $myenvcusto/.myenvrc .
 fi
+
+cp -vf $myenvcusto/.myenv.extravim $HOME
 
 # link exotic files
 ln -svf $myenv/git/.gitk
