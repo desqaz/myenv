@@ -34,7 +34,7 @@ for rc in $myenv/.bashrc $myenv/.zshrc $myenv/.vimrc $myenv/.tmux.conf; do
 	ln -svf $rc
 done
 
-if [ ! -f $myenvcusto/.myenvrc ]; then
+if [ ! -f .myenvrc ]; then
 	echo "export MYENV_NAME=$USER"      >  .myenvrc
 	echo "export MYENV_HOST=$HOSTNAME"  >> .myenvrc
 fi
