@@ -40,6 +40,6 @@ pip   jira
 #
 # Others
 #
-cmd   sudo easy_install -U pip
+cmd   SUDO easy_install -U pip
 cmd   apt-file update
 

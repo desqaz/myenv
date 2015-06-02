@@ -11,7 +11,7 @@ else
 fi;
 
 if [ $ToInstall -eq 1 ]; then
-    wget -P ~/tmp http://www.scootersoftware.com/bcompare-${BinVer}_i386.deb && sudo gdebi -n ~/tmp/bcompare-${BinVer}_i386.deb;
+    wget -P ~/tmp http://www.scootersoftware.com/bcompare-${BinVer}_i386.deb && SUDO gdebi -n ~/tmp/bcompare-${BinVer}_i386.deb;
 else
     echo "[0;36mbcompare version $BinVer already installed[0m";
 fi
