@@ -13,7 +13,8 @@ pkg   vim-gtk
 pkg   g++-multilib
 pkg   htop
 pkg   tree
-pkg   python-pip
+pkg   python-setuptools
+pkg   python3-setuptools
 pkg   zsh
 pkg   tmux
 pkg   wget
@@ -30,16 +31,32 @@ pkg   unzip
 
 
 #
+# EASY_INSTALL
+#
+eins  pip
+
+
+#
+# EASY_INSTALL3
+#
+eins3 pip
+
+
+#
 # PIP
 #
-
 pip   tmuxp
 pip   jira
 
 
 #
+# PIP3
+#
+pip3  tmuxomatic 
+
+
+#
 # Others
 #
-cmd   SUDO easy_install -U pip
 cmd   apt-file update
 

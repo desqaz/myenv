@@ -72,13 +72,46 @@ if [ $? -eq 0 ]; then
 fi
 
 #
+# easy_install package installation 
+#
+echo "[0;32mInstalling python easy_install deps[0m"
+type easy_install > /dev/null 2> /dev/null
+if [ $? -eq 0 ]; then
+	for dep in $(cat $DepsLst | grep -w '^eins' | awk '{print $2}'); do
+		SUDO easy_install -U $dep
+	done
+fi
+
+#
+# easy_install3 package installation 
+#
+echo "[0;32mInstalling python3 easy_install deps[0m"
+type easy_install3 > /dev/null 2> /dev/null
+if [ $? -eq 0 ]; then
+	for dep in $(cat $DepsLst | grep -w '^eins3' | awk '{print $2}'); do
+		SUDO easy_install3 -U $dep
+	done
+fi
+
+#
 # Pip package installation 
 #
-echo "[0;32mInstalling python deps[0m"
+echo "[0;32mInstalling python pip deps[0m"
 type pip > /dev/null 2> /dev/null
 if [ $? -eq 0 ]; then
-	for dep in $(cat $DepsLst | grep '^pip' | awk '{print $2}'); do
+	for dep in $(cat $DepsLst | grep -w '^pip' | awk '{print $2}'); do
 		SUDO pip install --upgrade $dep
+	done
+fi
+
+#
+# Pip3 package installation 
+#
+echo "[0;32mInstalling python3 pip deps[0m"
+type pip3 > /dev/null 2> /dev/null
+if [ $? -eq 0 ]; then
+	for dep in $(cat $DepsLst | grep -w '^pip3' | awk '{print $2}'); do
+		SUDO pip3 install --upgrade $dep
 	done
 fi
 
@@ -86,11 +119,24 @@ fi
 # Others installation
 #
 echo "[0;32mInstalling deps.d[0m"
-
 for dep in $(find $toolsdeps -type f); do
 	echo "[0;33m$dep[0m"
 	. $dep
 done
+
+#
+# Extra command 
+#
+echo "[0;32mExecuting extra cmd[0m"
+IFS=$'\n'
+export -f SUDO
+export isSudo
+if [ $? -eq 0 ]; then
+	for dep in $(cat $DepsLst | grep -w '^cmd' |  awk '{for(i=1;i<$$NF;i++) $i=""; print}'); do
+		echo "[0;33m$dep[0m"
+		bash -c "$dep"
+	done
+fi
 
 rm -f $DepsLst
 
