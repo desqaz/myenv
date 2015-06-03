@@ -53,7 +53,7 @@ pip   jira
 # PIP3
 #
 pip3  tmuxomatic 
-
+pip3  pyyaml
 
 #
 # Others
