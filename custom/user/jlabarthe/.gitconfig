@@ -10,10 +10,13 @@
 	lg = log -M --decorate --graph
 	st = status -s
 	stm = status -s -uno
-	ci = commit
+	di = diff
 	co = checkout
+	ci = commit
+	pl = pull
+	ps = push
 	dt = difftool
-	cl = clean -f -d
+	cl = clean -fdx
 	llg = log --format='%Cgreen%h%Creset %Cblue[%an - %ar]%Creset %s' --graph
 [diff]
 	tool = bc3

@@ -2,22 +2,42 @@
 	name = Sidney N'Guessan
 	email = snguessan@dxo.com
 [color]
- 	ui = auto
- 	diff = auto
- 	status = auto
- 	branch = auto
-[diff]
-	external = git_diff_wrapper_bc
+	ui = auto
+	diff = auto
+	status = auto
+	branch = auto
 [alias]
-	st = status
+	lg = log -M --decorate --graph
+	st = status -s
+	stm = status -s -uno
 	di = diff
 	co = checkout
 	ci = commit
 	pl = pull
 	ps = push
+	dt = difftool
+	cl = clean -fdx
 	llg = log --format='%Cgreen%h%Creset %Cblue[%an - %ar]%Creset %s' --graph
+[diff]
+	tool = bc3
+	#tool = vi
+[difftool]
+	prompt = false
+[difftool "bc3"]
+	cmd = git_difftool_wrapper_bc   "$LOCAL" "$REMOTE" "$BASE"
+[difftool "vi"]
+	cmd = git_difftool_wrapper_vi   "$LOCAL" "$REMOTE" "$BASE"
+[difftool "meld"]
+	cmd = git_difftool_wrapper_meld "$LOCAL" "$REMOTE" "$BASE"
+[merge]
+	tool = bc3
+[mergetool]
+	prompt = false
+	keepBackup = false
+[mergetool "bc3"]
+	cmd = git_mergetool_wrapper_bc "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+	trustExitCode = true
 [core]
 	excludesfile = /home/snguessan/.gitignore_global
-	pager = cat
 [push]
 	default = simple
