@@ -2,29 +2,36 @@
 
 Verbose="n"
 
-if [ "$1" = "-v" ]; then
+echo $@ | grep -- -v > /dev/null
+if [ $? -eq 0 ]; then
 	Verbose="y"
+	set -x
 fi
 
-# Prepare temp dir
-TmpDir=$(mktemp -d)
+shas=$(echo $@ | sed s@'-v'@@g)
 
 # Gen diff script
+TmpDir=$(mktemp -d)
 DiffScript=$TmpDir/diff_cmd_script
 LocalTreeDir=$TmpDir/LocalTree
 RemoteTreeDir=$TmpDir/RemoteTree
 DiffStat=$TmpDir/DiffStat
+lTitle=$TmpDir/lTitle
+rTitle=$TmpDir/rTitle
+
 RootDir=$(pwd)
 
 echo "nodiff" > $DiffStat
 
 mkdir $LocalTreeDir $RemoteTreeDir
+
 cat << EOF > $DiffScript
 #! /bin/sh
 
 optVer=""
 
 if [ "$Verbose" = "y" ]; then
+	set -x
 	echo "Args --->"
 	echo \$*
 	echo "<---"
@@ -34,25 +41,35 @@ fi
 Filename="\$1"
 
 Local="\$2"
-Verlocal="\$3"
+VerLocal="\$3"
 Remote="\$5"
 VerRemote="\$6"
 
 FileDir=\$(dirname \$Filename)
 
-mkdir -p $LocalTreeDir/\$FileDir
-mkdir -p $RemoteTreeDir/\$FileDir
-
-if [ "\$Verlocal" = "0000000000000000000000000000000000000000" ]; then
-	ln -s \$optVer $RootDir/\$Local $LocalTreeDir/\$Filename
-else
-	cp -f \$optVer \$Local $LocalTreeDir/\$Filename
+if [ \$VerLocal  != '.' ]; then
+	shortVerLocal=\$(git rev-parse --short \$VerLocal)
+	mkdir -p $LocalTreeDir/\$FileDir
+	if [ "\$VerLocal" = "0000000000000000000000000000000000000000" ]; then
+		ln -s \$optVer $RootDir/\$Local $LocalTreeDir/\$Filename
+		echo "WorkingCopy" > $lTitle
+	else
+		cp -f \$optVer \$Local $LocalTreeDir/\$Filename
+		echo \$shortVerLocal > $lTitle
+	fi
 fi
 
-if [ "\$VerRemote" = "0000000000000000000000000000000000000000" ]; then
-	ln -s \$optVer $RootDir/\$Remote $RemoteTreeDir/\$Filename
-else
-	cp -f \$optVer \$Remote $RemoteTreeDir/\$Filename
+if [ \$VerRemote != '.' ]; then
+  	shortVerRemote=\$(git rev-parse --short \$VerRemote)
+	mkdir -p $RemoteTreeDir/\$FileDir
+
+	if [ "\$VerRemote" = "0000000000000000000000000000000000000000" ]; then
+		ln -s \$optVer $RootDir/\$Remote $RemoteTreeDir/\$Filename
+		echo "WorkingCopy" > $rTitle
+	else
+		cp -f \$optVer \$Remote $RemoteTreeDir/\$Filename
+		echo \$shortVerRemote > $rTitle
+	fi
 fi
 
 echo "diff" > $DiffStat
@@ -63,7 +80,7 @@ chmod +x $DiffScript
 # execute git diff
 OldDiffConfig=$(git config diff.external)
 git config diff.external $DiffScript
-git diff --ext-diff
+git diff --ext-diff $shas
 if [ "$OldDiffConfig" != "" ]; then
 	git config diff.external $OldDiffConfig
 else
@@ -81,8 +98,9 @@ fi
 
 # Launch bcompare
 if [ "$(cat $DiffStat)" != "nodiff" ]; then
-	bcompare $LocalTreeDir $RemoteTreeDir | cat
+	bcompare -expandall -title1="$(cat $lTitle)" -title2="$(cat $rTitle)" $LocalTreeDir $RemoteTreeDir | cat
 fi
 
 # Remove temp dir
 rm -rf $TmpDir
+set +x

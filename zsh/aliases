@@ -42,7 +42,7 @@ alias sha='sha1sum'
 
 alias gls="git log -2 --stat"
 alias gs=" git status"
-alias gd=" git diff"
+alias gd=" git difftool"
 alias gci="git commit"
 alias gck="git checkout"
 alias ga=" git add"

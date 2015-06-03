@@ -1,0 +1,8 @@
+#!/bin/sh
+
+Local=$1
+Remote=$2
+Base=$3
+
+meld $Local $Remote
+
