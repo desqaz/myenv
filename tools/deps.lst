@@ -28,7 +28,7 @@ pkg   apt-file
 pkg   cmake
 pkg   ninja-build
 pkg   unzip
-
+pkg   openssh-server
 
 #
 # EASY_INSTALL
