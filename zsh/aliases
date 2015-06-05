@@ -9,17 +9,17 @@ alias ls='ls --color=auto'
 alias ll='ls -lh'
 alias la='ll -a'
 alias lu='ls | xargs du -sh'
-alias lt='tree  -aCl      -I .svn -I .git'
-alias ltr='tree -paCl     -I .svn -I .git'
-alias lts='tree -shaCl    -I .svn -I .git'
-alias ltd='tree -aCld     -I .svn -I .git'
-alias lta='tree -pshaClug -I .svn -I .git'
+alias lt="tree -aCl -I $MYENV_EXCLUDEDIR_PATTERN"
+alias ltr="lt -p"
+alias lts="lt -sh"
+alias ltd="lt -d"
+alias lta="lts -pug"
 alias md=mkdir -vp
 alias cpf='cp -rf'
 alias rmf='rm -rf'
-alias gp='grep  -Is --exclude-dir='.svn' --exclude-dir='.git' --exclude-dir='%MAKE' --exclude-dir='%STATE' --exclude-dir='products' -r -n --color=auto'
-alias gpi='grep -Is --exclude-dir='.svn' --exclude-dir='.git' --exclude-dir='%MAKE' --exclude-dir='%STATE' --exclude-dir='products' -ri -n --color=auto'
-alias gpa='grep -r -n --color=auto'
+alias gp="grep --color=auto -rn -Is --exclude-dir=$MYENV_EXCLUDEDIR_PATTERN"
+alias gpi="gp -i"
+alias gpa="grep --color=auto -rn"
 alias cls=clear
 alias h=history
 alias hh='h -50'
@@ -28,19 +28,14 @@ alias tp='top -d 1'
 alias k='$TOOLS_ROOT/k.sh'
 alias ka='$TOOLS_ROOT/k.sh -a'
 alias _='$TOOLS_ROOT/dt.sh'
-alias glog='git log --graph --format="%Cgreen%h%Creset %Cblue[%an - %ar]%Creset %s"'
 
 alias sdi='svn diff --diff-cmd=/home/jlabarthe/myenv/tools/svn_diff_wrapper_bc'
 alias sdiv='svn diff --diff-cmd=/home/jlabarthe/myenv/tools/svn_diff_wrapper_vi'
 
-alias mk='$TOOLS_ROOT/dt.sh lmake'
-alias lw='lshow -d'
-alias lW='lshow -D'
 alias bcp='bcompare'
-alias md5='md5sum'
-alias sha='sha1sum'
 
 alias gls="git log -2 --stat"
+alias glog='git log --graph --format="%Cgreen%h%Creset %Cblue[%an - %ar]%Creset %s"'
 alias gs=" git status"
 alias gd=" git difftool"
 alias gci="git commit"
@@ -54,14 +49,6 @@ alias gpl="git pull"
 alias gpp="git pull && git push"
 
 alias _vi='gvim -g -geometry 200x60'
-vip() {
-	if [ -z "$VIMPROJSERVERNAME" ]; then
-		echo "VIMPROJSERVERNAME env var not set (use 7tags before using vip)"
-	else
-		vi --servername $VIMPROJSERVERNAME --remote-silent "$@"
-	fi
-}
-
 alias 7tags='7tags.sh && source .vimtags/export_var_for_vim'
 
 alias -g V=' | vi -R -'

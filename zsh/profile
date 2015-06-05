@@ -1,5 +1,10 @@
 . $LIBS_PATH/colors
 . $LIBS_PATH/debug
+
+for f in $(find $LIBS_PATH -type d); do
+	[ -f $f/vars ] && . $f/vars
+done
+
 . $ZSH_PATH/aliases
 . $ZSH_PATH/splash
 . $ZSH_PATH/options

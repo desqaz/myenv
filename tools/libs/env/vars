@@ -1,0 +1,2 @@
+export MYENV_EXCLUDE_PATTERN=''
+export MYENV_EXCLUDEDIR_PATTERN='".svn|.git|%MAKE|%STATE|product|.vimtags"'

@@ -17,7 +17,7 @@ finx()
       return 0
    fi
 
-   find $2 -name $3 | xargs grep $1 -r -n --color=auto --exclude-dir=".svn" --exclude-dir=".vimtags" --exclude-dir=".git"
+   find $2 -name $3 | xargs grep $1 -r -n --color=auto --exclude-dir=$MYENV_EXCLUDEDIR_PATTERN
 }
 
 finc()
@@ -145,5 +145,17 @@ set +x
 function gl() {
 	git --no-pager log -n30 $@ --no-merges --pretty="%h | %<(16)%cr | %<(20)%cn | %<(140,trunc)%s" --date=local\
  		| sed "s@\($(git config user.name)\|$USER\\|$MYENV_NAME\)@[0;32m\1[0m@g"
+}
+
+#------------------------------------------------------------------------------
+#GVIM 
+#------------------------------------------------------------------------------
+
+vip() {
+	if [ -z "$VIMPROJSERVERNAME" ]; then
+		echo "VIMPROJSERVERNAME env var not set (use 7tags before using vip)"
+	else
+		vi --servername $VIMPROJSERVERNAME --remote-silent "$@"
+	fi
 }
 
