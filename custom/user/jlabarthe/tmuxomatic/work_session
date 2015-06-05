@@ -1,0 +1,23 @@
+window main
+
+AAAAAAAAASSSS
+AAAAAAAAASSSS
+AAAAAAAAASSSS
+BBBBBBBBBSSSS
+BBBBBBBBBHHHH
+BBBBBBBBBHHHH
+
+  foc
+  dir ~
+A run ssh -tX jlabarthe.dxo@star 'cd ~/BASES/GIT/Fusion && zsh'
+B foc
+S run ssh -t jlabarthe.dxo@star 'zsh -i -c ' "'" '\$TOOLS_ROOT/sgewatch.sh' "'"
+H run htop
+
+window htop
+
+A
+
+  dir ~
+A foc
+A run htop
