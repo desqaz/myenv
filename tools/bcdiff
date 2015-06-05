@@ -16,8 +16,8 @@ DiffScript=$TmpDir/diff_cmd_script
 LocalTreeDir=$TmpDir/LocalTree
 RemoteTreeDir=$TmpDir/RemoteTree
 DiffStat=$TmpDir/DiffStat
-lTitle=$TmpDir/lTitle
-rTitle=$TmpDir/rTitle
+commitListLocal=$TmpDir/commitListLocal
+commitListRemote=$TmpDir/commitListRemote
 
 RootDir=$(pwd)
 
@@ -47,28 +47,24 @@ VerRemote="\$6"
 
 FileDir=\$(dirname \$Filename)
 
+git-find-blob.pl \$VerLocal  >> $commitListLocal
+git-find-blob.pl \$VerRemote >> $commitListRemote
+
 if [ \$VerLocal  != '.' ]; then
-	shortVerLocal=\$(git rev-parse --short \$VerLocal)
 	mkdir -p $LocalTreeDir/\$FileDir
 	if [ "\$VerLocal" = "0000000000000000000000000000000000000000" ]; then
 		ln -s \$optVer $RootDir/\$Local $LocalTreeDir/\$Filename
-		echo "WorkingCopy" > $lTitle
 	else
 		cp -f \$optVer \$Local $LocalTreeDir/\$Filename
-		echo \$shortVerLocal > $lTitle
 	fi
 fi
 
 if [ \$VerRemote != '.' ]; then
-  	shortVerRemote=\$(git rev-parse --short \$VerRemote)
 	mkdir -p $RemoteTreeDir/\$FileDir
-
 	if [ "\$VerRemote" = "0000000000000000000000000000000000000000" ]; then
 		ln -s \$optVer $RootDir/\$Remote $RemoteTreeDir/\$Filename
-		echo "WorkingCopy" > $rTitle
 	else
 		cp -f \$optVer \$Remote $RemoteTreeDir/\$Filename
-		echo \$shortVerRemote > $rTitle
 	fi
 fi
 
@@ -98,7 +94,13 @@ fi
 
 # Launch bcompare
 if [ "$(cat $DiffStat)" != "nodiff" ]; then
-	bcompare -expandall -title1="$(cat $lTitle)" -title2="$(cat $rTitle)" $LocalTreeDir $RemoteTreeDir | cat
+	lTitle=$(cat $commitListLocal | sort | head -n1 | awk '{for(i=2;i<NF;i++) printf "%s ",$i; printf "\n"}')
+	rTitle=$(cat $commitListRemote | sort -r | head -n1 | awk '{for(i=2;i<NF;i++) printf "%s ",$i; printf "\n"}')
+
+	[ -z "$rTitle" ] && rTitle="Working copy"
+	[ -z "$lTitle" ] && lTitle="Working copy"
+
+	bcompare -expandall -title1="$lTitle" -title2="$rTitle" $LocalTreeDir $RemoteTreeDir | cat
 fi
 
 # Remove temp dir
