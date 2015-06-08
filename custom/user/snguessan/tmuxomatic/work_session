@@ -1,0 +1,35 @@
+#------------------------------------------------------------------------------
+
+window zsh
+
+T
+T foc
+
+#------------------------------------------------------------------------------
+
+window dev
+
+AAAAAAAAASSSS
+AAAAAAAAASSSS
+BBBBBBBBBSSSS
+BBBBBBBBBSSSS
+BBBBBBBBBHHHH
+BBBBBBBBBHHHH
+
+  foc
+  dir ~
+A run ssh -tX $MYENV_NAME.dxo@schest 'cd ~/bases/fusion && zsh'
+B foc
+S run ssh -t $MYENV_NAME.dxo@schest 'zsh -i -c ' "'" '\$TOOLS_ROOT/sgewatch.sh' "'"
+H run htop
+
+
+#------------------------------------------------------------------------------
+
+window htop
+
+A
+
+  dir ~
+A foc
+A run htop
