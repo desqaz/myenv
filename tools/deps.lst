@@ -21,7 +21,7 @@ pkg   wget
 pkg   openssl
 pkg   libyaml-dev
 pkg   subversion
-pkg   ctags
+pkg   exuberant-ctags
 pkg   cscope
 pkg   libpython-dev
 pkg   apt-file
@@ -29,6 +29,8 @@ pkg   cmake
 pkg   ninja-build
 pkg   unzip
 pkg   openssh-server
+pkg   libpython-dev
+pkg   libpython3-dev
 
 #
 # EASY_INSTALL
@@ -45,7 +47,6 @@ eins3 pip
 #
 # PIP
 #
-pip   tmuxp
 pip   jira
 
 

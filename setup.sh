@@ -13,7 +13,11 @@ function SUDO () {
 			isSudo=0
 		fi
 	fi
-	[ $isSudo -eq 1 ] && sudo $@
+	if [ $isSudo -eq 1 ]; then
+		sudo $@
+	else
+		echo "[0;1;33m    --> $@ ignored (need sudo)[0m"
+	fi
 }
 
 myenv=$(cd $(dirname $0) 2>&1 > /dev/null && pwd)
@@ -62,8 +66,8 @@ echo "[0;32mInstalling deps packages[0m"
 type apt-get > /dev/null 2> /dev/null
 if [ $? -eq 0 ]; then
 	for dep in $(cat $DepsLst | grep '^pkg' | awk '{print $2}'); do
-		dpkg-query -l "$dep" >/dev/null 2>/dev/null
-		if [ "$?" -ne 0 ]; then
+		isInstalled=$(dpkg-query -l "$dep" 2>/dev/null | grep "^ii[[:space:]]*$dep")
+		if [ "$?" -ne 0 ] || [ -z "$isInstalled" ]; then
 			SUDO apt-get install "$dep" -y
 		else 
 			echo "[0;36m    --> $dep already installed[0m"

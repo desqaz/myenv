@@ -2,5 +2,5 @@ if [ "$(groups | grep -w "staff")" = "" ]; then
 	echo "[0;32mAdding user to 'staff' group[0m"
 	SUDO usermod -a -G staff $USER
 else
-	echo "[0;36m User already belong to 'staff' group[0m"
+	echo "[0;36mUser already belong to 'staff' group[0m"
 fi
