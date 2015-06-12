@@ -1,7 +1,7 @@
 "-------------------------------------------------------------------------
 "Color and font
 "-------------------------------------------------------------------------
-so $VIMRUNTIME/colors/desert.vim
+colorscheme desert
 
 set guifont=Monospace\ 8
 

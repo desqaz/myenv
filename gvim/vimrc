@@ -12,7 +12,7 @@ execute pathogen#infect('$GVIM_PATH/bundle')
 "-------------------------------------------------------------------------
 "Color and font
 "-------------------------------------------------------------------------
-so $VIMRUNTIME/colors/darkblue.vim
+colorscheme darkblue
 
 set guifont=Monospace\ 10
 set gfn=Monospace\ 10
