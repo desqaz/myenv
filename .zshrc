@@ -27,7 +27,6 @@ if [[ $- == *i* ]]; then
 	export MANPATH=$MYPATH__MANPATH:$MANPATH
 
 	export GVIM_PATH=$MYENV_ROOT/gvim
-	export VIM=$GVIM_PATH
 	export LIBS_PATH=$TOOLS_ROOT/libs
 	export ZSH_PATH=$MYENV_ROOT/zsh
 

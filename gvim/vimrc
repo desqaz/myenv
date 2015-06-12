@@ -6,7 +6,8 @@
 set nocp
 
 " Pathogen
-execute pathogen#infect()
+so $GVIM_PATH/pathogen.vim
+execute pathogen#infect('$GVIM_PATH/bundle')
 
 "-------------------------------------------------------------------------
 "Color and font
@@ -29,12 +30,6 @@ if $TAGS_HL != ""
    au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    source $TAGS_HL
 endif
 endif
-
-"-------------------------------------------------------------------------
-"Colorsheme Scroller, Chooser, and Browser
-"-------------------------------------------------------------------------
-source $VIMRUNTIME/plugin/ScrollColor.vim
-source $VIMRUNTIME/plugin/color_sample_pack.vim
 
 "-------------------------------------------------------------------------
 " Various
@@ -257,8 +252,6 @@ if $VIMTAGSPATH != ""
 elseif filereadable(".vimtags/tags") 
    set tags+=.vimtags/tags
 endif
-
-source $VIMRUNTIME/autoload/ccomplete.vim
 
 "---------------------------------------------------------------------------
 " tab completion from tags or cscope
