@@ -152,8 +152,7 @@ set noeol
 " Mapping
 "---------------------------------------------------------------------------
 map <F2>          :call Show80col()<CR>
-map <F3>          :TlistUpdate<CR>
-map <F4>          :TlistToggle<CR>
+map <F4>          :TagbarToggle<CR>
 map <F5>          ^i/* <C-[>$a */<C-[>
 map <F6>          ^3x$2h3x
 map <F7>          :bdelete<CR>
@@ -276,45 +275,6 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1 
 let g:miniBufExplMapCTabSwitchBufs = 1 
 let g:miniBufExplModSelTarget = 1
-
-"---------------------------------------------------------------------------
-" Tlist
-" -------------------------------------------------------------------------
-"Fermer Vim s'il ne reste que Tlist
-let Tlist_Exit_OnlyWindow = 1
-" La panneau gagne le focus dès qu'il est ouvert
-let Tlist_GainFocus_On_ToggleOpen = 1
-" Une fois une fonction sélectionnée, on ferme le panneau
-"let Tlist_Close_On_Select = 0
-" Mettre à jour automatiquement quand un fichier est en édition
-let Tlist_Auto_Update = 1
-" Toujours parser le fichier même si le panneau n'est pas ouvert
-let Tlist_Process_File_Always = 0
-" Ouvrir le panneau à droite
-"let Tlist_Use_Right_Window = 0
-" Largeur du panneau
-let Tlist_WinWidth = 50
-" Le contenu du panneau ne représente que le fichier courant
-let Tlist_Show_One_File = 1
-" Afficher dans le menu
-let Tlist_Show_Menu = 1
-" Replie automatiquement les fichiers inactifs
-let Tlist_File_Fold_Auto_Close = 1
-" Persistance
-"autocmd TabLeave * wincmd p
-"autocmd TabEnter * execute ResumeTList()
-" Automatically highlight the current tag in the taglist
-let Tlist_Auto_Highlight_Tag = 1
-" Open the taglist window when Vim starts.
-let Tlist_Auto_Open = 0
-" Single click on a tag jumps to it
-let Tlist_Use_SingleClick = 1
-"On entering a buffer, automatically highlight the current tag
-let Tlist_Highlight_Tag_On_BufEnter = 1
-" cols wide, so i can (almost always)
-let Tlist_Show_One_File = 1
-let Tlist_Inc_Winwidth = 1
-let Tlist_Sort_Type = "name"
 
 "---------------------------------------------------------------------------
 " Syntastic!!
