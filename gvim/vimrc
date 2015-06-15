@@ -20,7 +20,6 @@ set gfn=Monospace\ 10
 " enable syntax highlighting
 syntax on
 
-if $VIM_FROM_ECLIPSE != "y"
 if $TAGS_HL != ""
    au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_f Function
    au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight c_t gui=bold,italic
@@ -29,17 +28,10 @@ if $TAGS_HL != ""
    au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_e Tag
    au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    source $TAGS_HL
 endif
-endif
 
 "-------------------------------------------------------------------------
 " Various
 "-------------------------------------------------------------------------
-
-" Syntastic!!
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loclist=1
-let g:syntastic_quiet_warnings=0
-
 " un historique raisonnable
 set history=100
 
@@ -144,12 +136,17 @@ set listchars+=tab:\|-
 set backupdir=~/tmp/vim/
 set directory=~/tmp/vim/
 
-if $VIM_FROM_ECLIPSE == "y"
+" Do not save modified buffer when switching
+set hidden
+
+" Remove newline added by vim automatically at end-of-file
+set noeol
+
 " menubar
-set guioptions-=m
+"set guioptions-=m
+
 " tools bar
-set guioptions-=T
-endif
+"set guioptions-=T
 
 "---------------------------------------------------------------------------
 " Mapping
@@ -190,7 +187,6 @@ map <C-g>         :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 " --------------------------------------------------------------------------
 " Cscope 
 "---------------------------------------------------------------------------
-if $VIM_FROM_ECLIPSE != "y"
 if has("cscope")
 	" change this to 1 to search ctags DBs first
 	set csto=0
@@ -229,7 +225,6 @@ if has("cscope")
 	nmap <C-^>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
 	nmap <C-^>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 	nmap <C-^>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
-endif
 endif
 
 function! CloseSomething()
@@ -277,15 +272,10 @@ cnoremap <Tab> <C-L><C-D>
 "---------------------------------------------------------------------------
 " Mini buffer explorer plugin
 " -------------------------------------------------------------------------
-if $VIM_FROM_ECLIPSE != "y"
 let g:miniBufExplMapWindowNavVim = 1 
 let g:miniBufExplMapWindowNavArrows = 1 
 let g:miniBufExplMapCTabSwitchBufs = 1 
 let g:miniBufExplModSelTarget = 1
-endif
-
-" Do not save modified buffer when switching
-set hidden
 
 "---------------------------------------------------------------------------
 " Tlist
@@ -327,6 +317,13 @@ let Tlist_Inc_Winwidth = 1
 let Tlist_Sort_Type = "name"
 
 "---------------------------------------------------------------------------
+" Syntastic!!
+"---------------------------------------------------------------------------
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loclist=1
+let g:syntastic_quiet_messages = {'level': 'warnings'}
+
+"---------------------------------------------------------------------------
 " Diff style
 "---------------------------------------------------------------------------
 if &diff
@@ -350,7 +347,6 @@ function! Show80col()
       echo 'Hiding lines with more than 80 columns'
     endif
 endfunction
-
 
 "---------------------------------------------------------------------------
 "Highlight Patch like TODO :
@@ -388,26 +384,10 @@ let g:DoxygenToolkit_compactDoc="yes"
 let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------"
 set formatoptions+=ro
 
-
-"-------------------------------------------------------------------------
-" force use of tabs in Makefiles and python
-"---------------------------------------------------------------------------
-au BufNewFile,BufRead Smakefile,Makefile*,GNUmakefile*,*.mk,*.mak,makefile*,*.py
-    \ set shiftwidth=4 tabstop=4 noexpandtab
-
-" Remove newline added by vim automatically at end-of-file
-set noeol
-
-" action script
-au BufNewFile,BufRead *.as
-   \ set ft=actionscript
-
-
-
 "-------------------------------------------------------------------------
 "SU write
+"-------------------------------------------------------------------------
 command! W w !sudo tee % > /dev/null
-
 
 "---------------------------------------------------------------------------
 " Myenv custo
