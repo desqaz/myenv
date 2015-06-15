@@ -30,9 +30,9 @@ if [[ $- == *i* ]]; then
 	export LIBS_PATH=$TOOLS_ROOT/libs
 	export ZSH_PATH=$MYENV_ROOT/zsh
 
-	. $ZSH_PATH/profile
+	. $ZSH_PATH/init
 
-	for file in $(find $ZSH_PATH/customrc -type f 2>/dev/null); do
+	for file in $(find $zsh_path/customrc -type f 2>/dev/null); do
 		. $file
 	done
 
@@ -42,4 +42,6 @@ if [[ $- == *i* ]]; then
 
 	export MYENV_CUSTOM_USER_ROOT=$MYENV_ROOT/custom/user/$MYENV_NAME
 	[ -f $MYENV_CUSTOM_USER_ROOT/zshrc ] && . $MYENV_CUSTOM_USER_ROOT/zshrc
+
+	return 0
 fi
