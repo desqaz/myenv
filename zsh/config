@@ -1,8 +1,113 @@
 HISTFILE=~/.histfile
-HISTSIZE=1000
+HISTSIZE=2000
 SAVEHIST=1000
 bindkey -e
 export WORDCHARS='*?_-.[]~=&;&%^(){}<>'
 
 prmptcmd() { echo "$(pwd) $(date) $(history -1)" >> ~/.zsh_eternal_history }
 precmd_functions=(prmptcmd)
+
+
+# -----------------------------------------------------------------------------
+#http://zsh.sourceforge.net/Doc/Release/Options.html#Description-of-Options
+# -----------------------------------------------------------------------------
+
+#
+# Changing Directories --------------------------------------------------------
+#
+so AUTO_CD
+so AUTO_PUSHD
+so CDABLE_VARS
+so CHASE_DOTS
+so CHASE_LINKS
+so PUSHD_IGNORE_DUPS
+so PUSHD_SILENT
+so PUSHD_TO_HOME
+
+#
+# Completion ------------------------------------------------------------------
+#
+so ALWAYS_TO_END
+so AUTO_NAME_DIRS
+so COMPLETE_ALIASES
+#so GLOB_COMPLETE
+uo LIST_BEEP
+so LIST_PACKED
+uo LIST_ROWS_FIRST
+so REC_EXACT
+
+#
+# Expansion and Globbing ------------------------------------------------------
+#
+so BAD_PATTERN
+so BRACE_CCL
+so EQUALS
+so EXTENDED_GLOB
+so GLOB_ASSIGN
+so GLOB_DOTS
+so HIST_SUBST_PATTERN
+so MAGIC_EQUAL_SUBST
+so MARK_DIRS
+so NOMATCH
+so RC_EXPAND_PARAM
+
+#
+# History ---------------------------------------------------------------------
+#
+so BANG_HIST
+so EXTENDED_HISTORY
+uo HIST_BEEP
+so HIST_FCNTL_LOCK
+so HIST_EXPIRE_DUPS_FIRST
+so HIST_FIND_NO_DUPS
+so HIST_IGNORE_ALL_DUPS
+so HIST_IGNORE_DUPS
+so HIST_REDUCE_BLANKS
+so HIST_SAVE_NO_DUPS
+so HIST_VERIFY
+so INC_APPEND_HISTORY
+so SHARE_HISTORY
+
+#
+# Input/Output ----------------------------------------------------------------
+#
+so CORRECT
+#so CORRECT_ALL
+so SHORT_LOOPS
+
+#
+# Job Control -----------------------------------------------------------------
+#
+so CHECK_JOBS
+so LONG_LIST_JOBS
+
+#
+# Scripts and Functions -------------------------------------------------------
+#
+so C_BASES
+so FUNCTION_ARGZERO
+#so SOURCE_TRACE
+#so VERBOSE
+#so XTRACE
+
+#
+# Shell Emulation -------------------------------------------------------------
+#
+#so CSH_JUNKIE_HISTORY
+so POSIX_ALIASES
+so POSIX_BUILTINS
+
+#
+# Zle -------------------------------------------------------------------------
+#
+uo BEEP
+so VI
+so ZLE
+
+#
+# Option Aliases --------------------------------------------------------------
+#
+so HASH_ALL
+so HIST_APPEND
+so HIST_EXPAND
+so PHYSICAL

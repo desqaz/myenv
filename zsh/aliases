@@ -22,7 +22,7 @@ alias gpi="gp -i"
 alias gpa="grep --color=auto -rn"
 alias cls=clear
 alias h=history
-alias hh='h -50'
+alias hh='history -50'
 alias which='\which'
 alias tp='top -d 1'
 alias k='$TOOLS_ROOT/k.sh'
@@ -60,4 +60,5 @@ alias -g CEW='2>&1 | sed -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\([wW]arni
                      -e "s/\(^[^:]\+:\)\([0-9:]*\)\([[:space:]]*\)\([eE]rror\)/[0;1;35m\1[0m[0;1;36m\2[0m\3[0;1;31m\4[0m/g;"'
 alias -g XGP='| xargs grep --color=auto -IsHnr'
 alias -g VGP='| awk -F ':' "{print $1}" | sort -u | xargs gvim'
+
 alias mwstat="lmstat -c 27020@signisntp -f"
