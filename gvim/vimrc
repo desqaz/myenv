@@ -183,6 +183,9 @@ vmap ,t !tal<CR>
 
 map <C-g>         :vsp <CR>:exec("tag ".expand("<cword>"))<CR> 
 
+"Completion in commands like 
+cnoremap <Tab> <C-L><C-D>
+
 " --------------------------------------------------------------------------
 " Cscope 
 "---------------------------------------------------------------------------
@@ -233,40 +236,6 @@ function! CloseSomething()
       q
    endif
 endfunction
-
-"--------------------------------------------------------------------------
-" Omnicompletion, needs tags
-"---------------------------------------------------------------------------
-set omnifunc=ccomplete#Complete
-set shiftwidth=3 tabstop=3
-"set shiftwidth=3 tabstop=3 expandtab
-
-if $VIMTAGSPATH != ""
-   set tags+=$VIMTAGSPATH/tags
-elseif filereadable(".vimtags/tags") 
-   set tags+=.vimtags/tags
-endif
-
-"---------------------------------------------------------------------------
-" tab completion from tags or cscope
-"---------------------------------------------------------------------------
-function! InsertTabWrapper(direction)
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] =~ '\s'
-        return "\<Tab>"
-    elseif "backward" == a:direction
-        return "\<C-P>"
-    else
-        return "\<C-N>"
-    endif
-endfunction
-
-inoremap <Tab> <C-R>=InsertTabWrapper("forward")<cr>
-inoremap <s-tab> <C-R>=InsertTabWrapper("backward")<cr>
-inoremap <leader><Tab> <Tab>
-
-"Completion in commands like 
-cnoremap <Tab> <C-L><C-D>
 
 "---------------------------------------------------------------------------
 " Mini buffer explorer plugin
