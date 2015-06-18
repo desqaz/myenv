@@ -159,7 +159,7 @@ map <F7>          :bdelete<CR>
 map <F9>          :noh<CR>
 map <C-N>         :noh<CR>
 map <C-B>         :MRU<CR>
-map <C-M>         :WMToggle<CR>
+map <C-M>         :VimFilerExplorer<CR>
 map <C-Del>       :bdelete<CR>
 map <C-PageUp>    [c
 map <C-PageDown>  ]c
@@ -251,6 +251,11 @@ let g:miniBufExplModSelTarget = 1
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loclist=1
 let g:syntastic_quiet_messages = {'level': 'warnings'}
+
+"---------------------------------------------------------------------------
+" Vimfiler
+"---------------------------------------------------------------------------
+let g:vimfiler_as_default_explorer = 1
 
 "---------------------------------------------------------------------------
 " Diff style
