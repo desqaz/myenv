@@ -32,7 +32,7 @@ if [[ $- == *i* ]]; then
 
 	. $ZSH_PATH/init
 
-	for file in $(find $zsh_path/customrc -type f 2>/dev/null); do
+	for file in $(find $ZSH_PATH/customrc -type f 2>/dev/null); do
 		. $file
 	done
 
