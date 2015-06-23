@@ -7,9 +7,8 @@ done
 
 . $ZSH_PATH/aliases
 . $ZSH_PATH/splash
-. $ZSH_PATH/options
-. $ZSH_PATH/compcfg
 . $ZSH_PATH/config
+. $ZSH_PATH/compcfg
 . $ZSH_PATH/bindkeys
 
 eval $(dircolors)
