@@ -30,7 +30,7 @@ so PUSHD_TO_HOME
 so ALWAYS_TO_END
 so AUTO_NAME_DIRS
 so NO_COMPLETE_ALIASES
-#so GLOB_COMPLETE
+so GLOB_COMPLETE
 uo LIST_BEEP
 so LIST_PACKED
 uo LIST_ROWS_FIRST
@@ -66,7 +66,7 @@ so HIST_REDUCE_BLANKS
 so HIST_SAVE_NO_DUPS
 so HIST_VERIFY
 so INC_APPEND_HISTORY
-so SHARE_HISTORY
+so NO_SHARE_HISTORY
 
 #
 # Input/Output ----------------------------------------------------------------
