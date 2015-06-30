@@ -11,12 +11,14 @@ pkg   curl
 pkg   gitk
 pkg   vim-gtk
 pkg   g++-multilib
+pkg   btrfs-tools
 pkg   htop
 pkg   tree
 pkg   python-setuptools
 pkg   python3-setuptools
 pkg   zsh
 pkg   tmux
+pkg   terminator
 pkg   wget
 pkg   openssl
 pkg   libyaml-dev
@@ -31,6 +33,7 @@ pkg   unzip
 pkg   openssh-server
 pkg   libpython-dev
 pkg   libpython3-dev
+
 
 #
 # EASY_INSTALL
@@ -55,6 +58,7 @@ pip   jira
 #
 pip3  tmuxomatic 
 pip3  pyyaml
+
 
 #
 # Others
