@@ -15,7 +15,8 @@
 | F3              | Update functions list panel                  |
 | F7              | Delete buffer                                |
 | F9              | Remove current highlighting                  |
-| Ctrl-M or Enter | Toggle file explorer panel                   |
+| Ctrl-D          | Toggle Nerd tree file explorer panel         |
+| Ctrl-B          | Open MRU (Most Recently Used) panel          |
 | Ctrl-PageUp     | Previous diff                                |
 | Ctrl-PageDown   | Next diff                                    |
 | ,l              | Reload ~/.vimrc                              |
