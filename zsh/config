@@ -34,7 +34,7 @@ so GLOB_COMPLETE
 uo LIST_BEEP
 so LIST_PACKED
 uo LIST_ROWS_FIRST
-so REC_EXACT
+uo REC_EXACT
 
 #
 # Expansion and Globbing ------------------------------------------------------
