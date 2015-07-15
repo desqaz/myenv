@@ -267,6 +267,8 @@ let g:syntastic_quiet_messages = {'level': 'warnings'}
 "---------------------------------------------------------------------------
 " Open it on vim startup
 autocmd VimEnter * NERDTree
+" Go to previous (last accessed) window.
+autocmd VimEnter * wincmd p
 " Mirror tree position for every buffer
 autocmd BufEnter * NERDTreeMirror
 " Set current dir to vim cwd
