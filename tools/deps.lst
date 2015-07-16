@@ -30,6 +30,7 @@ pkg   apt-file
 pkg   cmake
 pkg   ninja-build
 pkg   unzip
+pkg   pv
 pkg   openssh-server
 pkg   libpython-dev
 pkg   libpython3-dev
