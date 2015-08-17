@@ -1,1 +1,1 @@
-export PATH=/datas/kits/android-ndk-r10e:$PATH
+export PATH=/datas/devkits/android-ndk-r10e:$PATH
