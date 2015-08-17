@@ -1,0 +1,35 @@
+#!/bin/sh
+
+if [ $# -lt 2 ] || [ "$1" = "-h" ]
+then
+	echo "Usage : ncp local_dir [user@]machine:remote_dir"
+	exit 1
+fi
+
+Src=$1 
+Dst=$2 
+
+if [ ! -e $Src ]
+then
+	echo "$Src does not exists"
+	exit 1
+fi
+
+DstSrv=$(echo "$Dst" | sed 's?:.*$??') 
+DstDir=$(echo "$Dst" | sed 's?^.*:??') 
+
+[ -z $DstDir ] && DstDir='~' 
+
+echo "Calculating size of $Src ..."
+SrcSize=$(du -sb $Src | awk '{print $1}') 
+
+echo "Transfering to $Dst ..."
+tar -C $(dirname $Src) -c $(basename $Src) | pv -pterb -s $SrcSize | ssh $DstSrv tar -C $DstDir -xf -
+if [ $? -ne 0 ]
+then
+	echo "Transfer failed"
+	exit 1
+fi
+
+echo "Done !"
+

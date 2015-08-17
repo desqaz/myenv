@@ -75,33 +75,6 @@ timeout()
    perl -e 'alarm shift; exec @ARGV' "$@";
 }
 
-#------------------------------------------------------------------------------
-ncp()
-{
-	Src=$1
-	Dst=$2
-
-	if [ ! -e $Src ]; then
-		echo "$Src does not exists"
-		return 1
-	fi
-	
-	DstSrv=$(echo "$Dst" | sed 's?:.*$??')
-	DstDir=$(echo "$Dst" | sed 's?^.*:??')
-	[ -z $DstDir ] && DstDir='~'
-
-	echo "Calculating size of $Src ..."
-	SrcSize=$(du -sb $Src | awk '{print $1}')
-	
-	echo "Transfering to $Dst ..."
-	tar -c $Src | pv -pterb -s $SrcSize | ssh $DstSrv tar -C $DstDir -xf -
-	if [ $? -ne 0 ]; then
-		echo "Transfer failed"
-		return 1
-	fi
-
-	echo "Done !"
-}
 
 #------------------------------------------------------------------------------
 #Highlight anything with a pipe 
