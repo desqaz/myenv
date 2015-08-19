@@ -40,7 +40,7 @@ uo REC_EXACT
 # Expansion and Globbing ------------------------------------------------------
 #
 so BAD_PATTERN
-so BRACE_CCL
+uo BRACE_CCL
 so EQUALS
 so EXTENDED_GLOB
 so GLOB_ASSIGN
