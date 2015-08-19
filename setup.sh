@@ -22,7 +22,8 @@ function SUDO () {
 
 myenv=$(cd $(dirname $0) 2>&1 > /dev/null && pwd)
 myenvcusto=$myenv/custom/user/$USER
-toolsdeps=$myenv/tools/deps.d
+myenvsetup=$myenv/setup
+myenvdepsdir=$myenvsetup/deps.d
 
 cd $HOME
 
@@ -57,7 +58,7 @@ ln -svf $myenv/git/.gitk
 [ ! -d $HOME/.local/lib ] && mkdir -vp $HOME/.local/lib
 
 DepsLst=$(mktemp)
-cat $myenv/tools/deps.lst | perl -p -e 's/\\\n//' > $DepsLst
+cat $myenvsetup/deps.lst | perl -p -e 's/\\\n//' > $DepsLst
 
 #
 # Packages installation
@@ -123,7 +124,7 @@ fi
 # Others installation
 #
 echo "[0;32mInstalling deps.d[0m"
-for dep in $(find $toolsdeps -type f); do
+for dep in $(find $myenvdepsdir -type f); do
 	echo "[0;33m$dep[0m"
 	. $dep
 done
