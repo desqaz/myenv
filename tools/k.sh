@@ -1,7 +1,7 @@
 #!/bin/bash --norc
 shname=`echo "$0" | gawk -F / '{print $NF}'`
 
-. $LIBS_PATH/debug
+. $SH_PATH/debug
 
 PTypeList="T Z"
 
