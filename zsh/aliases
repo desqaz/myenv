@@ -48,7 +48,7 @@ alias gps="git push"
 alias gpl="git pull"
 alias gpp="git pull && git push"
 
-alias _vi='gvim -g -geometry 200x60'
+alias _vi='gvim -g -geometry 200x60 >/dev/null 2>&1'
 alias 7tags='7tags.sh && source .vimtags/export_var_for_vim'
 
 alias -g V=' | vi -R -'
