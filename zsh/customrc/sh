@@ -1,0 +1,1 @@
+alias sshfs-schest='sshfs schest: ~/media/sshfs/schest -o auto_cache,reconnect,no_readahead,Ciphers=arcfour,compression=no'

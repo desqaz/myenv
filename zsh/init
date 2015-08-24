@@ -1,7 +1,7 @@
-. $LIBS_PATH/colors
-. $LIBS_PATH/debug
+. $SH_PATH/colors
+. $SH_PATH/debug
 
-for f in $(find $LIBS_PATH -type d); do
+for f in $(find $SH_PATH -type d); do
 	[ -f $f/vars ] && . $f/vars
 done
 
@@ -13,7 +13,7 @@ done
 
 eval $(dircolors)
 
-for f in $(find $LIBS_PATH -type d); do
+for f in $(find $SH_PATH -type d); do
 	[ -f $f/funktions ] && . $f/funktions
 done
 

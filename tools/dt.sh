@@ -1,8 +1,8 @@
 #!/bin/bash --norc
 shname=`echo "$0" | gawk -F / '{print $NF}'`
 
-. $LIBS_PATH/colors
-. $LIBS_PATH/debug
+. $SH_PATH/colors
+. $SH_PATH/debug
 
 
 trap '' INT
