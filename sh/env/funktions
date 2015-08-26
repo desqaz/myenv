@@ -34,7 +34,7 @@ finh()
    finx $1 $here '*.h'
 }
 
-function srm () {
+srm () {
 	chmod  777 -R $@
 	rm -r $@
 }
@@ -91,7 +91,7 @@ hl ()
 #------------------------------------------------------------------------------
 export JIRASRV=172.16.0.122
 
-function jr () {
+jr () {
 	JIRACMD="jira-cli"
 	#set -x
 	while [ $# -gt 0 ] ; do
@@ -142,9 +142,18 @@ set +x
 #GIT 
 #------------------------------------------------------------------------------
 
-function gl() {
+gl() {
 	git --no-pager log -n30 $@ --no-merges --pretty="%h | %<(16)%cr | %<(20)%cn | %<(100,trunc)%s" --date=local\
  		| sed "s@\($(git config user.name)\|$USER\\|$MYENV_NAME\)@[0;32m\1[0m@g"
+}
+
+gsms() {
+	echo "[0;1;36m>> Pulling repo[0m"
+	git pull || exit 1
+	echo "[0;1;36m>> Syncing submodules[0m"
+	git submodule sync --recursive || exit 2
+	echo "[0;1;36m>> Updating submodules[0m"
+	git submodule update --init --recursive || exit 3
 }
 
 #------------------------------------------------------------------------------
