@@ -149,11 +149,11 @@ gl() {
 
 gsms() {
 	echo "[0;1;36m>> Pulling repo[0m"
-	git pull || exit 1
+	git pull || return 1
 	echo "[0;1;36m>> Syncing submodules[0m"
-	git submodule sync --recursive || exit 2
+	git submodule sync --recursive || return  2
 	echo "[0;1;36m>> Updating submodules[0m"
-	git submodule update --init --recursive || exit 3
+	git submodule update --init --recursive || return 3
 }
 
 #------------------------------------------------------------------------------
