@@ -40,7 +40,6 @@ vi () {
 }
 
 #------------------------------------------------------------------------------
-
 vip() {
 	if [ -z "$VIMPROJSERVERNAME" ]; then
 		echo "VIMPROJSERVERNAME env var not set (use 7tags before using vip)"
