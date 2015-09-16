@@ -6,7 +6,12 @@ WorksetPath=$(pwd)
 
 TAGS_IGNORE_FILE=$WorksetPath/.7tags.ignore
 TAGS_ADD_FILE=$WorksetPath/.7tags.add
-VIMTAGSPATH="$WorksetPath/.vimtags"
+VIMTAGSPATHROOT=$HOME/.vimtagsroot
+VIMTAGSPATH=$VIMTAGSPATHROOT/$(echo $WorksetPath | sed -e 's/[^[:alnum:]]/_/g')
+if test -d $VIMTAGSPATH; then
+	rm -rf $VIMTAGSPATH
+fi
+mkdir -p $VIMTAGSPATH
 CSCOPE_DB="$VIMTAGSPATH/cscope.out"
 tagsfile="$VIMTAGSPATH/tags"
 TAGS_HL="$VIMTAGSPATH/tags_hl.vim"
@@ -39,11 +44,11 @@ if [ -e $TAGS_IGNORE_FILE ]; then
 fi
 for dir in $IgnoreDirList; do
    IgnoreDirCmd=$(echo -n "$IgnoreDirCmd -path '"'*\'"$dir""' -prune -o ")
-   echo "  -> Ignoring directory : $dir ..."
+   echo "  -> Ignoring directory : $dir ..." >&2
 done
 
 if [ "$UpdateFilesList" = "y" ]; then
-   echo "Updating files list ..."
+   echo "Updating files list ..." >&2
    mkdir -p $VIMTAGSPATH
 cat << EOF > $VIMTAGSPATH/find_cmd
 find     $WorksetPath/ $IgnoreDirCmd -type f -name '*.h'                  >  $FilesList
@@ -59,7 +64,7 @@ if [ -e $TAGS_ADD_FILE ]; then
    AddDirList=$(cat $TAGS_ADD_FILE | sed -e 's/^[[:space:]]*#.*$//' -e '/^$/d')
 fi
 for dir in $AddDirList; do
-   echo "  -> Adding directory : $dir ..."
+   echo "  -> Adding directory : $dir ..." >&2
 cat << EOF >> $VIMTAGSPATH/find_cmd
 find    $dir/  -type f -name '*.h'                  >> $FilesList
 find    $dir/  -type f -name '*.hpp'                >> $FilesList
@@ -76,14 +81,14 @@ fi
 
 if [ "$UpdateTags" = "y" ]; then
    if [ -e $FilesList ]; then
-      echo "Updating CSCOPE database ..."
+      echo "Updating CSCOPE database ..." >&2
       cscope -Rbkc -i $FilesList -f $CSCOPE_DB 2>/dev/null
 
-      echo "Updating CTAGS database ..."
+      echo "Updating CTAGS database ..." >&2
       ctags --fields=+lStn --extra=+f --tag-relative=yes -L $FilesList -f $tagsfile  && sed -i '/EXPORT_SYMBOL/d' $tagsfile
       sed -n '/^\(\w\+\)\t[^\"]*\"\t\(t\|f\|d\|e\).*$/ s//syntax keyword c_\2 \1/p' $tagsfile | sort -u > $TAGS_HL
    else
-      echo "Files list does not exist, you cannot use -nolist option !"
+      echo "Files list does not exist, you cannot use -nolist option !" >&2
       exit 255
    fi
 fi
@@ -96,4 +101,6 @@ export tagsfile="$tagsfile"
 export TAGS_HL="$TAGS_HL"
 export VIMPROJSERVERNAME="$VimServerName"
 EOF
+
+echo $VIMTAGSPATH/export_var_for_vim
 
