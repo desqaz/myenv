@@ -15,99 +15,99 @@ precmd_functions=(prmptcmd)
 #
 # Changing Directories --------------------------------------------------------
 #
-so AUTO_CD
-so AUTO_PUSHD
-so CDABLE_VARS
-so CHASE_DOTS
-so CHASE_LINKS
-so PUSHD_IGNORE_DUPS
-so PUSHD_SILENT
-so PUSHD_TO_HOME
+setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt CDABLE_VARS
+setopt CHASE_DOTS
+setopt CHASE_LINKS
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+setopt PUSHD_TO_HOME
 
 #
 # Completion ------------------------------------------------------------------
 #
-so ALWAYS_TO_END
-so AUTO_NAME_DIRS
-so NO_COMPLETE_ALIASES
-so GLOB_COMPLETE
-uo LIST_BEEP
-so LIST_PACKED
-uo LIST_ROWS_FIRST
-uo REC_EXACT
+setopt ALWAYS_TO_END
+setopt AUTO_NAME_DIRS
+setopt NO_COMPLETE_ALIASES
+setopt GLOB_COMPLETE
+unsetopt LIST_BEEP
+setopt LIST_PACKED
+unsetopt LIST_ROWS_FIRST
+unsetopt REC_EXACT
 
 #
 # Expansion and Globbing ------------------------------------------------------
 #
-so BAD_PATTERN
-uo BRACE_CCL
-so EQUALS
-so EXTENDED_GLOB
-so GLOB_ASSIGN
-so GLOB_DOTS
-so HIST_SUBST_PATTERN
-so MAGIC_EQUAL_SUBST
-so MARK_DIRS
-so NOMATCH
-so RC_EXPAND_PARAM
+setopt BAD_PATTERN
+unsetopt BRACE_CCL
+setopt EQUALS
+setopt EXTENDED_GLOB
+setopt GLOB_ASSIGN
+setopt GLOB_DOTS
+setopt HIST_SUBST_PATTERN
+setopt MAGIC_EQUAL_SUBST
+setopt MARK_DIRS
+setopt NOMATCH
+setopt RC_EXPAND_PARAM
 
 #
 # History ---------------------------------------------------------------------
 #
-so BANG_HIST
-so EXTENDED_HISTORY
-uo HIST_BEEP
-so HIST_FCNTL_LOCK
-so HIST_EXPIRE_DUPS_FIRST
-so HIST_FIND_NO_DUPS
-so HIST_IGNORE_ALL_DUPS
-so HIST_IGNORE_DUPS
-so HIST_REDUCE_BLANKS
-so HIST_SAVE_NO_DUPS
-so HIST_VERIFY
-so INC_APPEND_HISTORY
-so NO_SHARE_HISTORY
+setopt BANG_HIST
+setopt EXTENDED_HISTORY
+unsetopt HIST_BEEP
+setopt HIST_FCNTL_LOCK
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_VERIFY
+setopt INC_APPEND_HISTORY
+setopt NO_SHARE_HISTORY
 
 #
 # Input/Output ----------------------------------------------------------------
 #
-so CORRECT
-#so CORRECT_ALL
-so SHORT_LOOPS
+setopt CORRECT
+#setopt CORRECT_ALL
+setopt SHORT_LOOPS
 
 #
 # Job Control -----------------------------------------------------------------
 #
-so CHECK_JOBS
-so LONG_LIST_JOBS
+setopt CHECK_JOBS
+setopt LONG_LIST_JOBS
 
 #
 # Scripts and Functions -------------------------------------------------------
 #
-so C_BASES
-so FUNCTION_ARGZERO
-#so SOURCE_TRACE
-#so VERBOSE
-#so XTRACE
+setopt C_BASES
+setopt FUNCTION_ARGZERO
+#setopt SOURCE_TRACE
+#setopt VERBOSE
+#setopt XTRACE
 
 #
 # Shell Emulation -------------------------------------------------------------
 #
-#so CSH_JUNKIE_HISTORY
-so POSIX_ALIASES
-so POSIX_BUILTINS
+#setopt CSH_JUNKIE_HISTORY
+setopt POSIX_ALIASES
+setopt POSIX_BUILTINS
 
 #
 # Zle -------------------------------------------------------------------------
 #
-uo BEEP
-#so VI
-#so ZLE
+unsetopt BEEP
+#setopt VI
+#setopt ZLE
 
 #
 # Option Aliases --------------------------------------------------------------
 #
-so HASH_ALL
-so HIST_APPEND
-so HIST_EXPAND
-so PHYSICAL
+setopt HASH_ALL
+setopt HIST_APPEND
+setopt HIST_EXPAND
+setopt PHYSICAL
