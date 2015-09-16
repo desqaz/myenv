@@ -43,7 +43,7 @@ alias gps="git push"
 alias gpl="git pull"
 alias gpp="git pull && git push"
 
-alias 7tags='7tags.sh && . .vimtags/export_var_for_vim'
+alias 7tags='source $(7tags.sh)'
 
 alias -g V=' | vi -R -'
 alias -g F=' | sed -e "s/\x1B\[[0-9;]*[mK]//g" '
