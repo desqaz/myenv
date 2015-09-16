@@ -56,7 +56,7 @@ if [[ $- == *i* ]]; then
 	export MYENV_CUSTOM_USER_ROOT=$MYENV_ROOT/custom/user/$MYENV_NAME
 	[ -f $MYENV_CUSTOM_USER_ROOT/zshrc ] && . $MYENV_CUSTOM_USER_ROOT/zshrc
 
-	for file in $(find $MYENV_CUSTOM_USER_ROOT/rc.d -type f | sort -n 2>/dev/null); do
+	for file in $(find $MYENV_CUSTOM_USER_ROOT/rc.d -type f 2>/dev/null | sort -n 2>/dev/null); do
 		. $file
 	done
 

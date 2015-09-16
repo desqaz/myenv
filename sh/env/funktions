@@ -154,3 +154,11 @@ gsms() {
 	git submodule update --init --recursive || return 3
 }
 
+gsmst() {
+	echo ">> Status of head repo"
+	git status -s
+	echo ">> Status of submodules"
+	git submodule foreach --recursive git status -s
+}
+
+
