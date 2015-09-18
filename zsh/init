@@ -1,19 +1,7 @@
-. $SH_PATH/colors
-. $SH_PATH/debug
-
-for f in $(find $SH_PATH -type d); do
-	[ -f $f/vars ] && . $f/vars
-done
-
-. $ZSH_PATH/aliases
 . $ZSH_PATH/splash
 . $ZSH_PATH/config
 . $ZSH_PATH/compcfg
 . $ZSH_PATH/bindkeys
 
 eval $(dircolors)
-
-for f in $(find $SH_PATH -type d); do
-	[ -f $f/funktions ] && . $f/funktions
-done
 

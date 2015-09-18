@@ -1,10 +1,5 @@
-alias e='export'
-alias a='alias'
-alias u='unset'
-alias so='setopt'
-alias uo='unsetopt'
 
-alias rcz='source ~/.zshrc'
+alias rcz='. ~/.zshrc'
 alias ls='ls --color=auto'
 alias ll='ls -lh'
 alias la='ll -a'
@@ -36,7 +31,7 @@ alias bcp='bcompare'
 
 alias gls="git log -2 --stat"
 alias glog='git log --graph --format="%Cgreen%h%Creset %Cblue[%an - %ar]%Creset %s"'
-alias gs=" git status"
+alias gs=" git status -s"
 alias gd=" git difftool"
 alias gci="git commit"
 alias gck="git checkout"
@@ -48,8 +43,7 @@ alias gps="git push"
 alias gpl="git pull"
 alias gpp="git pull && git push"
 
-alias _vi='gvim -g -geometry 200x60'
-alias 7tags='7tags.sh && source .vimtags/export_var_for_vim'
+alias 7tags='source $(7tags.sh)'
 
 alias -g V=' | vi -R -'
 alias -g F=' | sed -e "s/\x1B\[[0-9;]*[mK]//g" '

@@ -1,7 +1,7 @@
 #!/bin/bash --norc
 shname=`echo "$0" | gawk -F / '{print $NF}'`
 
-. $SH_PATH/debug
+. $SH_PATH/disp-func
 
 PTypeList="T Z"
 

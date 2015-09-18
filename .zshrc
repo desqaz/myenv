@@ -30,9 +30,22 @@ if [[ $- == *i* ]]; then
 	export SH_PATH=$MYENV_ROOT/sh
 	export ZSH_PATH=$MYENV_ROOT/zsh
 
-	. $ZSH_PATH/init
 
-	for file in $(find $ZSH_PATH/customrc -type f 2>/dev/null); do
+	# Shell variables
+	for f in $(find $SH_PATH -type d); do
+		[ -f $f/vars ] && . $f/vars
+	done
+
+	# ZSH 
+	. $ZSH_PATH/init
+	
+	# Shell functions
+	for f in $(find $SH_PATH -type d); do
+		[ -f $f/funktions ] && . $f/funktions
+	done
+
+	# RC scripts
+	for file in $(find $SH_PATH/rc.d -type f | sort -n 2>/dev/null); do
 		. $file
 	done
 
@@ -42,6 +55,10 @@ if [[ $- == *i* ]]; then
 
 	export MYENV_CUSTOM_USER_ROOT=$MYENV_ROOT/custom/user/$MYENV_NAME
 	[ -f $MYENV_CUSTOM_USER_ROOT/zshrc ] && . $MYENV_CUSTOM_USER_ROOT/zshrc
+
+	for file in $(find $MYENV_CUSTOM_USER_ROOT/rc.d -type f 2>/dev/null | sort -n 2>/dev/null); do
+		. $file
+	done
 
 	return 0
 fi

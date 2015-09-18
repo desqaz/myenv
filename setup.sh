@@ -167,6 +167,11 @@ if [ "$USER" != "travis" ]; then
 	fi
 fi
 
+
+# source custom rc
+
+
+
 # enjoy!
 
 case $(ps -p $PPID -o comm=) in

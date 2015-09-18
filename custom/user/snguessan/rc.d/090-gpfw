@@ -1,0 +1,21 @@
+export PATH=/datas/devkits/pybin-20141226-1810-4a17794:$PATH
+export PATH=/datas/devkits/gcc-arm-none-eabi-4_7-2013q3/bin:$PATH
+
+
+wbanzai () {
+	cmd="build"
+	echo "waf: [0;1;36m$cmd[0m"
+	/usr/bin/python waf $(echo $cmd)
+#	cp -uvf ./admin/AmbaUSB/s2e_lpddr3_MT29UZ4B8DZZHGPB.ads                                   /media/sf_vm-exports
+#	cp -uvf ./waf_build/build/australia_waf/fwprog/fwprog_bst_bld_sys_dsp_rom_lnx_dtb_rfs.out /media/sf_vm-exports
+#	cp -uvf ./waf_build/build/australia_waf/system/system.elf                                 /media/sf_vm-exports
+}
+
+wwdr () {
+	cmd="build install"
+	echo "waf: [0;1;36m$cmd[0m"
+	cd banzai_libs && /usr/bin/python ../waf $(echo $cmd) ; cd -
+#	cp -uvf ./admin/AmbaUSB/s2e_lpddr3_MT29UZ4B8DZZHGPB.ads                                   /media/sf_vm-exports
+#	cp -uvf ./waf_build/build/australia_waf/fwprog/fwprog_bst_bld_sys_dsp_rom_lnx_dtb_rfs.out /media/sf_vm-exports
+#	cp -uvf ./waf_build/build/australia_waf/system/system.elf                                 /media/sf_vm-exports
+}

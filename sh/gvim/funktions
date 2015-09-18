@@ -1,3 +1,7 @@
+
+alias _vi='gvim -g -geometry $(echo $MYENV_GVIM_GEOMETRY) >/dev/null 2>&1'
+
+
 #------------------------------------------------------------------------------
 # Grep in vim
 vgp () {
@@ -35,4 +39,17 @@ vi () {
 	fi
 }
 
- 
+#------------------------------------------------------------------------------
+vip() {
+	if [ -z "$VIMPROJSERVERNAME" ]; then
+		echo "VIMPROJSERVERNAME env var not set (use 7tags before using vip)"
+	else
+		vi --servername $VIMPROJSERVERNAME --remote-silent "$@"
+	fi
+}
+
+#------------------------------------------------------------------------------
+#Product and Open a lmake target file
+lvi () {
+	lm $1 && _vi $1
+}
