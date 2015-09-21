@@ -23,4 +23,12 @@ Host seedbox
     Port 22
     User fripooy
 
+Host github.com-private
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa
 
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_gpfw
