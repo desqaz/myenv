@@ -248,6 +248,14 @@ function! CloseSomething()
 endfunction
 
 "---------------------------------------------------------------------------
+" SuperTab
+" -------------------------------------------------------------------------
+let g:SuperTabDefaultCompletionType = "context"
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+set complete=.,w,b,u,t
+
+"---------------------------------------------------------------------------
 " Mini buffer explorer plugin
 " -------------------------------------------------------------------------
 let g:miniBufExplMapWindowNavVim = 1 
