@@ -145,7 +145,7 @@ fi
 
 rm -f $DepsLst
 
-# Put keys if exists
+# SSH config
 if [ ! -d $HOME/.ssh ]; then
 	if [ -f $myenvcusto/enck.txt ]; then
 		mkdir $HOME/.ssh
@@ -154,6 +154,9 @@ if [ ! -d $HOME/.ssh ]; then
 		if [ $? -ne 0 ]; then rm -rf $HOME/.ssh; fi
 	fi
 fi
+
+[ -f $myenvcusto/.sshconfig ] && ln -svf $myenvcusto/.sshconfig .ssh/config
+
 
 if [ "$USER" != "travis" ]; then
 	# Set zsh by default

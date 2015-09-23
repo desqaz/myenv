@@ -1,0 +1,34 @@
+Host xrt
+    HostName xrt.noip.me 
+    Port 22
+    User root
+
+Host xrt2
+    HostName xrt.noip.me 
+    Port 60022
+    User root
+
+Host btx-jenkins
+    HostName xrt.noip.me 
+    Port 54022
+    User root
+
+Host xrtbox
+    HostName xrt.noip.me 
+    Port 60022
+    User root
+
+Host seedbox
+    HostName lw198.ultraseedbox.com 
+    Port 22
+    User fripooy
+
+Host github.com-private
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa
+
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_gpfw
