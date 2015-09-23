@@ -32,3 +32,6 @@
 [mergetool "bc3"]
 	cmd = git_mergetool_wrapper_bc "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
 	trustExitCode = true
+
+[push]
+	default = current
