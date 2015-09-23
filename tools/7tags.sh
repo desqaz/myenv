@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 # Set Variables
 WorksetPath=$(pwd)
 
@@ -36,14 +35,14 @@ while [ $# -gt 0 ]; do
    esac
 done
 
-IgnoreDirCmd="-path '*\.svn' -prune -o "
+IgnoreDirCmd="-path '*\.svn' -prune -o -path '*\.git' -prune -o "
 
 # Grap ignore dir list
 if [ -e $TAGS_IGNORE_FILE ]; then
    IgnoreDirList=$(cat $TAGS_IGNORE_FILE | sed -e 's/^[[:space:]]*#.*$//' -e '/^$/d')
 fi
 for dir in $IgnoreDirList; do
-   IgnoreDirCmd=$(echo -n "$IgnoreDirCmd -path '"'*\'"$dir""' -prune -o ")
+   IgnoreDirCmd=$(echo -n "$IgnoreDirCmd -path '"'*'"$dir""' -prune -o ")
    echo "  -> Ignoring directory : $dir ..." >&2
 done
 
