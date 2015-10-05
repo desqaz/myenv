@@ -34,10 +34,9 @@ endif
 "-------------------------------------------------------------------------
 	
 " tabulation
-set tabstop=3
+set tabstop=4
 set shiftwidth=3
 set softtabstop=0
-set noexpandtab
 
 " un historique raisonnable
 set history=100
@@ -182,8 +181,9 @@ map ,"            :s@^@"@<CR><C-N>
 map ,c            :set filetype=c<CR>
 map ,z            :set filetype=zsh<CR>
 map ,m            :set filetype=make<CR>
-map ,p            :set filetype=pantalk<CR>
+map ,p            :set filetype=python<CR>
 map ,d            :Dox<CR>
+map ,i            :call ToggleExpandTab()<CR>
 
 " Sélectionner tout
 map <C-a> ggVG
@@ -251,6 +251,7 @@ endfunction
 " SuperTab
 " -------------------------------------------------------------------------
 let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabDefaultCompletionType = "<c-p>"
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 set complete=.,w,b,u,t
@@ -296,6 +297,23 @@ if &diff
 endif
 
 highlight DiffText guifg=black 
+
+"---------------------------------------------------------------------------
+"Toggle tab expansion
+"---------------------------------------------------------------------------
+set noexpandtab
+let g:isexpandtab = 0
+function! ToggleExpandTab()
+   if g:isexpandtab == 0
+      set expandtab
+      echo "Tab will be expanded from now"
+      let g:isexpandtab = 1
+   else
+      set noexpandtab
+      echo "Tab will not be expanded anymore"
+      let g:isexpandtab = 0
+   endif
+endfunction
 
 "---------------------------------------------------------------------------
 "Highlight when line > 80 columns
