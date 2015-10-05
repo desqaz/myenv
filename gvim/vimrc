@@ -35,7 +35,7 @@ endif
 	
 " tabulation
 set tabstop=4
-set shiftwidth=3
+set shiftwidth=4
 set softtabstop=0
 
 " un historique raisonnable
@@ -184,6 +184,7 @@ map ,m            :set filetype=make<CR>
 map ,p            :set filetype=python<CR>
 map ,d            :Dox<CR>
 map ,i            :call ToggleExpandTab()<CR>
+map ,n            :call ToggleListNoList()<CR>
 
 " Sélectionner tout
 map <C-a> ggVG
@@ -312,6 +313,23 @@ function! ToggleExpandTab()
       set noexpandtab
       echo "Tab will not be expanded anymore"
       let g:isexpandtab = 0
+   endif
+endfunction
+
+"---------------------------------------------------------------------------
+"Toggle list/nolist
+"---------------------------------------------------------------------------
+set nolist
+let g:islist = 0
+function! ToggleListNoList()
+   if g:islist == 0
+      set list
+      echo "Print 'tab' and 'cr'"
+      let g:islist = 1
+   else
+      set nolist
+      echo "Unprint 'tab' and 'cr'"
+      let g:islist = 0
    endif
 endfunction
 
