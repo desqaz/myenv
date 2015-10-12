@@ -1,5 +1,5 @@
-export PATH=/datas/devkits/pybin-20141226-1810-4a17794:$PATH
-export PATH=/datas/devkits/gcc-arm-none-eabi-4_7-2013q3/bin:$PATH
+export PATH=/opt/pybin-20141226-1810-4a17794:$PATH
+export PATH=/opt/gcc-arm-none-eabi-4_7-2013q3/bin:$PATH
 
 
 wbanzai () {
