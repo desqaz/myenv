@@ -40,3 +40,5 @@
 [core]
 	excludesfile = /home/snguessan/.gitignore_global
 
+[push]
+	default = simple

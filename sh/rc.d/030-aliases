@@ -24,8 +24,9 @@ alias k='$TOOLS_ROOT/k.sh'
 alias ka='$TOOLS_ROOT/k.sh -a'
 alias _='$TOOLS_ROOT/dt.sh'
 
-alias sdi='svn diff --diff-cmd=/home/jlabarthe/myenv/tools/svn_diff_wrapper_bc'
-alias sdiv='svn diff --diff-cmd=/home/jlabarthe/myenv/tools/svn_diff_wrapper_vi'
+alias l='$PWD/l'
+alias r='$PWD/r'
+
 
 alias bcp='bcompare'
 

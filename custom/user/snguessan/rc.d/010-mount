@@ -1,1 +1,4 @@
-alias sshfs-schest='sshfs schest: ~/media/sshfs/schest -o auto_cache,reconnect,no_readahead,Ciphers=arcfour,compression=no'
+if [ -z "$(mount | grep /media/datas)" ]; then
+	sudo mount -t vmhgfs .host:/datas /media/datas -o uid=snguessan,gid=snguessan,umask=022
+fi
+
