@@ -35,9 +35,10 @@ fi
 # link rc files
 echo "Linking rc files"
 
-for rc in $myenv/.bashrc $myenv/.zshrc $myenv/.vimrc $myenv/.tmux.conf; do
-	ln -svf $rc
-done
+rclist="$myenv/.bashrc $myenv/.zshrc $myenv/.vimrc $myenvcusto/.minirc.dfl"
+
+for rc in $rclist; do ln -svf $rc; done
+
 
 if [ ! -f .myenvrc ]; then
 	echo "export MYENV_NAME=$USER"      >  .myenvrc
