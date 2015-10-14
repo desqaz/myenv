@@ -6,16 +6,22 @@ wbanzai () {
 	cmd="build"
 	echo "waf: [0;1;36m$cmd[0m"
 	/usr/bin/python waf $(echo $cmd)
-#	cp -uvf ./admin/AmbaUSB/s2e_lpddr3_MT29UZ4B8DZZHGPB.ads                                   /media/sf_vm-exports
-#	cp -uvf ./waf_build/build/australia_waf/fwprog/fwprog_bst_bld_sys_dsp_rom_lnx_dtb_rfs.out /media/sf_vm-exports
-#	cp -uvf ./waf_build/build/australia_waf/system/system.elf                                 /media/sf_vm-exports
+	cp -uvf ./admin/AmbaUSB/s2e_lpddr3_MT29UZ4B8DZZHGPB.ads       /media/sf_datas
+	cp -uvf ./waf_build/build/australia_waf/fwprog/*.out          /media/sf_datas
+	cp -uvf ./waf_build/build/australia_waf/system/system.elf     /media/sf_datas
 }
 
 wwdr () {
 	cmd="build install"
 	echo "waf: [0;1;36m$cmd[0m"
 	cd banzai_libs && /usr/bin/python ../waf $(echo $cmd) ; cd -
-#	cp -uvf ./admin/AmbaUSB/s2e_lpddr3_MT29UZ4B8DZZHGPB.ads                                   /media/sf_vm-exports
-#	cp -uvf ./waf_build/build/australia_waf/fwprog/fwprog_bst_bld_sys_dsp_rom_lnx_dtb_rfs.out /media/sf_vm-exports
-#	cp -uvf ./waf_build/build/australia_waf/system/system.elf                                 /media/sf_vm-exports
+	cp -uvf ./admin/AmbaUSB/s2e_lpddr3_MT29UZ4B8DZZHGPB.ads       /media/sf_datas
+	cp -uvf ./waf_build/build/australia_waf/fwprog/*.out          /media/sf_datas
+	cp -uvf ./waf_build/build/australia_waf/system/system.elf     /media/sf_datas
+}
+
+t-wdr () {
+	cmd='on'
+	if [ "$1" = '0' ]; then cmd='off'; fi
+	echo "t frw imgcap wdr $cmd" > /dev/ttyUSB0
 }
