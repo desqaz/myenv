@@ -126,7 +126,7 @@ fi
 # Others installation
 #
 echo "[0;32mInstalling deps.d[0m"
-for dep in $(find $myenvdepsdir -type f); do
+for dep in $(find $myenvdepsdir -type f | sort -n 2>/dev/null); do
 	echo "[0;33m$dep[0m"
 	. $dep
 done
@@ -150,7 +150,7 @@ fi
 #
 if [ -d $myenvdepscustodir ]; then
 	echo "[0;32mInstalling custom deps.d[0m"
-	for dep in $(find $myenvdepscustodir -type f ); do
+	for dep in $(find $myenvdepscustodir -type f | sort -n 2>/dev/null); do
 		echo "[0;33m$dep[0m"
 		. $dep
 	done
