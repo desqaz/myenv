@@ -24,6 +24,7 @@ myenv=$(cd $(dirname $0) 2>&1 > /dev/null && pwd)
 myenvcusto=$myenv/custom/user/$USER
 myenvsetup=$myenv/setup
 myenvdepsdir=$myenvsetup/deps.d
+myenvdepscustodir=$myenvcusto/setup/deps.d
 
 cd $HOME
 
@@ -141,6 +142,17 @@ if [ $? -eq 0 ]; then
 	for dep in $(cat $DepsLst | grep -w '^cmd' |  awk '{for(i=1;i<$$NF;i++) $i=""; print}'); do
 		echo "[0;33m$dep[0m"
 		bash -c "$dep"
+	done
+fi
+
+#
+# Others custom installation
+#
+if [ -d $myenvdepscustodir ]; then
+	echo "[0;32mInstalling custom deps.d[0m"
+	for dep in $(find $myenvdepscustodir -type f ); do
+		echo "[0;33m$dep[0m"
+		. $dep
 	done
 fi
 

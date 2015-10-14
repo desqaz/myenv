@@ -24,6 +24,8 @@
 	cmd = git_difftool_wrapper_bc "$LOCAL" "$REMOTE" "$BASE"
 [difftool "vi"]
 	cmd = git_difftool_wrapper_vi "$LOCAL" "$REMOTE" "$BASE"
+[difftool "meld"]
+	cmd = git_difftool_wrapper_meld "$LOCAL" "$REMOTE" "$BASE"
 [merge]
 	tool = bc3
 [mergetool]
