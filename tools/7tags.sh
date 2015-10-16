@@ -65,14 +65,14 @@ fi
 for dir in $AddDirList; do
    echo "  -> Adding directory : $dir ..." >&2
 cat << EOF >> $VIMTAGSPATH/find_cmd
-find    $dir/  -type f -name '*.h'                  >> $FilesList
-find    $dir/  -type f -name '*.hpp'                >> $FilesList
-find    $dir/  -type f -name '*.c'                  >> $FilesList
-find    $dir/  -type f -name '*.cc'                 >> $FilesList
-find    $dir/  -type f -name '*.cpp'                >> $FilesList
-find    $dir/  -type f -name '*.config'             >> $FilesList
-find    $dir/  -type f -regex '.*\.make?$' -print   >> $FilesList
-find    $dir/  -type f -iname 'makefile' -print     >> $FilesList
+find    $WorksetPath/$dir/  -type f -name '*.h'                  >> $FilesList
+find    $WorksetPath/$dir/  -type f -name '*.hpp'                >> $FilesList
+find    $WorksetPath/$dir/  -type f -name '*.c'                  >> $FilesList
+find    $WorksetPath/$dir/  -type f -name '*.cc'                 >> $FilesList
+find    $WorksetPath/$dir/  -type f -name '*.cpp'                >> $FilesList
+find    $WorksetPath/$dir/  -type f -name '*.config'             >> $FilesList
+find    $WorksetPath/$dir/  -type f -regex '.*\.make?$' -print   >> $FilesList
+find    $WorksetPath/$dir/  -type f -iname 'makefile' -print     >> $FilesList
 EOF
 done
    . $VIMTAGSPATH/find_cmd
