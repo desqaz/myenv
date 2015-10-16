@@ -1,3 +1,8 @@
+Host *
+     ForwardAgent yes
+     ForwardX11 yes
+     ForwardX11Trusted yes
+
 Host xrt
     HostName xrt.noip.me 
     Port 22
