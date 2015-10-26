@@ -2,6 +2,19 @@ export PATH=/datas/devkits/pybin-20141226-1810-4a17794:$PATH
 export PATH=/datas/devkits/gcc-arm-none-eabi-4_7-2013q3/bin:$PATH
 
 
+alias gsu='git submodule sync && git submodule update --init --recursive'
+alias lm='./r make'
+alias lc='./r make commit.pyok'
+alias lq='./r make qa.pyok'
+alias lsh='./r show'
+alias lcl='./r clean'
+
+alias li='./r make wdr/pylists/image.pyok'
+alias lgr='./r make wdr/pylists/genref.pyok'
+alias lt='./r make products/tag{australia/opt.build/cubie.plat/std.impl}/kit{arm-linaro-lnx-gnueabihf-4.7}/qa/yuv_ceiling/run.ok'
+alias lst='./r show -o products/tag{australia/opt.build/cubie.plat/std.impl}/kit{arm-linaro-lnx-gnueabihf-4.7}/qa/yuv_ceiling/run'
+alias lu='./r make products/wdr/tag{australia/dbg.build/std.impl}/kit{x86_64-Linux}/wdr/gpwdrUnittest.run.ok'
+
 wbanzai () {
 	cmd="build"
 	echo "waf: [0;1;36m$cmd[0m"
@@ -19,3 +32,14 @@ wwdr () {
 #	cp -uvf ./waf_build/build/australia_waf/fwprog/fwprog_bst_bld_sys_dsp_rom_lnx_dtb_rfs.out /media/sf_vm-exports
 #	cp -uvf ./waf_build/build/australia_waf/system/system.elf                                 /media/sf_vm-exports
 }
+
+
+
+### MEMO
+#git clone https://github.com/desqaz/myenv
+#cd myenv/
+#./setup.sh
+#zsh
+
+
+#git clone git@github.com:GPFW/ISG_PROJ_ALGOLIBS.git

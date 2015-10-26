@@ -19,7 +19,7 @@
 	cl = clean -fdx
 	llg = log --format='%Cgreen%h%Creset %Cblue[%an - %ar]%Creset %s' --graph
 [diff]
-	tool = bc3
+	tool = kdiff3
 	#tool = vi
 [difftool]
 	prompt = false
@@ -30,7 +30,7 @@
 [difftool "meld"]
 	cmd = git_difftool_wrapper_meld "$LOCAL" "$REMOTE" "$BASE"
 [merge]
-	tool = bc3
+	tool = kdiff3
 [mergetool]
 	prompt = false
 	keepBackup = false
@@ -38,3 +38,5 @@
 	cmd = git_mergetool_wrapper_bc "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
 	trustExitCode = true
 
+[core]
+	editor = kwrite
