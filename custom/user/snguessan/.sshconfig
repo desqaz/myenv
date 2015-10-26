@@ -1,3 +1,8 @@
+Host *
+     ForwardAgent yes
+     ForwardX11 yes
+     ForwardX11Trusted yes
+
 Host xrt
     HostName xrt.noip.me 
     Port 22
@@ -23,8 +28,8 @@ Host seedbox
     Port 22
     User fripooy
 
-Host github.com-private
-    HostName github.com
+Host github-priv
+    HostName github-priv
     User git
     IdentityFile ~/.ssh/id_rsa
 

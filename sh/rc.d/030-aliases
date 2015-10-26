@@ -24,24 +24,26 @@ alias k='$TOOLS_ROOT/k.sh'
 alias ka='$TOOLS_ROOT/k.sh -a'
 alias _='$TOOLS_ROOT/dt.sh'
 
-alias sdi='svn diff --diff-cmd=/home/jlabarthe/myenv/tools/svn_diff_wrapper_bc'
-alias sdiv='svn diff --diff-cmd=/home/jlabarthe/myenv/tools/svn_diff_wrapper_vi'
+alias l='$PWD/l'
+alias r='$PWD/r'
+
 
 alias bcp='bcompare'
 
-alias gls="git log -2 --stat"
+alias gls=' git log -2 --stat'
 alias glog='git log --graph --format="%Cgreen%h%Creset %Cblue[%an - %ar]%Creset %s"'
-alias gs=" git status -s"
-alias gd=" git difftool"
-alias gci="git commit"
-alias gck="git checkout"
-alias ga=" git add"
-alias gb=" git branch"
-alias gm=" git commit --amend --no-edit"
-alias gme="git commit --amend"
-alias gps="git push"
-alias gpl="git pull"
-alias gpp="git pull && git push"
+alias gs='  git status -s'
+alias gd='  git difftool'
+alias gci=' git commit'
+alias gck=' git checkout'
+alias ga='  git add'
+alias gb='  git branch'
+alias gm='  git commit --amend --no-edit'
+alias gme=' git commit --amend'
+alias gps=' git push'
+alias gpl=' git pull'
+alias gpp=' git pull && git push'
+alias gup=' git log --oneline --stat origin/$(git rev-parse --abbrev-ref HEAD)..HEAD'
 
 alias 7tags='source $(7tags.sh)'
 
