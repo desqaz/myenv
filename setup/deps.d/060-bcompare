@@ -1,4 +1,4 @@
-BinVer="3.3.13.18981"; PkgVer="3.3.13-18981"
+BinVer="4.1.1.20615"; PkgVer="4.1.1-20615"
 ToInstall=0
 
 dpkg-query -l bcompare >/dev/null 2>/dev/null
@@ -11,7 +11,7 @@ else
 fi;
 
 if [ $ToInstall -eq 1 ]; then
-    wget -P ~/tmp http://www.scootersoftware.com/bcompare-${BinVer}_i386.deb && SUDO gdebi -n ~/tmp/bcompare-${BinVer}_i386.deb;
+    wget -P ~/tmp http://www.scootersoftware.com/bcompare-${BinVer}_amd64.deb && SUDO gdebi -n ~/tmp/bcompare-${BinVer}_i386.deb;
 else
     echo "[0;36mbcompare version $BinVer already installed[0m";
 fi
