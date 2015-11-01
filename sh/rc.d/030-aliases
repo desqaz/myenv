@@ -43,6 +43,9 @@ alias gps="git push"
 alias gpl="git pull"
 alias gpp="git pull && git push"
 
+alias l='$PWD/l'
+alias r='$PWD/r'
+
 alias 7tags='source $(7tags.sh)'
 
 alias -g V=' | vi -R -'
