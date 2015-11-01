@@ -24,6 +24,7 @@ myenv=$(cd $(dirname $0) 2>&1 > /dev/null && pwd)
 myenvcusto=$myenv/custom/user/$USER
 myenvsetup=$myenv/setup
 myenvdepsdir=$myenvsetup/deps.d
+myenvdepscustodir=$myenvcusto/setup/deps.d
 
 cd $HOME
 
@@ -35,9 +36,10 @@ fi
 # link rc files
 echo "Linking rc files"
 
-for rc in $myenv/.bashrc $myenv/.zshrc $myenv/.vimrc $myenv/.tmux.conf; do
-	ln -svf $rc
-done
+rclist="$myenv/.bashrc $myenv/.zshrc $myenv/.vimrc $myenvcusto/.minirc.dfl"
+
+for rc in $rclist; do ln -svf $rc; done
+
 
 if [ ! -f .myenvrc ]; then
 	echo "export MYENV_NAME=$USER"      >  .myenvrc
@@ -124,7 +126,7 @@ fi
 # Others installation
 #
 echo "[0;32mInstalling deps.d[0m"
-for dep in $(find $myenvdepsdir -type f); do
+for dep in $(find $myenvdepsdir -type f | sort -n 2>/dev/null); do
 	echo "[0;33m$dep[0m"
 	. $dep
 done
@@ -140,6 +142,17 @@ if [ $? -eq 0 ]; then
 	for dep in $(cat $DepsLst | grep -w '^cmd' |  awk '{for(i=1;i<$$NF;i++) $i=""; print}'); do
 		echo "[0;33m$dep[0m"
 		bash -c "$dep"
+	done
+fi
+
+#
+# Others custom installation
+#
+if [ -d $myenvdepscustodir ]; then
+	echo "[0;32mInstalling custom deps.d[0m"
+	for dep in $(find $myenvdepscustodir -type f | sort -n 2>/dev/null); do
+		echo "[0;33m$dep[0m"
+		. $dep
 	done
 fi
 

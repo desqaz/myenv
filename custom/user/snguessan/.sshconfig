@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 #
 # Private ---------------------------------------------------------------------
 #
+=======
+Host *
+     ForwardAgent yes
+     ForwardX11 yes
+     ForwardX11Trusted yes
+>>>>>>> 0b9a000697b038de2ab58f80005340d21d72f67a
 
 Host xrt
     HostName xrt.noip.me
@@ -25,7 +32,8 @@ Host seedbox
     HostName lw198.ultraseedbox.com
     User fripooy
 
-Host github-private
+Host github-priv
+    HostName github-priv
     User git
     IdentityFile ~/.ssh/id_rsa
 
