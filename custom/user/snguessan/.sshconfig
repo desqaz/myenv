@@ -1,13 +1,10 @@
-<<<<<<< HEAD
 #
 # Private ---------------------------------------------------------------------
 #
-=======
 Host *
      ForwardAgent yes
      ForwardX11 yes
      ForwardX11Trusted yes
->>>>>>> 0b9a000697b038de2ab58f80005340d21d72f67a
 
 Host xrt
     HostName xrt.noip.me
