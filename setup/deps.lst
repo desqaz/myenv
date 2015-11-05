@@ -36,6 +36,7 @@ pkg   libpython-dev
 pkg   libpython3-dev
 pkg   gawk
 pkg   git-gui
+pkg   ccache
 
 
 #
