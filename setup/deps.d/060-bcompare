@@ -1,6 +1,5 @@
-BinVer="4.1.1.20615"; PkgVer="4.1.1-20615"
+BinVer="4.1.2.20720"; PkgVer="4.1.2-20720"
 ToInstall=0
-#arch=i386
 arch=amd64
 
 
