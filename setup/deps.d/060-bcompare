@@ -1,20 +1,5 @@
-BinVer="4.1.2.20720"; PkgVer="4.1.2-20720"
-ToInstall=0
-arch=amd64
-
-
-dpkg-query -l bcompare >/dev/null 2>/dev/null
-
-if [ $? -eq 0 ]; then
-    InstalledVer=$(dpkg-query -l bcompare | grep bcompare | awk '{print $3}');
-    [ "$InstalledVer" != "$PkgVer" ] && ToInstall=1
-else
-    ToInstall=1
-fi;
-
-if [ $ToInstall -eq 1 ]; then
-    wget -P ~/tmp http://www.scootersoftware.com/bcompare-${BinVer}_${arch}.deb && SUDO gdebi -n ~/tmp/bcompare-${BinVer}_${arch}.deb;
-else
-    echo "[0;36mbcompare version $BinVer already installed[0m";
+if [ ! -e /etc/apt/sources.list.d/scootersoftware.list ]; then
+	SUDO sh -c 'echo "deb http://www.scootersoftware.com/ bcompare4 non-free" > /etc/apt/sources.list.d/scootersoftware.list'
+	SUDO apt-get update
+	SUDO apt-get install bcompare -y
 fi
-
