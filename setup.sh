@@ -168,7 +168,7 @@ if [ ! -d $HOME/.ssh ]; then
 	fi
 fi
 
-[ -f $myenvcusto/.sshconfig ] && ln -svf $myenvcusto/.sshconfig .ssh/config
+[ -f $myenvcusto/.sshconfig ] && ln -svf $myenvcusto/.sshconfig $HOME/.ssh/config
 
 
 if [ "$USER" != "travis" ]; then
@@ -189,9 +189,9 @@ fi
 
 case $(ps -p $PPID -o comm=) in
 	zsh)
-		. .zshrc ;;
+		. $HOME/.zshrc ;;
 	bash)
-		. .bashrc ;;
+		. $HOME/.bashrc ;;
 	*)
 		zsh ;;
 esac

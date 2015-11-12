@@ -1,31 +1,32 @@
+#
+# Private ---------------------------------------------------------------------
+#
 Host *
      ForwardAgent yes
      ForwardX11 yes
      ForwardX11Trusted yes
 
 Host xrt
-    HostName xrt.noip.me 
-    Port 22
+    HostName xrt.noip.me
     User root
 
 Host xrt2
-    HostName xrt.noip.me 
+    HostName xrt.noip.me
     Port 60022
     User root
 
-Host btx-jenkins
-    HostName xrt.noip.me 
+Host jenkins-btx
+    HostName xrt.noip.me
     Port 54022
     User root
 
 Host xrtbox
-    HostName xrt.noip.me 
+    HostName xrt.noip.me
     Port 60022
     User root
 
 Host seedbox
-    HostName lw198.ultraseedbox.com 
-    Port 22
+    HostName lw198.ultraseedbox.com
     User fripooy
 
 Host github-priv
@@ -33,7 +34,25 @@ Host github-priv
     User git
     IdentityFile ~/.ssh/id_rsa
 
+
+#
+# Job ------------------------------------------------------------------------- 
+#
+
 Host github.com
     HostName github.com
     User git
     IdentityFile ~/.ssh/id_gpfw
+
+Host jenkins-schest
+	HostName schest
+	User jenkins
+
+Host isge-ubuntu
+	HostName 10.129.17.15
+
+Host cbt
+	HostName cbt1-fr
+	User cubuser
+    IdentityFile ~/.ssh/id_rsa
+
