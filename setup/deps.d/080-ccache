@@ -1,0 +1,26 @@
+#! /bin/bash --norc
+
+cd /usr/lib/ccache
+
+suffixList="
+gcc
+g++
+c++
+"
+
+prefixList="
+arm-none-eabi-
+arm-linux-gnueabihf-
+x86_64-apple-darwin12-
+x86_64-w64-mingw32-
+"
+
+for p in $prefixList; do
+	for s in $suffixList; do
+		comp="${p}${s}"
+		[ ! -f $comp ] && sudo ln -svf ../../bin/ccache $comp
+	done
+done
+
+cd -
+

@@ -34,6 +34,9 @@ pkg   pv
 pkg   openssh-server
 pkg   libpython-dev
 pkg   libpython3-dev
+pkg   gawk
+pkg   git-gui
+pkg   ccache
 pkg   valgrind
 pkg   python-matplotlib
 

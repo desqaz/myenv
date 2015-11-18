@@ -41,4 +41,4 @@
 	excludesfile = /home/snguessan/.gitignore_global
 
 [push]
-	default = simple
+	default = current
