@@ -1,5 +1,5 @@
 # Machine-generated file - use setup menu in minicom to change parameters.
-pu port             /dev/ttyUSB0
+pu port             /dev/ttyACM0
 pu rtscts           No
 pu tbcolor          BLUE
 pu sound            No 

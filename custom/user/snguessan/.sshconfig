@@ -34,6 +34,13 @@ Host github-priv
     User git
     IdentityFile ~/.ssh/id_rsa
 
+Host raspsalon
+    HostName raspsalon
+    User root
+
+Host cubnas
+	Hostname cubnas
+	User fripooy
 
 #
 # Job ------------------------------------------------------------------------- 
