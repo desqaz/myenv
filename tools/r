@@ -1,0 +1,93 @@
+#! /bin/bash --norc
+
+ScriptDir=$(cd $(dirname $0) >/dev/null 2>/dev/null && pwd)
+RcFile=$HOME/.rrc
+RemoteWorkDir=$(echo $ScriptDir | sed -e 's?/?_?g')
+
+quiet=
+sync=1
+progressOpt=
+
+
+if test ! -f $RcFile; then
+	echo 'Please create this file : $HOME/.rrc' 1>&2
+	echo '.rrc example : ' 1>&2
+	echo 'RrcServer=user@star' 1>&2
+	echo 'RrcRemoteRootDir=BASES' 1>&2
+	exit 1
+fi
+
+source $RcFile
+
+if test -z $RrcServer; then
+	echo 'Bad $HOME/.rrc file' 1>&2
+	echo 'Missing RrcServer variable' 1>&2
+	exit 1
+fi
+if test -z $RrcRemoteRootDir; then
+	echo 'Bad $HOME/.rrc file' 1>&2
+	echo 'Missing RrcRemoteRootDir variable' 1>&2
+	exit 1
+fi
+
+
+#
+# PARSE OPTIONS
+#
+
+zzz=$(rsync --info=progress2 . . -q > /dev/null 2>&1)
+if [ $? -eq 0 ]; then progressOpt='--info=progress2'; fi
+
+
+if [ "$1" = '-n' ]; then
+	sync=0
+   	shift
+elif [ "$1" = '-q' ]; then
+	quiet=1
+	progressOpt=
+	shift
+fi
+
+if [ "$1" = 'sgestat' ]; then sync=0; fi
+
+
+#
+# HELPERS
+#
+
+syncL2R() {
+	if [ $sync -eq 1 ]; then
+		[ -z "$quiet" ] && printf "\e[0;36mSyncing local ->> remote \e[0m\n" 1>&2
+		ssh $RrcServer "mkdir -p $RrcRemoteRootDir/$RemoteWorkDir"
+		rsync $progressOpt -au --delete . $RrcServer:$RrcRemoteRootDir/$RemoteWorkDir/. 1>&2 || exit 123
+	fi
+}
+
+syncR2L() {
+	if [ $sync -eq 1 ]; then
+		[ -z "$quiet" ] && printf "\e[0;36mSyncing local <<- remote \e[0m\n" 1>&2
+		rsync $progressOpt -au --exclude='.git*/' --exclude='.tmp.exclude/' --delete $RrcServer:$RrcRemoteRootDir/$RemoteWorkDir/. . 1>&2
+	fi
+}
+
+
+#
+# PROCESS
+#
+
+cd $ScriptDir
+
+
+syncL2R $1
+
+if test "$1" = "run"; then
+	shift
+	printf "\e[0;1;35mRemote Exec \e[33m$*\e[0m\n" 1>&2
+	ssh -t $RrcServer "cd $RrcRemoteRootDir/$RemoteWorkDir && $@"
+else
+	printf "\e[0;1;35mRemote Exec \e[33ml $*\e[0m\n" 1>&2
+	ssh -t $RrcServer "cd $RrcRemoteRootDir/$RemoteWorkDir && l $@"
+fi
+
+syncR2L $1
+

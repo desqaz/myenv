@@ -24,10 +24,6 @@ alias k='$TOOLS_ROOT/k.sh'
 alias ka='$TOOLS_ROOT/k.sh -a'
 alias _='$TOOLS_ROOT/dt.sh'
 
-alias l='$PWD/l'
-alias r='$PWD/r'
-
-
 alias bcp='bcompare'
 
 alias gls=' git log -2 --stat'
@@ -44,9 +40,6 @@ alias gps=' git push'
 alias gpl=' git pull'
 alias gpp=' git pull && git push'
 alias gup=' git log --oneline --stat origin/$(git rev-parse --abbrev-ref HEAD)..HEAD'
-
-alias l='$PWD/l'
-alias r='$PWD/r'
 
 alias 7tags='source $(7tags.sh)'
 
