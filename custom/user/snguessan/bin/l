@@ -17,9 +17,9 @@ else
 fi
 
 
-which lmake
-
 function ccache-exe () {
+	if [ -z "$(mount | grep 'vg0-workspace' -m1)" ]; then return 0; fi
+
 	if [ -n "$(which ccache | grep -v 'not found')" ]; then
 		if [ "$(echo $1 | grep make)" ]; then 
 			shift
@@ -30,6 +30,7 @@ function ccache-exe () {
 	fi
 }
 
+echo "lmake = $(which lmake)"
 
 Cmd="$1"
 shift

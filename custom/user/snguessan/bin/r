@@ -4,6 +4,8 @@ ScriptDir=$(cd $(dirname $0) >/dev/null 2>/dev/null && pwd)
 RcFile=$HOME/.rrc
 RemoteWorkDir=$(echo $ScriptDir | sed -e 's?/?_?g')
 
+l="$TOOLS_ROOT/l"
+
 quiet=
 sync=1
 progressOpt=
@@ -86,7 +88,7 @@ if test "$1" = "run"; then
 	ssh -t $RrcServer "cd $RrcRemoteRootDir/$RemoteWorkDir && $@"
 else
 	printf "\e[0;1;35mRemote Exec \e[33ml $*\e[0m\n" 1>&2
-	ssh -t $RrcServer "cd $RrcRemoteRootDir/$RemoteWorkDir && l $@"
+	ssh -t $RrcServer "cd $RrcRemoteRootDir/$RemoteWorkDir && $l $@"
 fi
 
 syncR2L $1
