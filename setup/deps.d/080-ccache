@@ -13,6 +13,8 @@ arm-none-eabi-
 arm-linux-gnueabihf-
 x86_64-apple-darwin12-
 x86_64-w64-mingw32-
+arm-xilinx-eabi-
+arm-xilinx-linux-gnueabi-
 "
 
 for p in $prefixList; do

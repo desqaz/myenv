@@ -39,7 +39,9 @@ pkg   git-gui
 pkg   ccache
 pkg   valgrind
 pkg   python-matplotlib
-
+pkg   libncurses5-dev
+pkg   libssl-dev
+pkg   build-essential
 
 #
 # EASY_INSTALL
@@ -57,7 +59,7 @@ eins3 pip
 # PIP
 #
 pip   jira
-
+pip   speedtest-cli 
 
 #
 # PIP3
