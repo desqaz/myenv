@@ -42,6 +42,10 @@ Host cubnas
 	Hostname cubnas
 	User fripooy
 
+Host dmx
+	Hostname dmx
+	User fripooy
+
 #
 # Job ------------------------------------------------------------------------- 
 #
