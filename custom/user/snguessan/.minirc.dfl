@@ -2,5 +2,5 @@
 pu port             /dev/ttyACM0
 pu rtscts           No
 pu tbcolor          BLUE
-pu sound            No 
+pu sound            No
 pu histlines        5000

@@ -1,4 +1,6 @@
 export PATH=$PATH:/media/datas/devkits/dtc
+export PATH=$PATH:/media/datas/devel/u-boot-xlnx/tools
+
 export XILINX_SDK=/media/datas/tools/xilink/SDK/2015.3
 
 . $XILINX_SDK/.settings64-XSDK_Core_Tools.sh
