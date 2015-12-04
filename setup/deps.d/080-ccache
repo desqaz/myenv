@@ -26,3 +26,13 @@ done
 
 cd -
 
+echo "Force use ccache for compiler in /soft ..."
+for s in $suffixList; do
+	for bin in $(find -L /soft -type f -name "*-$s" 2>/dev/null); do
+		if [ ! -f ${bin}.real ]; then
+			mv -v $bin{,.real}
+			ln -sv $HOME/myenv/tools/ccache-hook $bin
+		fi
+	done
+done
+
