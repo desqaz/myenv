@@ -26,7 +26,7 @@ done
 
 cd -
 
-echo "Force use ccache for compiler in /soft ..."
+echo "Force use ccache for cross-compiler in /soft ..."
 for s in $suffixList; do
 	for bin in $(find -L /soft -type f -name "*-$s" 2>/dev/null); do
 		if [ ! -f ${bin}.real ]; then
@@ -36,3 +36,11 @@ for s in $suffixList; do
 	done
 done
 
+echo "Force use ccache for compiler in /usr/bin ..."
+for s in $suffixList; do
+	bin=/usr/bin/$s
+	if [ ! -f ${bin}.real ]; then
+		SUDO mv -v $bin{,.real}
+		SUDO ln -sv $HOME/myenv/tools/ccache-hook $bin
+	fi
+done	
