@@ -1,5 +1,2 @@
 #!/bin/sh
-
-export CCACHE_DIR=/ccache
-
 ccache $0.real "$@"
