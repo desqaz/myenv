@@ -30,7 +30,7 @@
 [difftool "meld"]
 	cmd = git_difftool_wrapper_meld "$LOCAL" "$REMOTE" "$BASE"
 [merge]
-	tool = bc3
+	tool = bcompare
 [mergetool]
 	prompt = false
 	keepBackup = false
