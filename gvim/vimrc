@@ -21,12 +21,12 @@ set gfn=Monospace\ 10
 syntax on
 
 if $TAGS_HL != ""
-   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_f Function
-   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight c_t gui=bold,italic
-   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_d Tag
-   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_m Tag
-   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    highlight link c_e Tag
-   au bufnewfile,bufread *.c,*.h,*.cpp,*.patch    source $TAGS_HL
+   au bufnewfile,bufread *.c,*.cc,*.h,*.cpp,*.patch  highlight link c_f Function
+   au bufnewfile,bufread *.c,*.cc,*.h,*.cpp,*.patch  highlight c_t gui=bold,italic
+   au bufnewfile,bufread *.c,*.cc,*.h,*.cpp,*.patch  highlight link c_d Tag
+   au bufnewfile,bufread *.c,*.cc,*.h,*.cpp,*.patch  highlight link c_m Tag
+   au bufnewfile,bufread *.c,*.cc,*.h,*.cpp,*.patch  highlight link c_e Tag
+   au bufnewfile,bufread *.c,*.cc,*.h,*.cpp,*.patch  source $TAGS_HL
 endif
 
 "-------------------------------------------------------------------------
