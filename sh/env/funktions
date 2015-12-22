@@ -161,4 +161,11 @@ gsmst() {
 	git submodule foreach --recursive git status -s
 }
 
+l() {
+	build/scripts/l "$@"
+}
+
+r() {
+	build/scripts/r "$@"
+}
 
