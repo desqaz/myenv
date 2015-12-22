@@ -1,0 +1,26 @@
+#compdef l rl
+
+_l_comp () {
+	local cmd
+	if (( CURRENT > 2)); then
+		cmd=${words[2]}
+		# Run the completion for the subcommand
+		(( $+functions[_l_comp_$cmd] )) && _l_comp_$cmd
+
+	else
+		_values : \
+			"make[launch lmake]"
+	fi  
+}
+
+_l_comp_make() {
+	local -a pylist_files
+	pylist_files=( **/*.pylist )
+	pyok_files=(${pylist_files//\.pylist/.pyok})
+	_multi_parts / pyok_files
+}
+
+
+_l_comp "$@"
+
+# -*- mode: shell-script -*-

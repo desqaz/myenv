@@ -165,7 +165,7 @@ l() {
 	build/scripts/l "$@"
 }
 
-r() {
+rl() {
 	build/scripts/r "$@"
 }
 
