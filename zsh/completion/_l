@@ -15,9 +15,14 @@ _l_comp () {
 
 _l_comp_make() {
 	local -a pylist_files
+	local -a cmd_files
+	local -a all_files
 	pylist_files=( **/*.pylist )
-	pyok_files=(${pylist_files//\.pylist/.pyok})
-	_multi_parts / pyok_files
+	cmd_files=( %STATE/ancillary/**/*/cmd )
+	cmd_files=( ${cmd_files//\%STATE\/ancillary\//} )
+	cmd_files=( ${cmd_files//\/cmd/} )
+	all_files=( ${pylist_files//\.pylist/.pyok} $cmd_files )
+	_multi_parts / all_files
 }
 
 
