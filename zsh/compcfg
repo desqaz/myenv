@@ -21,7 +21,6 @@ compinit
 
 autoload -Uz promptinit 
 promptinit
-#prompt modrivers
 prompt myenv
 
 autoload zsh/complist
