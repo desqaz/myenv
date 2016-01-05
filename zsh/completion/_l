@@ -2,15 +2,24 @@
 
 _l_comp () {
 	local cmd
-	if (( CURRENT > 2)); then
+	if (( CURRENT == 3 )); then
 		cmd=${words[2]}
 		# Run the completion for the subcommand
 		(( $+functions[_l_comp_$cmd] )) && _l_comp_$cmd
-
+	elif (( CURRENT > 3 )); then
+		cmd=${words[2]}
+		opt=${words[3]}
+		# Run the completion for the subcommand
+		(( $+functions[_l_comp_$cmd] )) && _l_comp_$cmd $opt
 	else
 		_values : \
-			"make[launch lmake]"
-	fi  
+			"make[launch lmake]" \
+		   	"makeserver[launch lmake server]" \
+		   	"show[display various infos about target]" \
+		   	"clean[clean lmake artefacts]" \
+		   	"stable[add target to stable state]" \
+		   	"unstable[remove target from stable state]"
+	fi
 }
 
 _l_comp_make() {
@@ -23,6 +32,41 @@ _l_comp_make() {
 	cmd_files=( ${cmd_files//\/cmd/} )
 	all_files=( ${pylist_files//\.pylist/.pyok} $cmd_files )
 	_multi_parts / all_files
+}
+
+_l_comp_show() {
+	if (( $# == 0 )); then
+		_values : \
+		"-h[show this help message and exit]" \
+		"-a[all deps of path]" \
+		"-b[deep deps]" \
+		"-c[the rule command]" \
+		"-d[the deps of path]" \
+		"-e[the stderr of rule execution]" \
+		"-i[miscelaneous infos about path]" \
+		"-k[the deps of path (recurse if kept)]" \
+		"-o[the stdout of rule execution]" \
+		"-r[deep deps being built]" \
+		"-s[the rule script]" \
+		"-t[an execution trace of lrexec]" \
+		"-u[deep deps in error]" \
+		"-B[source deps]" \
+		"-C[a count of job execution per rule]" \
+		"-D[the paths which depend on path]" \
+		"-E[show info of matching files]" \
+		"-S[statistics for targets]" \
+		"-T[an execution trace of rule]"
+	elif (( $# == 1 )); then
+		for i in "-a" "-b" "-c" "-d" "-e" "-i" "-k" "-o" "-B" "-D"; do
+			if [ "$i" = "$1" ]; then
+				local -a cmd_files
+				cmd_files=( %STATE/ancillary/**/*/cmd )
+				cmd_files=( ${cmd_files//\%STATE\/ancillary\//} )
+				cmd_files=( ${cmd_files//\/cmd/} )
+				_multi_parts / cmd_files
+			fi
+		done
+	fi
 }
 
 
