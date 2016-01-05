@@ -1,27 +1,8 @@
 export PATH=/data/gopro/soft/pybin-20141226-1810-4a17794:$PATH
 export PATH=/data/gopro/soft/gcc-arm-none-eabi-4_7-2013q3/bin:$PATH
 
-
-wbanzai () {
-	cmd="build"
-	echo "waf: [0;1;36m$cmd[0m"
-	/usr/bin/python waf $(echo $cmd)
-	cp -uvf ./admin/AmbaUSB/s2e_lpddr3_MT29UZ4B8DZZHGPB.ads       /media/sf_datas
-	cp -uvf ./waf_build/build/australia_waf/fwprog/*.out          /media/sf_datas
-	cp -uvf ./waf_build/build/australia_waf/system/system.elf     /media/sf_datas
-}
-
-wwdr () {
-	cmd="build install"
-	echo "waf: [0;1;36m$cmd[0m"
-	cd banzai_libs && /usr/bin/python ../waf $(echo $cmd) ; cd -
-	cp -uvf ./admin/AmbaUSB/s2e_lpddr3_MT29UZ4B8DZZHGPB.ads       /media/sf_datas
-	cp -uvf ./waf_build/build/australia_waf/fwprog/*.out          /media/sf_datas
-	cp -uvf ./waf_build/build/australia_waf/system/system.elf     /media/sf_datas
-}
-
-t-wdr () {
-	cmd='on'
-	if [ "$1" = '0' ]; then cmd='off'; fi
-	echo "t frw imgcap wdr $cmd" > /dev/ttyUSB0
+ccbanzaiep () {
+	cmd="l make camCtl/pylists/deliver.pyok && tar -C /data/gopro/banzai/BANZAI_EP -xavf products/deliveries/camCtl/pydelivs/banzai_ep_libs.tar.bz2 && /data/gopro/banzai/BANZAI_EP/syncwin.sh"
+	echo "banzai_ep : [0;1;7;36m$cmd[0m"
+	eval $cmd
 }
