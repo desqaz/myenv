@@ -147,9 +147,9 @@ gsmail() {
 	fi
 
 	if [ "$1" = "p" ]; then
-		git config user.mail $MYENV_PERS_MAIL
+		git config user.email $MYENV_EMAIL_PRIV
 	else
-		git config user.mail $MYENV_CORP_MAIL
+		git config user.email $MYENV_EMAIL_CORP
 	fi
 
 	git config --get user.mail	
