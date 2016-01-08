@@ -1,1 +1,5 @@
-export LMAKE_ROOT_DIR=~/bases/lmake/ 
+export MYENV_PERS_MAIL="sidney.nguessan@gmail.com"
+export MYENV_CORP_MAIL="snguessan@gopro.com"
+
+export LMAKE_ROOT_DIR=~/bases/lmake
+
