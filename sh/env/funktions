@@ -140,6 +140,21 @@ set +x
 #GIT 
 #------------------------------------------------------------------------------
 
+gsmail() {
+	if [ "$1" = "h" ]; then
+		echo "$0 [p]: set corporate/[personal] user.mail"
+		return 0
+	fi
+
+	if [ "$1" = "p" ]; then
+		git config user.email $MYENV_EMAIL_PRIV
+	else
+		git config user.email $MYENV_EMAIL_CORP
+	fi
+
+	git config --get user.mail	
+}
+
 gl() {
 	git --no-pager log -n30 $@ --pretty="%h | %<(16)%cr | %<(20)%cn | %<(70,trunc)%s" --date=local\
  		| sed "s@\($(git config user.name)\|$USER\\|$MYENV_NAME\)@[0;32m\1[0m@g"
