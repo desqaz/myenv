@@ -189,6 +189,7 @@ map ,n            :call ToggleListNoList()<CR>
 vmap a "+y
 vmap z "+p
 nmap aa "+yy
+nmap z "+p
 
 " Sélectionner tout
 map <C-a> ggVG
