@@ -147,12 +147,15 @@ gsmail() {
 	fi
 
 	if [ "$1" = "p" ]; then
+		set -x
 		git config user.email $MYENV_EMAIL_PRIV
 	else
+		set -x
 		git config user.email $MYENV_EMAIL_CORP
 	fi
 
-	git config --get user.mail	
+	git config --get user.mail
+	set +x
 }
 
 gl() {
