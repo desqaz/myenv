@@ -1,0 +1,5 @@
+#!/bin/bash --norc
+set -e
+. $MYENV_ROOT/sh/env/funktions
+echo make $@
+cd $(dirname $(fup Makefile)) && make $@

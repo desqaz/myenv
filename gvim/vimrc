@@ -168,6 +168,7 @@ map <F6>          ^3x$2h3x
 map <F7>          :bdelete<CR>
 map <F9>          :noh<CR>
 nmap <F10>        /[^\x00-\x7F]<CR>
+map <F12>         :!mk<CR>
 map <C-N>         :noh<CR>
 map <C-B>         :MRU<CR>
 map <C-Del>       :bdelete<CR>
@@ -175,6 +176,7 @@ map <C-PageUp>    [c
 map <C-PageDown>  ]c
 map <C-x>         :call CloseSomething()<CR>
 
+map ,b            :!mk beautify<CR>
 map ,l            :so ~/.vimrc<CR>
 map ,#            :s/^/#/<CR><C-N>
 map ,/            :s@^@//@<CR><C-N>
