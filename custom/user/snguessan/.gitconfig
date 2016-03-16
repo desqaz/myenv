@@ -19,22 +19,22 @@
 	cl = clean -fdx
 	llg = log --format='%Cgreen%h%Creset %Cblue[%an - %ar]%Creset %s' --graph
 [diff]
-	tool = bc3
+	tool = bc
 	#tool = vi
 [difftool]
 	prompt = false
-[difftool "bc3"]
+[difftool "bc"]
 	cmd = git_difftool_wrapper_bc   "$LOCAL" "$REMOTE" "$BASE"
 [difftool "vi"]
 	cmd = git_difftool_wrapper_vi   "$LOCAL" "$REMOTE" "$BASE"
 [difftool "meld"]
 	cmd = git_difftool_wrapper_meld "$LOCAL" "$REMOTE" "$BASE"
 [merge]
-	tool = bcompare
+	tool = bc
 [mergetool]
 	prompt = false
 	keepBackup = false
-[mergetool "bc3"]
+[mergetool "bc"]
 	cmd = git_mergetool_wrapper_bc "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
 	trustExitCode = true
 [core]

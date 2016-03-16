@@ -1,6 +1,3 @@
-HISTFILE=~/.histfile
-HISTSIZE=2000
-SAVEHIST=1000
 bindkey -e
 export WORDCHARS='*?_-.[]~=&;&%^(){}<>'
 
@@ -54,9 +51,14 @@ setopt RC_EXPAND_PARAM
 #
 # History ---------------------------------------------------------------------
 #
+
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
+SAVEHIST=1000
+
 setopt BANG_HIST
 setopt EXTENDED_HISTORY
-unsetopt HIST_BEEP
+setopt HIST_BEEP
 setopt HIST_FCNTL_LOCK
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS
@@ -67,6 +69,7 @@ setopt HIST_SAVE_NO_DUPS
 setopt HIST_VERIFY
 setopt INC_APPEND_HISTORY
 setopt NO_SHARE_HISTORY
+setopt HIST_SAVE_BY_COPY
 
 #
 # Input/Output ----------------------------------------------------------------

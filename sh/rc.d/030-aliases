@@ -42,7 +42,7 @@ alias gps=' git push'
 alias gpl=' git pull'
 alias gpp=' git pull && git push'
 alias gup=' git log --oneline --stat origin/$(git rev-parse --abbrev-ref HEAD)..HEAD'
-
+alias gmt=' git mergetool --tool=bc'
 alias 7tags='source $(7tags.sh)'
 
 alias -g V=' | vi -R -'
