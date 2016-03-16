@@ -132,7 +132,7 @@ myenv_title() {
 
 myenv_git_resume() {
    if [ "$MYENV_NO_GIT_STATUS" = "y" ]; then 
-      local gitstatus=""
+      local gitstatus="true"
    else
       local gitstatus="gitstatus.py"
    fi
