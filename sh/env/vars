@@ -1,3 +1,2 @@
 export MYENV_EXCLUDE_PATTERN=''
 export MYENV_EXCLUDEDIR_PATTERN='".svn|.git|%MAKE|%STATE|products|.vimtags"'
-export MYENV_EXCLUDEDIR_PATTERN_GREP="$(echo $MYENV_EXCLUDEDIR_PATTERN | sed 's@\"@|@g' | sed 's@|$@@' | sed 's@|@ --exclude-dir=@g')"

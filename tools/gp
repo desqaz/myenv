@@ -1,0 +1,13 @@
+#!/bin/sh
+
+dirsFromEnv="$(echo $MYENV_EXCLUDEDIR_PATTERN | sed 's@\"@|@g')"
+excludeDirs="$(echo $dirsFromEnv | sed 's@|$@@' | sed 's@|@ --exclude-dir=@g')"
+
+for d in $(cat .grepignore 2> /dev/null); do
+	excludeDirs="$excludeDirs --exclude-dir=$d"
+        projDirs="$projDirs $d"
+done
+
+grep --color=auto -rn -Is $excludeDirs $@ || exit $?
+echo --
+echo "excluded dirs: $(echo $dirsFromEnv + $projDirs)"

@@ -12,7 +12,6 @@ alias lta="lts -pug"
 alias md=mkdir -vp
 alias cpf='cp -rf'
 alias rmf='rm -rf'
-alias gp="grep --color=auto -rn -Is --exclude-dir=$MYENV_EXCLUDEDIR_PATTERN_GREP"
 alias gpi="gp -i"
 alias gpa="grep --color=auto -rn"
 alias cls=clear
