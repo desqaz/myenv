@@ -175,6 +175,7 @@ map <C-Del>       :bdelete<CR>
 map <C-PageUp>    [c
 map <C-PageDown>  ]c
 map <C-x>         :call CloseSomething()<CR>
+map <C-s>         :w!<CR>
 
 map ,b            :!mk beautify<CR>
 map ,l            :so ~/.vimrc<CR>
