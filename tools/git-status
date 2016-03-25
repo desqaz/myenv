@@ -1,0 +1,23 @@
+#!/bin/bash --norc
+
+shortOpt=
+
+if   [ "$1" = "-s" ] || [ -z "$1" ]; then
+	[ "$1" = "-s" ] && shortOpt='-s'; git status $shortOpt; exit 0;
+fi
+
+if   [ "$1" = "-ss" ];  then shortOpt=;      shift
+elif [ "$1" = "-sss" ]; then shortOpt='-s';  shift; fi
+
+dirs="$@"
+[ -z "$dirs" ] && dirs='$PWD'
+
+for d in $dirs; do
+	echo "[0;36m-------------------------------------------------------------------------------- [1m$PWD[0m[0m"
+	git status $shortOpt
+	for sm in $(git submodule status --recursive | awk -F "[[:space:]]*" '{print $3}'); do
+		subpath=$PWD/$sm
+		echo "[0;36m-------------------------------------------------------------------------------- [1m$subpath[0m[0m"
+		cd $subpath; git status $shortOpt; cd - > /dev/null
+	done
+done
