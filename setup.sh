@@ -62,64 +62,66 @@ ln -svf $myenv/git/.gitk
 DepsLst=$(mktemp)
 cat $myenvsetup/deps.lst | perl -p -e 's/\\\n//' > $DepsLst
 
-#
-# Packages installation
-#
-echo "[0;32mInstalling deps packages[0m"
-type apt-get > /dev/null 2> /dev/null
-if [ $? -eq 0 ]; then
-	for dep in $(cat $DepsLst | grep '^pkg' | awk '{print $2}'); do
-		isInstalled=$(dpkg-query -l "$dep" 2>/dev/null | grep "^ii[[:space:]]*$dep")
-		if [ "$?" -ne 0 ] || [ -z "$isInstalled" ]; then
-			SUDO apt-get install "$dep" -y
-		else 
-			echo "[0;36m    --> $dep already installed[0m"
-		fi
-	done
-fi
+if [ "$1" != "nopack" ]; then
+	#
+	# Packages installation
+	#
+	echo "[0;32mInstalling deps packages[0m"
+	type apt-get > /dev/null 2> /dev/null
+	if [ $? -eq 0 ]; then
+		for dep in $(cat $DepsLst | grep '^pkg' | awk '{print $2}'); do
+			isInstalled=$(dpkg-query -l "$dep" 2>/dev/null | grep "^ii[[:space:]]*$dep")
+			if [ "$?" -ne 0 ] || [ -z "$isInstalled" ]; then
+				SUDO apt-get install "$dep" -y
+			else 
+				echo "[0;36m    --> $dep already installed[0m"
+			fi
+		done
+	fi
 
-#
-# easy_install package installation 
-#
-echo "[0;32mInstalling python easy_install deps[0m"
-type easy_install > /dev/null 2> /dev/null
-if [ $? -eq 0 ]; then
-	for dep in $(cat $DepsLst | grep -w '^eins' | awk '{print $2}'); do
-		SUDO easy_install -U $dep
-	done
-fi
+	#
+	# easy_install package installation 
+	#
+	echo "[0;32mInstalling python easy_install deps[0m"
+	type easy_install > /dev/null 2> /dev/null
+	if [ $? -eq 0 ]; then
+		for dep in $(cat $DepsLst | grep -w '^eins' | awk '{print $2}'); do
+			SUDO easy_install -U $dep
+		done
+	fi
 
-#
-# easy_install3 package installation 
-#
-echo "[0;32mInstalling python3 easy_install deps[0m"
-type easy_install3 > /dev/null 2> /dev/null
-if [ $? -eq 0 ]; then
-	for dep in $(cat $DepsLst | grep -w '^eins3' | awk '{print $2}'); do
-		SUDO easy_install3 -U $dep
-	done
-fi
+	#
+	# easy_install3 package installation 
+	#
+	echo "[0;32mInstalling python3 easy_install deps[0m"
+	type easy_install3 > /dev/null 2> /dev/null
+	if [ $? -eq 0 ]; then
+		for dep in $(cat $DepsLst | grep -w '^eins3' | awk '{print $2}'); do
+			SUDO easy_install3 -U $dep
+		done
+	fi
 
-#
-# Pip package installation 
-#
-echo "[0;32mInstalling python pip deps[0m"
-type pip > /dev/null 2> /dev/null
-if [ $? -eq 0 ]; then
-	for dep in $(cat $DepsLst | grep -w '^pip' | awk '{print $2}'); do
-		SUDO pip install --upgrade $dep
-	done
-fi
+	#
+	# Pip package installation 
+	#
+	echo "[0;32mInstalling python pip deps[0m"
+	type pip > /dev/null 2> /dev/null
+	if [ $? -eq 0 ]; then
+		for dep in $(cat $DepsLst | grep -w '^pip' | awk '{print $2}'); do
+			SUDO pip install --upgrade $dep
+		done
+	fi
 
-#
-# Pip3 package installation 
-#
-echo "[0;32mInstalling python3 pip deps[0m"
-type pip3 > /dev/null 2> /dev/null
-if [ $? -eq 0 ]; then
-	for dep in $(cat $DepsLst | grep -w '^pip3' | awk '{print $2}'); do
-		SUDO pip3 install --upgrade $dep
-	done
+	#
+	# Pip3 package installation 
+	#
+	echo "[0;32mInstalling python3 pip deps[0m"
+	type pip3 > /dev/null 2> /dev/null
+	if [ $? -eq 0 ]; then
+		for dep in $(cat $DepsLst | grep -w '^pip3' | awk '{print $2}'); do
+			SUDO pip3 install --upgrade $dep
+		done
+	fi
 fi
 
 #

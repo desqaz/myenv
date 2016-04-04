@@ -42,6 +42,8 @@ pkg   python-matplotlib
 pkg   libncurses5-dev
 pkg   libssl-dev
 pkg   build-essential
+pkg   lib32z1
+pkg   lib32z1-dev
 
 #
 # EASY_INSTALL
@@ -70,5 +72,5 @@ pip3  pyyaml
 #
 # Others
 #
-cmd   apt-file update
+cmd   [ ! -f ~/.cache/.myenv-aptfile-up ] && apt-file update && touch ~/.cache/.myenv-aptfile-up
 

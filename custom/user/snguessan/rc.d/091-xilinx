@@ -1,9 +1,9 @@
-export PATH=$PATH:/media/datas/devkits/dtc
-export PATH=$PATH:/media/datas/devel/u-boot-xlnx/tools
+export PATH=$PATH:/datas/devkits/dtc
+export PATH=$PATH:/datas/devel/u-boot-xlnx/tools
 
-export XILINX_SDK=/media/datas/tools/xilink/SDK/2015.3
+export XILINX_SDK=/datas/tools/xilink/SDK/2015.3
 
-. $XILINX_SDK/.settings64-XSDK_Core_Tools.sh
+#. $XILINX_SDK/.settings64-XSDK_Core_Tools.sh
 
 #export CROSS_COMPILE=arm-xilinx-linux-gnueabi-
 #export ARCH=arm
