@@ -1,0 +1,73 @@
+[global_config]
+  handle_size = 0
+  custom_url_handler = chromium-browser
+  always_split_with_profile = True
+  focus = mouse
+  use_custom_url_handler = True
+  suppress_multiple_term_dialog = True
+  tab_position = bottom
+  inactive_color_offset = 0.83
+[keybindings]
+[profiles]
+  [[default]]
+    background_image = None
+    background_darkness = 0.85
+    background_type = transparent
+    scroll_on_output = False
+    icon_bell = False
+    show_titlebar = False
+    copy_on_selection = True
+    word_chars = "-A-Za-z0-9,./?%&#:_{}"
+    allow_bold = False
+    scrollback_infinite = True
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+  [[mine]]
+    [[[child0]]]
+      position = 0:0
+      type = Window
+      order = 0
+      parent = ""
+      size = 3840, 2107
+    [[[child1]]]
+      position = 1920
+      type = HPaned
+      order = 0
+      parent = child0
+    [[[child3]]]
+      position = 1053
+      type = VPaned
+      order = 1
+      parent = child1
+    [[[child4]]]
+      position = 960
+      type = HPaned
+      order = 0
+      parent = child3
+    [[[terminal2]]]
+      profile = default
+      type = Terminal
+      order = 0
+      parent = child1
+    [[[terminal5]]]
+      profile = default
+      type = Terminal
+      order = 0
+      parent = child4
+    [[[terminal7]]]
+      profile = default
+      type = Terminal
+      order = 1
+      parent = child3
+    [[[terminal6]]]
+      profile = default
+      type = Terminal
+      order = 1
+      parent = child4
+[plugins]

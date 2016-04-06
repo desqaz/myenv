@@ -1,0 +1,3 @@
+mkdir -vp $HOME/.config/terminator/
+rm -f $HOME/.config/terminator/config
+ln -svf $HOME/myenv/custom/user/$USER/terminator $HOME/.config/terminator/config
