@@ -16,6 +16,7 @@ _l_comp () {
 			"make[launch lmake]" \
 		   	"makeserver[launch lmake server]" \
 		   	"show[display various infos about target]" \
+		   	"repair[fix db not synchronized]" \
 		   	"clean[clean lmake artefacts]" \
 		   	"stable[add target to stable state]" \
 		   	"unstable[remove target from stable state]"
