@@ -45,6 +45,8 @@ alias gpp='  git pull && git push'
 alias gup='  git log --oneline --stat origin/$(git rev-parse --abbrev-ref HEAD)..HEAD'
 alias gunp=' git fetch && git log --oneline --stat HEAD..origin/$(git rev-parse --abbrev-ref HEAD)'
 alias gmt='  git mergetool --tool=bc'
+alias gst='  git stash'
+alias gstp=' gst pop'
 
 alias 7tags='source $(7tags.sh)'
 

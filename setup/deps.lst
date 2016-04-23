@@ -4,46 +4,48 @@
 pkg   autoconf
 pkg   automake
 pkg   libtool
-pkg   libtool-bin
+pkg   libtool-bin,-
 pkg   pkg-config
 pkg   gawk
-pkg   gdebi-core
+pkg   gdebi-core,-
 pkg   curl
-pkg   gitk
-pkg   vim-gtk
-pkg   g++-multilib
-pkg   btrfs-tools
+pkg   gitk,-
+pkg   tk,tcl
+pkg   vim-gtk,gvim
+pkg   g++-multilib,gcc-libs-multilib
+pkg   btrfs-tools,btrfs-progs
 pkg   htop
 pkg   tree
 pkg   python-setuptools
-pkg   python3-setuptools
+pkg   python3-setuptools,-
 pkg   zsh
 pkg   terminator
 pkg   wget
 pkg   openssl
-pkg   libyaml-dev
+pkg   libyaml-dev,libyaml
 pkg   subversion
-pkg   exuberant-ctags
+pkg   exuberant-ctags,ctags
 pkg   cscope
-pkg   libpython-dev
-pkg   apt-file
+pkg   apt-file,-
 pkg   cmake
-pkg   ninja-build
+pkg   ninja-build,ninja
 pkg   unzip
 pkg   pv
-pkg   openssh-server
-pkg   libpython-dev
-pkg   libpython3-dev
+pkg   openssh-server,openssh
+pkg   libpython-dev,-
+pkg   libpython3-dev,-
 pkg   gawk
-pkg   git-gui
+pkg   git-gui,-
 pkg   ccache
 pkg   valgrind
 pkg   python-matplotlib
-pkg   libncurses5-dev
-pkg   libssl-dev
-pkg   build-essential
-pkg   lib32z1
-pkg   lib32z1-dev
+pkg   libncurses5-dev,ncurses
+pkg   libssl-dev,-
+#pkg   build-essential,base-devel
+pkg   build-essential,-
+pkg   lib32z1,lib32-zlib
+pkg   lib32z1-dev,-
+pkg   nemiver
 
 #
 # EASY_INSTALL
@@ -72,5 +74,5 @@ pip3  pyyaml
 #
 # Others
 #
-cmd   [ ! -f ~/.cache/.myenv-aptfile-up ] && apt-file update && touch ~/.cache/.myenv-aptfile-up
+cmd   [ $myenvDistro = 'debian' ] && [ ! -f ~/.cache/.myenv-aptfile-up ] && apt-file update && touch ~/.cache/.myenv-aptfile-up
 

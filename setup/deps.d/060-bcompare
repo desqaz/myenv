@@ -1,5 +1,13 @@
-if [ ! -e /etc/apt/sources.list.d/scootersoftware.list ]; then
-	SUDO sh -c 'echo "deb http://www.scootersoftware.com/ bcompare4 non-free" > /etc/apt/sources.list.d/scootersoftware.list'
-	SUDO apt-get update
-	SUDO apt-get install bcompare -y
+if [ $myenvDistro = 'debian' ]; then
+	if [ ! -e /etc/apt/sources.list.d/scootersoftware.list ]; then
+		SUDO sh -c 'echo "deb http://www.scootersoftware.com/ bcompare4 non-free" > /etc/apt/sources.list.d/scootersoftware.list'
+		SUDO apt-get update
+		SUDO apt-get install bcompare -y
+	fi
+fi
+
+if [ $myenvDistro = 'arch' ]; then
+    if [ -z "$(yaourt -Q bcompare)" ]; then
+		yaourt -S bcompare --noconfirm
+	fi
 fi

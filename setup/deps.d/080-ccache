@@ -1,6 +1,6 @@
 #! /bin/bash --norc
 
-cd /usr/lib/ccache
+cd /usr/lib/ccache || exit 1
 
 suffixList="
 gcc

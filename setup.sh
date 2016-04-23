@@ -62,22 +62,65 @@ ln -svf $myenv/git/.gitk
 DepsLst=$(mktemp)
 cat $myenvsetup/deps.lst | perl -p -e 's/\\\n//' > $DepsLst
 
+export myenvDistro=
+
 if [ "$1" != "nopack" ]; then
 	#
 	# Packages installation
 	#
 	echo "[0;32mInstalling deps packages[0m"
-	type apt-get > /dev/null 2> /dev/null
+
+	type apt-get 2> /dev/null
 	if [ $? -eq 0 ]; then
-		for dep in $(cat $DepsLst | grep '^pkg' | awk '{print $2}'); do
-			isInstalled=$(dpkg-query -l "$dep" 2>/dev/null | grep "^ii[[:space:]]*$dep")
-			if [ "$?" -ne 0 ] || [ -z "$isInstalled" ]; then
-				SUDO apt-get install "$dep" -y
+		myenvDistro='debian'
+		function packageGet {
+		   	SUDO apt-get install "$1" -y
+			return $?
+	   	}
+		function packageCheck {
+		   	dpkg-query -l "$1" 2>/dev/null | grep "^ii[[:space:]]*$1"
+	   	}
+		function packageSearch {
+			echo $1 #stub
+		}
+	fi
+
+	type pacman 2> /dev/null
+	if [ $? -eq 0 ]; then
+		myenvDistro='arch'
+		SUDO pacman -Sy
+		function packageGet   {
+		   	SUDO pacman --color auto -S --force --noconfirm "$1"
+			return $?
+	   	}
+		function packageCheck {
+		   	pacman --color auto -Q "$1" 2>/dev/null
+	   	}
+		function packageSearch {
+		 	pacsearch "^$dep$"	
+		}
+	fi
+	for depnames in $(cat $DepsLst | grep '^pkg' | awk '{print $2}'); do
+		depOk=0
+		for dep in $(echo $depnames | awk -F ',' '{for(i=1; i<=NF; i++){print $i}}'); do
+			if [ $dep = '-' ]; then
+				echo "[0;1;36m$depnames[0;33m ignored[0m"
+			   	depOk=2; break;
+		   	fi
+			if [ -z "$(packageCheck $dep)" ]; then
+				if [ -n "$(packageSearch $dep)" ]; then
+					packageGet $dep
+					if [ $? -eq 0 ]; then depOk=1; fi
+			   	fi
 			else 
-				echo "[0;36m    --> $dep already installed[0m"
+				echo "[0;1;36m$dep[0;36m already installed[0m"
+				depOk=1
 			fi
 		done
-	fi
+		if [ $depOk = 0 ]; then
+			echo "[0;1;31mNo corresponding package installed for '$depnames'[0m"
+		fi
+	done
 
 	#
 	# easy_install package installation 

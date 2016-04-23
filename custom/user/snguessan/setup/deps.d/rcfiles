@@ -1,0 +1,4 @@
+sudo ln -svf ~/myenv/custom/user/snguessan/smb.conf /etc/samba/smb.conf
+
+ln -svf ~/myenv/custom/user/snguessan/.rrc ~/.rrc
+ln -svf ~/myenv/custom/user/snguessan/.yaourtrc ~/.yaourtrc
