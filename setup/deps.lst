@@ -46,6 +46,8 @@ pkg   build-essential,-
 pkg   lib32z1,lib32-zlib
 pkg   lib32z1-dev,-
 pkg   nemiver
+pkg   wine
+pkg   samba
 
 #
 # EASY_INSTALL
