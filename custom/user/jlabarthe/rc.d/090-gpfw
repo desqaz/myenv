@@ -1,8 +1,3 @@
-export PATH=/data/gopro/soft/pybin-20141226-1810-4a17794:$PATH
-export PATH=/data/gopro/soft/gcc-arm-none-eabi-4_7-2013q3/bin:$PATH
+export PATH=/datas/devkits/pybin-20141226-1810-4a17794:$PATH
+export PATH=/datas/devkits/gcc-arm-none-eabi-4_7-2013q3/bin:$PATH
 
-ccbanzaiep () {
-	cmd="l make camCtl/pylists/deliver.pyok && tar -C /data/gopro/banzai/BANZAI_EP -xavf products/deliveries/camCtl/pydelivs/banzai_ep_libs.tar.bz2 && /data/gopro/banzai/BANZAI_EP/syncwin.sh"
-	echo "banzai_ep : [0;1;7;36m$cmd[0m"
-	eval $cmd
-}
