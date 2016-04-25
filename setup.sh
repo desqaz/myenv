@@ -103,18 +103,18 @@ if [ "$1" != "nopack" ]; then
 	for depnames in $(cat $DepsLst | grep '^pkg' | awk '{print $2}'); do
 		depOk=0
 		for dep in $(echo $depnames | awk -F ',' '{for(i=1; i<=NF; i++){print $i}}'); do
-			if [ $dep = '-' ]; then
+			if [ $dep = '-' ] && [ $depOk = 0 ]; then
 				echo "[0;1;36m$depnames[0;33m ignored[0m"
 			   	depOk=2; break;
 		   	fi
 			if [ -z "$(packageCheck $dep)" ]; then
 				if [ -n "$(packageSearch $dep)" ]; then
 					packageGet $dep
-					if [ $? -eq 0 ]; then depOk=1; fi
+					if [ $? -eq 0 ]; then depOk=1; break; fi
 			   	fi
 			else 
 				echo "[0;1;36m$dep[0;36m already installed[0m"
-				depOk=1
+				depOk=1; break;
 			fi
 		done
 		if [ $depOk = 0 ]; then
