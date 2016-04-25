@@ -3,7 +3,7 @@
   custom_url_handler = chromium-browser
   focus = mouse
   handle_size = 2
-  inactive_color_offset = 0.83
+  inactive_color_offset = 1.0
   suppress_multiple_term_dialog = True
   tab_position = bottom
   title_hide_sizetext = True
