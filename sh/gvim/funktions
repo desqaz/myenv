@@ -1,5 +1,5 @@
 
-alias _vi='gvim -g -geometry $(echo $MYENV_GVIM_GEOMETRY) >/dev/null 2>&1'
+alias _vi='gvim -g -geometry $MYENV_GVIM_GEOMETRY >/dev/null 2>&1'
 
 
 #------------------------------------------------------------------------------
