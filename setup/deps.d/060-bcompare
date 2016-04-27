@@ -1,8 +1,8 @@
 if [ $myenvDistro = 'debian' ]; then
 	if [ ! -e /etc/apt/sources.list.d/scootersoftware.list ]; then
-		SUDO sh -c 'echo "deb http://www.scootersoftware.com/ bcompare4 non-free" > /etc/apt/sources.list.d/scootersoftware.list'
+		SUDO sh -c "echo \"deb http://www.scootersoftware.com/ bcompare4 non-free\" > /etc/apt/sources.list.d/scootersoftware.list"
 		SUDO apt-get update
-		SUDO apt-get install bcompare -y
+		SUDO apt-get install bcompare -y --allow-unauthenticated
 	fi
 fi
 

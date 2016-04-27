@@ -14,7 +14,7 @@ function SUDO () {
 		fi
 	fi
 	if [ $isSudo -eq 1 ]; then
-		sudo $@
+		sudo "$@"
 	else
 		echo "[0;1;33m    --> $@ ignored (need sudo)[0m"
 	fi
@@ -219,7 +219,7 @@ fi
 if [ ! -f $HOME/.config/bcompare/BC4Key.txt ] && [ -f $myenvcusto/enck/bcp ]; then
 	echo "[0;1;36mInstalling bcompare key...[0m"
 	mkdir -vp $HOME/.config/bcompare
-	openssl aes-256-cbc -d -in $myenvcusto/enck/bcp > $HOME/.config/bcompare/BC4Key.txt
+	openssl aes-256-cbc -d -in $myenvcusto/enck/bcp -a > $HOME/.config/bcompare/BC4Key.txt
 	if [ $? -ne 0 ]; then rm -rf $HOME/.config/bcompare/BC4Key.txt; fi
 fi
 
