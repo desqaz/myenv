@@ -84,8 +84,8 @@
     background_darkness = 0.92
     background_image = None
     background_type = transparent
-    scroll_on_keystroke = False
+    font = Terminus 10
     scroll_on_output = False
     scrollback_infinite = True
     show_titlebar = False
-    word_chars = "-A-Za-z0-9,./?%&#:_{}"
+    word_chars = "-A-Za-z0-9,./?%&#:_{}+"

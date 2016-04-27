@@ -42,3 +42,7 @@
 	editor = vim -g
 [push]
 	default = current
+[gui]
+	spellingdictionary = none
+	fontui = -family Cantarell -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+	fontdiff = -family Cantarell -size 10 -weight normal -slant roman -underline 0 -overstrike 0

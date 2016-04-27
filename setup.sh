@@ -104,7 +104,7 @@ if [ "$1" != "nopack" ]; then
 		depOk=0
 		for dep in $(echo $depnames | awk -F ',' '{for(i=1; i<=NF; i++){print $i}}'); do
 			if [ $dep = '-' ] && [ $depOk = 0 ]; then
-				echo "[0;1;36m$depnames[0;33m ignored[0m"
+				echo "[0;33m$depnames ignored[0m"
 			   	depOk=2; break;
 		   	fi
 			if [ -z "$(packageCheck $dep)" ]; then
@@ -172,7 +172,7 @@ fi
 #
 echo "[0;32mInstalling deps.d[0m"
 for dep in $(find $myenvdepsdir -type f | sort -n 2>/dev/null); do
-	echo "[0;33m$dep[0m"
+	echo "[0;1;34m$dep[0m"
 	. $dep
 done
 
@@ -185,7 +185,7 @@ export -f SUDO
 export isSudo
 if [ $? -eq 0 ]; then
 	for dep in $(cat $DepsLst | grep -w '^cmd' |  awk '{for(i=1;i<$$NF;i++) $i=""; print}'); do
-		echo "[0;33m$dep[0m"
+		echo "[0;1;34m$dep[0m"
 		bash -c "$dep"
 	done
 fi
@@ -196,7 +196,7 @@ fi
 if [ -d $myenvdepscustodir ]; then
 	echo "[0;32mInstalling custom deps.d[0m"
 	for dep in $(find $myenvdepscustodir -type f | sort -n 2>/dev/null); do
-		echo "[0;33m$dep[0m"
+		echo "[0;1;34m$dep[0m"
 		. $dep
 	done
 fi
@@ -205,22 +205,29 @@ rm -f $DepsLst
 
 # SSH config
 if [ ! -d $HOME/.ssh ]; then
-	if [ -f $myenvcusto/enck.txt ]; then
+	if [ -f $myenvcusto/enck/ssh ]; then
 		mkdir $HOME/.ssh
-		echo "Decrypting keys for installation ..."
-		openssl aes-256-cbc -d -in $myenvcusto/enck.txt -a | tar -C $HOME/.ssh -xjf -
+		echo "[0;1;36mInstalling ssh key...[0m"
+		openssl aes-256-cbc -d -in $myenvcusto/enck/ssh -a | tar -C $HOME/.ssh -xjf -
 		if [ $? -ne 0 ]; then rm -rf $HOME/.ssh; fi
 	fi
 fi
 
 [ -f $myenvcusto/.sshconfig ] && ln -svf $myenvcusto/.sshconfig $HOME/.ssh/config
 
+# BCOMPARE config
+if [ ! -f $HOME/.config/bcompare/BC4Key.txt ] && [ -f $myenvcusto/enck/bcp ]; then
+	echo "[0;1;36mInstalling bcompare key...[0m"
+	mkdir -vp $HOME/.config/bcompare
+	openssl aes-256-cbc -d -in $myenvcusto/enck/bcp > $HOME/.config/bcompare/BC4Key.txt
+	if [ $? -ne 0 ]; then rm -rf $HOME/.config/bcompare/BC4Key.txt; fi
+fi
 
 if [ "$USER" != "travis" ]; then
 	# Set zsh by default
 	CurrentShell=$(cat /etc/passwd | grep $USER | cut -d ':' -f 7)
 	if [ "$CurrentShell" != "/bin/zsh" ]; then
-		echo "[0;32mSetting zsh by default with chsh[0m"
+		echo "[0;1;36mSetting zsh by default with chsh...[0m"
 		chsh -s /bin/zsh
 	fi
 fi
