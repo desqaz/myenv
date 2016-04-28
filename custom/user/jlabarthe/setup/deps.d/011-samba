@@ -1,0 +1,2 @@
+sudo ln -svf ~/myenv/custom/user/$USER/smb.conf /etc/samba/smb.conf
+

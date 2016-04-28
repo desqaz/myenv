@@ -3,10 +3,11 @@ echo "Symlink /soft directory"
 sudo ln -sf /datas/devkits/ /soft
 
 echo "Symlink /ccache directory"
-sudo ln -svf /datas/devkits/ccache/ /ccache
+sudo ln -svf /datas/devkits/ccache /ccache
 rm -rf ~/.ccache
 ln -svf /ccache ~/.ccache
 
 echo "Symlink home directories"
 cd || exit 1
 ln -svf /datas/
+ln -svf /mnt/vbox/

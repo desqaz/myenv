@@ -1,4 +1,4 @@
-mntVbox=(dev share)
+mntVbox=(data Downloads)
 
 for m in "${mntVbox[@]}"; do
 	if [ -z "$(mount | grep /mnt/vbox/${m})" ]; then

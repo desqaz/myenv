@@ -1,0 +1,4 @@
+if [ $myenvDistro = 'arch' ]; then
+	sudo sh -c 'cat /proc/version > /etc/arch-release'
+	sudo ln -svf /etc/arch-release /etc/debian-release
+fi
