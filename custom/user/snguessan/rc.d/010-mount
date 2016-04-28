@@ -1,8 +1,11 @@
-mntVbox=(dev share)
+mntVbox=(dev share downloads)
 
 for m in "${mntVbox[@]}"; do
 	if [ -z "$(mount | grep /mnt/vbox/${m})" ]; then
 		sudo mkdir -p /mnt/vbox/${m}
+		sudo chmod a+x /mnt
+		sudo chown $(id -u):$(id -g) /mnt/vbox
+		sudo chown $(id -u):$(id -g) /mnt/vbox/${m}
 		sudo mount.vboxsf $m /mnt/vbox/${m} -o uid=$(id -u),gid=$(id -g),umask=022
 	fi
 done
