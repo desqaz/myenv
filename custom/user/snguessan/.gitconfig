@@ -39,7 +39,7 @@
 	trustExitCode = true
 [core]
 	excludesfile = /home/snguessan/.gitignore_global
-	editor = vim -g
+	editor = vim
 [push]
 	default = current
 [gui]
