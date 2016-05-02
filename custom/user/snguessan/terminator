@@ -1,6 +1,8 @@
 [global_config]
+  borderless = True
   focus = mouse
-  handle_size = 2
+  handle_size = 0
+  inactive_color_offset = 1.0
   suppress_multiple_term_dialog = True
 [keybindings]
 [layouts]
@@ -14,38 +16,38 @@
   [[mine]]
     [[[child0]]]
       fullscreen = False
-      last_active_term = 76eba1bb-fe3f-4dde-83fb-a9eb9c521997
+      last_active_term = 85e76629-004d-44f2-881c-c9ea1027ad38
       last_active_window = True
       maximised = True
       order = 0
       parent = ""
       position = 0:0
-      size = 3840, 2064
+      size = 1854, 1006
       title = " /datas/myenv "
       type = Window
     [[[child1]]]
       order = 0
       parent = child0
-      position = 1919
+      position = 927
       ratio = 0.5
       type = HPaned
     [[[child2]]]
       order = 0
       parent = child1
-      position = 1031
+      position = 503
       ratio = 0.5
       type = VPaned
     [[[child5]]]
       order = 1
       parent = child1
-      position = 1031
-      ratio = 0.5
+      position = 373
+      ratio = 0.370775347913
       type = VPaned
     [[[child6]]]
       order = 0
       parent = child5
-      position = 958
-      ratio = 0.499739447629
+      position = 560
+      ratio = 0.604099244876
       type = HPaned
     [[[terminal3]]]
       order = 0
@@ -60,12 +62,14 @@
       type = Terminal
       uuid = 76eba1bb-fe3f-4dde-83fb-a9eb9c521997
     [[[terminal7]]]
+      command = sudo htop -d5
       order = 0
       parent = child6
       profile = default
       type = Terminal
       uuid = dba27c72-e4a9-4a5b-aa45-11bb75cbed55
     [[[terminal8]]]
+      command = watch -d -n 1 ccache -s
       order = 1
       parent = child6
       profile = default
@@ -87,5 +91,4 @@
     font = Terminus 10
     scroll_on_output = False
     scrollback_infinite = True
-    show_titlebar = False
-    word_chars = "-A-Za-z0-9,./?%&#:_{}+"
+    word_chars = "-A-Za-z0-9,./?%&#:_{}+\"
