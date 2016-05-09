@@ -61,3 +61,5 @@ alias -g XGP='| xargs grep --color=auto -IsHnr'
 alias -g VGP='| awk -F ':' "{print $1}" | sort -u | xargs gvim'
 
 alias mwstat="lmstat -c 27020@signisntp -f"
+
+alias paf='python waf'

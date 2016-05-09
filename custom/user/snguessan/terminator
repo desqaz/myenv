@@ -1,9 +1,11 @@
 [global_config]
-  borderless = True
+  custom_url_handler = chromium
   focus = mouse
-  handle_size = 0
   inactive_color_offset = 1.0
   suppress_multiple_term_dialog = True
+  title_hide_sizetext = True
+  use_custom_url_handler = True
+  window_state = maximise
 [keybindings]
 [layouts]
   [[default]]
@@ -22,32 +24,32 @@
       order = 0
       parent = ""
       position = 0:0
-      size = 1854, 1006
+      size = 3840, 2086
       title = " /datas/myenv "
       type = Window
     [[[child1]]]
       order = 0
       parent = child0
-      position = 927
+      position = 1920
       ratio = 0.5
       type = HPaned
     [[[child2]]]
       order = 0
       parent = child1
-      position = 503
+      position = 1043
       ratio = 0.5
       type = VPaned
     [[[child5]]]
       order = 1
       parent = child1
-      position = 373
-      ratio = 0.370775347913
+      position = 773
+      ratio = 0.370565675935
       type = VPaned
     [[[child6]]]
       order = 0
       parent = child5
-      position = 560
-      ratio = 0.604099244876
+      position = 1481
+      ratio = 0.771354166667
       type = HPaned
     [[[terminal3]]]
       order = 0
@@ -91,4 +93,4 @@
     font = Terminus 10
     scroll_on_output = False
     scrollback_infinite = True
-    word_chars = "-A-Za-z0-9,./?%&#:_{}+\"
+    word_chars = "-A-Za-z0-9,./?%&#:_{}+\@"

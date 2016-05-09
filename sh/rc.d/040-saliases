@@ -1,0 +1,11 @@
+alias -s pdf='chromium'
+alias -s htm='chromium'
+alias -s html='chromium'
+
+alias -s h='vi'
+alias -s hxx='vi'
+alias -s hpp='vi'
+alias -s c='vi'
+alias -s cc='vi'
+alias -s cpp='vi'
+
