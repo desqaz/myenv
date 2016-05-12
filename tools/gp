@@ -8,6 +8,6 @@ for d in $(cat .grepignore 2> /dev/null); do
         projDirs="$projDirs $d"
 done
 
-grep --color=auto -rn -Is $excludeDirs $@ || exit $?
+grep --color=auto -rn -Is $excludeDirs "$@" || exit $?
 echo --
 echo "excluded dirs: $(echo $dirsFromEnv + $projDirs)"
