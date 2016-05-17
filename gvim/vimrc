@@ -189,6 +189,7 @@ map ,p            :set filetype=python<CR>
 map ,d            :Dox<CR>
 map ,i            :call ToggleExpandTab()<CR>
 map ,n            :call ToggleListNoList()<CR>
+nmap c            :cs find s <cword><CR>
 
 vmap a "+y
 vmap z "+p

@@ -1,4 +1,4 @@
 if [ $myenvDistro = 'arch' ]; then
 	echo "Force python2"
-	sudo ln -svf python2 python
+	sudo ln -svf /usr/bin/python2 /usr/bin/python
 fi
