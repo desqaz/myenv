@@ -1,8 +1,39 @@
 export PATH=/datas/devkits/pybin-20141226-1810-4a17794:$PATH
 export PATH=/datas/devkits/gcc-arm-none-eabi-4_7-2013q3/bin:$PATH
 
-t-wdr () {
-	cmd='on'
-	if [ "$1" = '0' ]; then cmd='off'; fi
-	echo "t frw imgcap wdr $cmd" > /dev/ttyUSB0
+
+gpcom () {
+	tty=
+	rate=
+
+	case "$1" in
+	"usb")
+		tty=USB0; rate=115200
+	;;
+	"acm")
+		tty=ACM0; rate=921600 
+	;;
+	*)
+		echo "$0 <usb|acm>"
+		return 0
+	;;
+	esac
+
+	picocom /dev/tty$(echo $tty | awk '{print toupper($0)}') -b $rate --imap lfcrlf 
 }
+
+tt () {
+	if [ -e /dev/ttyACM0 ]; then
+		echo "t $@" > /dev/ttyACM0
+		return 0
+	fi
+	if [ -e /dev/ttyUSB0 ]; then
+		echo "t $@" > /dev/ttyUSB0
+		return 0
+	fi
+}
+
+tspyd () {
+	echo t frw spyd $@ > /dev/ttyACM0
+}
+
