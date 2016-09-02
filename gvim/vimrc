@@ -176,8 +176,10 @@ map <C-PageUp>    [c
 map <C-PageDown>  ]c
 map <C-x>         :call CloseSomething()<CR>
 map <C-s>         :w!<CR>
+map <C-s>         :w!<CR>
+map <C-t>         :NERDTreeFind<CR>
 
-map ,b            :!mk beautify<CR>
+map ,b            :!mk beautify-changes<CR><CR>
 map ,l            :so ~/.vimrc<CR>
 map ,#            :s/^/#/<CR><C-N>
 map ,/            :s@^@//@<CR><C-N>
@@ -186,7 +188,7 @@ map ,c            :set filetype=c<CR>
 map ,z            :set filetype=zsh<CR>
 map ,m            :set filetype=make<CR>
 map ,p            :set filetype=python<CR>
-map ,d            :Dox<CR>
+map ,d            :Dox<CR><CR>
 map ,i            :call ToggleExpandTab()<CR>
 map ,n            :call ToggleListNoList()<CR>
 nmap c            :cs find s <cword><CR>

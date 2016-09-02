@@ -6,6 +6,7 @@ suffixList="
 gcc
 g++
 c++
+clang-3.8
 "
 
 prefixList="
@@ -38,7 +39,7 @@ done
 
 echo "Force use ccache for compiler in /usr/bin ..."
 for s in $suffixList; do
-	bin=/usr/bin/$s
+	bin=$(ls /usr/bin/$s)
 	if [ ! -f ${bin}.real ]; then
 		SUDO mv -v $bin{,.real}
 		SUDO ln -sv $HOME/myenv/tools/ccache-hook $bin

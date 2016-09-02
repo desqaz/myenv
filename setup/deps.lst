@@ -9,6 +9,7 @@ pkg   pkg-config
 pkg   gawk
 pkg   gdebi-core,-
 pkg   curl
+pkg   git,-
 pkg   gitk,-
 pkg   tk,tcl
 pkg   vim-gtk,gvim
@@ -48,6 +49,8 @@ pkg   lib32z1-dev,-
 pkg   nemiver
 pkg   wine
 pkg   samba
+pkg   xorg-xdpyinfo
+pkg   picocom
 
 #
 # EASY_INSTALL
