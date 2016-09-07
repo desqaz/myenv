@@ -19,7 +19,7 @@ for d in $dirs; do
 	fi
 	git status $shortOpt
 	if [ -n "$gss" ]; then
-		for sm in $(git submodule status --recursive | awk -F "[[:space:]]*" '{print $3}'); do
+		for sm in $(git submodule status --recursive | awk -F '(' '{print $1}' | awk '{print $2}'); do
 			subpath=$PWD/$sm
 			echo "[0;34m-------------------------------------------------------------------------------- [1m$subpath[0m[0m"
 			cd $subpath; git status $shortOpt; cd - > /dev/null
