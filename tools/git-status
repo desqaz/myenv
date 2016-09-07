@@ -13,11 +13,16 @@ dirs="$@"
 [ -z "$dirs" ] && dirs='$PWD'
 
 for d in $dirs; do
-	echo "[0;34m-------------------------------------------------------------------------------- [1m$PWD[0m[0m"
+	gss=$(git submodule status --recursive)
+	if [ -n "$gss" ]; then
+		echo "[0;34m-------------------------------------------------------------------------------- [1m$PWD[0m[0m"
+	fi
 	git status $shortOpt
-	for sm in $(git submodule status --recursive | awk -F "[[:space:]]*" '{print $3}'); do
-		subpath=$PWD/$sm
-		echo "[0;34m-------------------------------------------------------------------------------- [1m$subpath[0m[0m"
-		cd $subpath; git status $shortOpt; cd - > /dev/null
-	done
+	if [ -n "$gss" ]; then
+		for sm in $(git submodule status --recursive | awk -F "[[:space:]]*" '{print $3}'); do
+			subpath=$PWD/$sm
+			echo "[0;34m-------------------------------------------------------------------------------- [1m$subpath[0m[0m"
+			cd $subpath; git status $shortOpt; cd - > /dev/null
+		done
+	fi
 done
