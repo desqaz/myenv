@@ -34,7 +34,7 @@ alias gds='   git difftool --staged'
 alias gci='   git commit'
 alias gck='   git checkout'
 alias ga='    git add'
-alias gb='    git branch'
+alias gb='    git branch -vv'
 alias gm='    git commit --amend --no-edit'
 alias gme='   git commit --amend'
 alias gps='   git push'
@@ -45,6 +45,7 @@ alias gunp='  git fetch && git log --oneline --stat HEAD..origin/$(git rev-parse
 alias gmt='   git mergetool --tool=bc'
 alias gst='   git stash'
 alias gstp='  gst pop'
+alias grs='   git remote show origin' 
 
 alias 7tags='source $(7tags.sh)'
 

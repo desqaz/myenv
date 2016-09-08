@@ -3,26 +3,46 @@
 shortOpt=
 
 if   [ "$1" = "-s" ] || [ -z "$1" ]; then
-	[ "$1" = "-s" ] && shortOpt='-sb'; git status $shortOpt; exit 0;
+	[ "$1" = "-s" ] && shortOpt='-sbu'; git status $shortOpt; exit 0;
 fi
 
-if   [ "$1" = "-ss" ];  then shortOpt=;      shift
-elif [ "$1" = "-sss" ]; then shortOpt='-sb';  shift; fi
+if   [ "$1" = "-ss" ];  then shortOpt=; shift
+elif [ "$1" = "-sss" ]; then shortOpt='-sbu'; shift; fi
 
 dirs="$@"
 [ -z "$dirs" ] && dirs='$PWD'
 
+
+gstatus () {
+	git status $shortOpt
+}
+
+bstatus () {
+	if [ -z "$(git branch | grep '^*' | grep "(HEAD")" ]; then
+		gup=$(git log --oneline --stat origin/$(git rev-parse --abbrev-ref HEAD)..HEAD)
+		if [ -n "$gup" ]; then
+		   	echo "[0;34mUnpushed ---[0m"
+			git log --oneline --stat origin/$(git rev-parse --abbrev-ref HEAD)..HEAD;
+		fi
+	fi
+}
+
+
 for d in $dirs; do
 	gss=$(git submodule status --recursive)
 	if [ -n "$gss" ]; then
-		echo "[0;34m-------------------------------------------------------------------------------- [1m$PWD[0m[0m"
+		echo "[0;34m-------------------------------------------------------------------------------- [1m$PWD[0m"
 	fi
-	git status $shortOpt
+	gstatus
+	bstatus
 	if [ -n "$gss" ]; then
 		for sm in $(git submodule status --recursive | awk -F '(' '{print $1}' | awk '{print $2}'); do
 			subpath=$PWD/$sm
-			echo "[0;34m-------------------------------------------------------------------------------- [1m$subpath[0m[0m"
-			cd $subpath; git status $shortOpt; cd - > /dev/null
+			echo "[0;34m-------------------------------------------------------------------------------- [1m$subpath[0m"
+			cd $subpath;
+		   	gstatus
+			bstatus
+		   	cd - > /dev/null
 		done
 	fi
 done
