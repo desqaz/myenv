@@ -177,7 +177,7 @@ map <C-PageDown>  ]c
 map <C-x>         :call CloseSomething()<CR>
 map <C-s>         :w!<CR>
 map <C-s>         :w!<CR>
-map <C-t>         :NERDTreeFind<CR>
+map <C-f>         :NERDTreeFind<CR>
 
 map ,b            :!mk beautify-changes<CR><CR>
 map ,l            :so ~/.vimrc<CR>
