@@ -25,32 +25,25 @@ gpcom () {
 	picocom /dev/tty$(echo $tty | awk '{print toupper($0)}') -b $rate --imap lfcrlf 
 }
 
-tt () {
+t () {
+	cmd="t $@"
+
+	if [ "$1" = 'exit' ]; then
+		cmd=exit
+	fi
+
 	if [ -e /dev/ttyACM0 ]; then
-		echo "t $@" > /dev/ttyACM0
-		return 0
+		echo "$cmd" > /dev/ttyACM0
 	fi
 	if [ -e /dev/ttyACM1 ]; then
-		echo "t $@" > /dev/ttyACM1
-		return 0
+		echo "$cmd" > /dev/ttyACM1
 	fi
 	if [ -e /dev/ttyUSB0 ]; then
-		echo "t $@" > /dev/ttyUSB0
-		return 0
+		echo "$cmd" > /dev/ttyUSB0
 	fi
 }
 
 tspyd () {
-    cmd="t frw spyd $@"
-
-	if [ -e /dev/ttyACM0 ]; then
-		echo $cmd > /dev/ttyACM0
-	elif [ -e /dev/ttyACM1 ]; then
-		echo $cmd > /dev/ttyACM1
-	else
-		echo $cmd > /dev/ttyUSB0
-	fi
-
-	return $?
+    t frw spyd $@
 }
 
