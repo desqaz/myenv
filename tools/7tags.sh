@@ -39,7 +39,7 @@ IgnoreDirCmd="-path '*\.svn' -prune -o -path '*\.git' -prune -o "
 
 # Grap ignore dir list
 if [ -e $TAGS_IGNORE_FILE ]; then
-   IgnoreDirList=$(cat $TAGS_IGNORE_FILE | sed -e 's/^[[:space:]]*#.*$//' -e '/^$/d')
+   IgnoreDirList=$(cat $TAGS_IGNORE_FILE | dos2unix |sed -e 's/^[[:space:]]*#.*$//' -e '/^$/d')
 fi
 for dir in $IgnoreDirList; do
    IgnoreDirCmd=$(echo -n "$IgnoreDirCmd -path '"'*'"$dir""' -prune -o ")
@@ -60,7 +60,7 @@ find     $WorksetPath/ $IgnoreDirCmd -type f -regex '.*\.make?$' -print   >> $Fi
 find     $WorksetPath/ $IgnoreDirCmd -type f -iname 'makefile' -print     >> $FilesList
 EOF
 if [ -e $TAGS_ADD_FILE ]; then
-   AddDirList=$(cat $TAGS_ADD_FILE | sed -e 's/^[[:space:]]*#.*$//' -e '/^$/d')
+   AddDirList=$(cat $TAGS_ADD_FILE | dos2unix | sed -e 's/^[[:space:]]*#.*$//' -e '/^$/d')
 fi
 for dir in $AddDirList; do
    echo "  -> Adding directory : $dir ..." >&2
