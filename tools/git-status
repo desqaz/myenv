@@ -12,7 +12,6 @@ elif [ "$1" = "-sss" ]; then shortOpt='-sbu'; shift; fi
 dirs="$@"
 [ -z "$dirs" ] && dirs='$PWD'
 
-
 gstatus () {
 	git status $shortOpt
 }
@@ -27,21 +26,29 @@ bstatus () {
 	fi
 }
 
+gl() {
+	git --no-pager log -n1 $@ --pretty="%h | %<(16)%cr | %<(20)%cn | %<(70,trunc)%s" --date=local\
+	   	| sed "s@\($(git config user.name)\|$USER\\|$MYENV_NAME\)@\1@g"
+}
+
+stateDir () {
+	gl 
+  	gstatus
+	bstatus
+}
 
 for d in $dirs; do
 	gss=$(git submodule status --recursive)
 	if [ -n "$gss" ]; then
 		echo "[0;34m-------------------------------------------------------------------------------- [1m$PWD[0m"
 	fi
-	gstatus
-	bstatus
+	stateDir
 	if [ -n "$gss" ]; then
 		for sm in $(git submodule status --recursive | awk -F '(' '{print $1}' | awk '{print $2}'); do
 			subpath=$PWD/$sm
 			echo "[0;34m-------------------------------------------------------------------------------- [1m$subpath[0m"
 			cd $subpath;
-		   	gstatus
-			bstatus
+		   	stateDir
 		   	cd - > /dev/null
 		done
 	fi
