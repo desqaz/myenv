@@ -20,7 +20,7 @@ bstatus () {
 	if [ -z "$(git branch | grep '^*' | grep "(HEAD")" ]; then
 		gup=$(git log --oneline --stat origin/$(git rev-parse --abbrev-ref HEAD)..HEAD)
 		if [ -n "$gup" ]; then
-		   	echo "[0;34mUnpushed ---[0m"
+		   	echo "[0;1;33m!+! Unpushed !+![0m"
 			git log --oneline --stat origin/$(git rev-parse --abbrev-ref HEAD)..HEAD;
 		fi
 	fi
