@@ -43,6 +43,43 @@ t () {
 	fi
 }
 
+s () {
+	cmd="s"
+
+	if [ "$1" = 'exit' ]; then
+		cmd=exit
+	fi
+
+	if [ -e /dev/ttyACM0 ]; then
+		echo "$cmd" > /dev/ttyACM0
+	fi
+	if [ -e /dev/ttyACM1 ]; then
+		echo "$cmd" > /dev/ttyACM1
+	fi
+	if [ -e /dev/ttyUSB0 ]; then
+		echo "$cmd" > /dev/ttyUSB0
+	fi
+}
+
+e () {
+	cmd="exit"
+
+	if [ "$1" = 'exit' ]; then
+		cmd=exit
+	fi
+
+	if [ -e /dev/ttyACM0 ]; then
+		echo "$cmd" > /dev/ttyACM0
+	fi
+	if [ -e /dev/ttyACM1 ]; then
+		echo "$cmd" > /dev/ttyACM1
+	fi
+	if [ -e /dev/ttyUSB0 ]; then
+		echo "$cmd" > /dev/ttyUSB0
+	fi
+
+}
+
 tspyd () {
     t frw spyd $@
 }
