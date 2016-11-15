@@ -3,11 +3,11 @@
 shortOpt=
 
 if   [ "$1" = "-s" ] || [ -z "$1" ]; then
-	[ "$1" = "-s" ] && shortOpt='-sbu'; git status $shortOpt; exit 0;
+	[ "$1" = "-s" ] && shortOpt='-sb'; git status $shortOpt; exit 0;
 fi
 
 if   [ "$1" = "-ss" ];  then shortOpt=; shift
-elif [ "$1" = "-sss" ]; then shortOpt='-sbu'; shift; fi
+elif [ "$1" = "-sss" ]; then shortOpt='-sb'; shift; fi
 
 dirs="$@"
 [ -z "$dirs" ] && dirs='$PWD'
