@@ -1,4 +1,4 @@
-mntVbox=(data Downloads)
+mntVbox=(data Downloads Dropbox C)
 
 for m in "${mntVbox[@]}"; do
 	if [ -z "$(mount | grep /mnt/vbox/${m})" ]; then

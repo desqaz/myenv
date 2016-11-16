@@ -11,6 +11,7 @@ if test -d $VIMTAGSPATH; then
 	rm -rf $VIMTAGSPATH
 fi
 mkdir -p $VIMTAGSPATH
+echo "Tags artifact will be stored at $VIMTAGSPATH" >&2
 CSCOPE_DB="$VIMTAGSPATH/cscope.out"
 tagsfile="$VIMTAGSPATH/tags"
 TAGS_HL="$VIMTAGSPATH/tags_hl.vim"
