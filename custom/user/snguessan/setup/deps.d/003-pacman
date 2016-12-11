@@ -1,3 +1,0 @@
-if [ $myenvDistro = 'arch' ]; then
-	sudo ln -svf ~/myenv/custom/user/$USER/pacman-mirrors /etc/pacman.d/mirrorlist
-fi
