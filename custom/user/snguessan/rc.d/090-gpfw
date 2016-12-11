@@ -1,9 +1,9 @@
 export PATH=/datas/devkits/pybin-20141226-1810-4a17794:$PATH
-export PATH=/datas/devkits/gcc-arm-none-eabi-4_7-2013q3/bin:$PATH
+#export PATH=/datas/devkits/gcc-arm-none-eabi-4_7-2013q3/bin:$PATH
+export PATH=/datas/devkits/gcc-arm-none-eabi-4_9-2015q3-m9m/bin:$PATH
+export DRIVE=/run/media/snguessan/ESW
 
-export JENKINS_EP_HOST=192.168.154.1
-
-gpcom () {
+pcom () {
 	tty=
 	rate=
     n=0
@@ -25,59 +25,21 @@ gpcom () {
 	picocom /dev/tty$(echo $tty | awk '{print toupper($0)}') -b $rate --imap lfcrlf 
 }
 
+
+wtty() {
+    tty=
+	[ -e /dev/ttyACM0 ] && tty=/dev/ttyACM0
+	[ -e /dev/ttyACM1 ] && tty=/dev/ttyACM1
+	[ -e /dev/ttyUSB0 ] && tty=/dev/ttyUSB0
+	[ -n "$tty" ] && echo "$@" > $tty
+}
+
+
 t () {
 	cmd="t $@"
-
-	if [ "$1" = 'exit' ]; then
-		cmd=exit
-	fi
-
-	if [ -e /dev/ttyACM0 ]; then
-		echo "$cmd" > /dev/ttyACM0
-	fi
-	if [ -e /dev/ttyACM1 ]; then
-		echo "$cmd" > /dev/ttyACM1
-	fi
-	if [ -e /dev/ttyUSB0 ]; then
-		echo "$cmd" > /dev/ttyUSB0
-	fi
-}
-
-s () {
-	cmd="s"
-
-	if [ "$1" = 'exit' ]; then
-		cmd=exit
-	fi
-
-	if [ -e /dev/ttyACM0 ]; then
-		echo "$cmd" > /dev/ttyACM0
-	fi
-	if [ -e /dev/ttyACM1 ]; then
-		echo "$cmd" > /dev/ttyACM1
-	fi
-	if [ -e /dev/ttyUSB0 ]; then
-		echo "$cmd" > /dev/ttyUSB0
-	fi
-}
-
-e () {
-	cmd="exit"
-
-	if [ "$1" = 'exit' ]; then
-		cmd=exit
-	fi
-
-	if [ -e /dev/ttyACM0 ]; then
-		echo "$cmd" > /dev/ttyACM0
-	fi
-	if [ -e /dev/ttyACM1 ]; then
-		echo "$cmd" > /dev/ttyACM1
-	fi
-	if [ -e /dev/ttyUSB0 ]; then
-		echo "$cmd" > /dev/ttyUSB0
-	fi
-
+	[ "$1" = "exit" ] && cmd="exit"
+	wtty "$cmd"
+	#wtty "exit"
 }
 
 tspyd () {
