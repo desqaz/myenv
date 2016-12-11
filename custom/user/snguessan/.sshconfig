@@ -29,11 +29,6 @@ Host seedbox
     HostName lw198.ultraseedbox.com
     User fripooy
 
-Host github-priv
-    HostName github-priv
-    User git
-    IdentityFile ~/.ssh/id_rsa
-
 Host raspsalon
     HostName raspsalon
     User root
@@ -52,7 +47,6 @@ Host dmx
 
 Host github.com
     HostName github.com
-    User git
     IdentityFile ~/.ssh/id_gpfw
 
 Host jenkins-schest
