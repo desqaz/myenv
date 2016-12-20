@@ -149,6 +149,10 @@ set +x
 #GIT 
 #------------------------------------------------------------------------------
 
+gdc() {
+ git difftool ${1}~1 $1
+}
+
 gsmail() {
 	if [ "$1" = "h" ]; then
 		echo "$0 [p]: set corporate/[personal] user.mail"
