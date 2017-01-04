@@ -173,19 +173,27 @@ gl() {
 }
 
 gsms() {
-	echo "[0;1;36m>> Pulling repo[0m"
-	git pull || return 1
+	if [ "$1" = "-r" ]; then
+		echo "[0;1;36m>> Pulling repo with rebase[0m"
+		git pull --rebase=interactive || return 1
+	elif [ "$1" = "-f" ]; then
+		echo "[0;1;36m>> Pulling repo fast forward only[0m"
+		git pull --ff-only --no-rebase || return 1
+	elif [ "$1" = "-m" ]; then
+		echo "[0;1;36m>> Pulling repo with merge[0m"
+		git pull --no-rebase || return 1
+	elif [ "$1" = "-h" ]; then
+		echo "[0;1;36m>> gsms help :[0m"
+		echo "[0;1;36m>>    + No option only sync submodules locally[0m"
+		echo "[0;1;36m>>    + -f : pull fast forward only[0m"
+		echo "[0;1;36m>>    + -r : pull with interactive rebase[0m"
+		echo "[0;1;36m>>    + -m : pull with merge[0m"
+		return 0
+	fi
 	echo "[0;1;36m>> Syncing submodules[0m"
 	git submodule sync --recursive || return  2
 	echo "[0;1;36m>> Updating submodules[0m"
 	git submodule update --init --recursive || return 3
-}
-
-gsmst() {
-	echo ">> Status of head repo"
-	git status -s
-	echo ">> Status of submodules"
-	git submodule foreach --recursive git status -s
 }
 
 l() {
