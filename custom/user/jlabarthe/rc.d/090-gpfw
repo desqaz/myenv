@@ -5,3 +5,8 @@ b() {
 	echo "$@" > /dev/ttyUSB0
 }
 
+gpcom() {
+	PortNumber=$1
+	[ -z $PortNumber ] && PortNumber=0
+	picocom -b 115200 --imap lfcrlf /dev/ttyUSB$PortNumber
+}

@@ -12,74 +12,148 @@
     [[[window0]]]
       parent = ""
       type = Window
-  [[mine]]
+  [[standard]]
     [[[child0]]]
       fullscreen = False
-      last_active_term = dba27c72-e4a9-4a5b-aa45-11bb75cbed55
+      last_active_term = abec1e0e-0cb6-4c1f-b814-317592b3d5e3
       last_active_window = True
       maximised = True
       order = 0
       parent = ""
-      position = 51:0
-      size = 3785, 1944
-      title = " /datas/myenv "
+      title = " -=[MYENV]=- "
       type = Window
     [[[child1]]]
       order = 0
       parent = child0
-      position = 1891
-      ratio = 0.499867899604
-      type = HPaned
+      ratio = 0.5
+      type = VPaned
     [[[child2]]]
       order = 0
       parent = child1
-      position = 971
       ratio = 0.5
-      type = VPaned
-    [[[child5]]]
+      type = HPaned
+    [[[child4]]]
+      order = 1
+      parent = child2
+      ratio = 0.7
+      type = HPaned
+    [[[child7]]]
       order = 1
       parent = child1
-      position = 971
       ratio = 0.5
-      type = VPaned
-    [[[child6]]]
-      order = 0
-      parent = child5
-      position = 944
-      ratio = 0.499471458774
       type = HPaned
     [[[terminal3]]]
       order = 0
       parent = child2
       profile = default
       type = Terminal
-      uuid = 85e76629-004d-44f2-881c-c9ea1027ad38
-    [[[terminal4]]]
+      uuid = cd4064c2-fd1a-4a06-8052-dc66be0b9fef
+    [[[terminal5]]]
+      order = 0
+      parent = child4
+      profile = default
+      type = Terminal
+      uuid = abec1e0e-0cb6-4c1f-b814-317592b3d5e3
+    [[[terminal6]]]
       order = 1
+      parent = child4
+      profile = default
+      type = Terminal
+      uuid = 17be697f-37a7-46a9-b369-03ac28bc71df
+    [[[terminal8]]]
+      order = 0
+      parent = child7
+      profile = default
+      type = Terminal
+      uuid = eec55d58-35a6-4111-bef7-b671b5181b14
+    [[[terminal9]]]
+      order = 1
+      parent = child7
+      profile = default
+      type = Terminal
+      uuid = 67233d68-47d7-4380-93ee-9c595232ce11
+  [[super]]
+    [[[child0]]]
+      fullscreen = False
+      last_active_term = eec55d58-35a6-4111-bef7-b671b5181b14
+      last_active_window = True
+      maximised = True
+      order = 0
+      parent = ""
+      position = 51:0
+      size = 3785, 1944
+      title = " -=[MYENV]=- "
+      type = Window
+    [[[child1]]]
+      order = 0
+      parent = child0
+      position = 971
+      ratio = 0.5
+      type = VPaned
+    [[[child2]]]
+      order = 0
+      parent = child1
+      position = 2642
+      ratio = 0.698282694848
+      type = HPaned
+    [[[child4]]]
+      order = 1
+      parent = child2
+      position = 339
+      ratio = 0.350154479918
+      type = VPaned
+    [[[child5]]]
+      order = 0
+      parent = child4
+      position = 674
+      ratio = 0.591586327783
+      type = HPaned
+    [[[child9]]]
+      order = 1
+      parent = child1
+      position = 1924
+      ratio = 0.50858652576
+      type = HPaned
+    [[[terminal10]]]
+      order = 0
+      parent = child9
+      profile = default
+      type = Terminal
+      uuid = eec55d58-35a6-4111-bef7-b671b5181b14
+    [[[terminal11]]]
+      order = 1
+      parent = child9
+      profile = default
+      type = Terminal
+      uuid = 67233d68-47d7-4380-93ee-9c595232ce11
+    [[[terminal3]]]
+      order = 0
       parent = child2
       profile = default
       type = Terminal
-      uuid = 76eba1bb-fe3f-4dde-83fb-a9eb9c521997
-    [[[terminal7]]]
-      command = sudo htop -d5
+      uuid = cd4064c2-fd1a-4a06-8052-dc66be0b9fef
+    [[[terminal6]]]
       order = 0
-      parent = child6
-      profile = default
-      type = Terminal
-      uuid = dba27c72-e4a9-4a5b-aa45-11bb75cbed55
-    [[[terminal8]]]
       command = watch -d -n 1 ccache -s
-      order = 1
-      parent = child6
-      profile = default
-      type = Terminal
-      uuid = 5c3c3cb1-5754-4d19-b645-6208b52d6df7
-    [[[terminal9]]]
-      order = 1
       parent = child5
       profile = default
       type = Terminal
-      uuid = 63a9defc-811b-4197-bdcf-d867cfc3f00b
+      uuid = 17be697f-37a7-46a9-b369-03ac28bc71df
+    [[[terminal7]]]
+      order = 1
+#      command = sudo atop
+      command = speedometer -r ens33 -t ens33
+      parent = child5
+      profile = default
+      type = Terminal
+      uuid = 38bab22a-b19c-425b-9140-3623a08a6b7e
+    [[[terminal8]]]
+      command = sudo htop
+      order = 1
+      parent = child4
+      profile = default
+      type = Terminal
+      uuid = abec1e0e-0cb6-4c1f-b814-317592b3d5e3
 [plugins]
 [profiles]
   [[default]]
