@@ -1,6 +1,6 @@
 [user]
-	name = Sidney N'Guessan
-	email =
+#	name =
+#	email =
 [color]
 	ui = auto
 	diff = auto
@@ -42,6 +42,8 @@
 	editor = vim
 [push]
 	default = current
+[pull]
+	rebase = true
 [gui]
 	spellingdictionary = none
 	fontui = -family Cantarell -size 10 -weight normal -slant roman -underline 0 -overstrike 0
