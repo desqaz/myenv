@@ -11,10 +11,10 @@ echo "Symlink home directories"
 cd || exit 1
 
 ln -svf /datas/
-ln -svf datas/bases/
+ln -svf datas/myenv/
+ln -svf datas/devel/
 ln -svf datas/documents/
 ln -svf datas/downloads/
-ln -svf datas/myenv/
 
 ln -svf /mnt/vbox/
 

@@ -48,3 +48,6 @@
 	spellingdictionary = none
 	fontui = -family Cantarell -size 10 -weight normal -slant roman -underline 0 -overstrike 0
 	fontdiff = -family Cantarell -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+[user]
+	email = snguessan@gopro.com
+	name = Sidney N'Guessan
