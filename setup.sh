@@ -208,7 +208,7 @@ if [ ! -d $HOME/.ssh ]; then
 	if [ -f $myenvcusto/enck/ssh ]; then
 		mkdir $HOME/.ssh
 		echo "[0;1;36mInstalling ssh key...[0m"
-		openssl aes-256-cbc -d -in $myenvcusto/enck/ssh -a | tar -C $HOME/.ssh -xjf -
+		openssl aes-256-cbc -md md5 -d -in $myenvcusto/enck/ssh -a | tar -C $HOME/.ssh -xjf -
 		if [ $? -ne 0 ]; then rm -rf $HOME/.ssh; fi
 	fi
 fi
@@ -219,7 +219,7 @@ fi
 if [ ! -f $HOME/.config/bcompare/BC4Key.txt ] && [ -f $myenvcusto/enck/bcp ]; then
 	echo "[0;1;36mInstalling bcompare key...[0m"
 	mkdir -vp $HOME/.config/bcompare
-	openssl aes-256-cbc -d -in $myenvcusto/enck/bcp -a > $HOME/.config/bcompare/BC4Key.txt
+	openssl aes-256-cbc -md md5 -d -in $myenvcusto/enck/bcp -a > $HOME/.config/bcompare/BC4Key.txt
 	if [ $? -ne 0 ]; then rm -rf $HOME/.config/bcompare/BC4Key.txt; fi
 fi
 
