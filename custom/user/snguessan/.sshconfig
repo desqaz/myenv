@@ -1,10 +1,11 @@
-#
-# Private ---------------------------------------------------------------------
-#
 Host *
     #ForwardAgent yes
     #ForwardX11 yes
     #ForwardX11Trusted yes
+
+#
+# Private ---------------------------------------------------------------------
+#
 
 Host xrt
     HostName xrt.noip.me
@@ -29,10 +30,6 @@ Host seedbox
     HostName lw198.ultraseedbox.com
     User fripooy
 
-Host raspsalon
-    HostName raspsalon
-    User root
-
 Host cubnas
 	Hostname cubnas
 	User fripooy
@@ -41,9 +38,18 @@ Host dmx
 	Hostname dmx
 	User fripooy
 
+
 #
-# Job ------------------------------------------------------------------------- 
+# Job -------------------------------------------------------------------------
 #
+
+Host gitolite-mnz
+    HostName 54.67.112.90
+    IdentityFile ~/.ssh/id_gpfw
+
+Host 54.67.112.90
+    HostName 54.67.112.90
+    IdentityFile ~/.ssh/id_gpfw
 
 Host github.com
     HostName github.com

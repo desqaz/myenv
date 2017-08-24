@@ -1,7 +1,7 @@
 "-------------------------------------------------------------------------
 "Color and font
 "-------------------------------------------------------------------------
-colorscheme desert
+colorscheme mustang
 
 set guifont=Monospace\ 10
 set gfn=Monospace\ 10

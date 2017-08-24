@@ -1,11 +1,11 @@
-mntVbox=(c_drive)
-for m in "${mntVbox[@]}"; do
-	if [ -z "$(mount | grep /mnt/vbox/${m})" ]; then
-		sudo mkdir -p /mnt/vbox/${m}
-		sudo chmod a+x /mnt
-		sudo chown $(id -u):$(id -g) /mnt/vbox
-		#sudo mount.vboxsf $m /mnt/vbox/${m} -o uid=$(id -u),gid=$(id -g),umask=022
-		sudo umount /mnt/vbox/${m} > /dev/null 2>&1
-		sudo vmhgfs-fuse -o nonempty -o allow_other -o auto_unmount -o uid=$(id -u) -o gid=$(id -g) -o umask=022 .host:/$m /mnt/vbox/${m}
-	fi
-done
+#mntVbox=(c_drive)
+#for m in "${mntVbox[@]}"; do
+#	if [ -z "$(mount | grep /mnt/vbox/${m})" ]; then
+#		sudo mkdir -p /mnt/vbox/${m}
+#		sudo chmod a+x /mnt
+#		sudo chown $(id -u):$(id -g) /mnt/vbox
+#		#sudo mount.vboxsf $m /mnt/vbox/${m} -o uid=$(id -u),gid=$(id -g),umask=022
+#		sudo umount /mnt/vbox/${m} > /dev/null 2>&1
+#		sudo vmhgfs-fuse -o nonempty -o allow_other -o auto_unmount -o uid=$(id -u) -o gid=$(id -g) -o umask=022 .host:/$m /mnt/vbox/${m}
+#	fi
+#done

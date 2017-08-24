@@ -1,8 +1,7 @@
 declare -i screenW=$(xdpyinfo | awk '/dimensions:/ { print $2 }' | awk -F x '{print $1}')
-factor=15
+factor=20
 [ $screenW -lt 2000 ] && factor=10
 declare -i vimW=${screenW}/${factor}
 declare -i vimH=${vimW}/3.5
 
 export MYENV_GVIM_GEOMETRY=${vimW}x${vimH}
-
