@@ -13,7 +13,7 @@ pkg   git,-
 pkg   gitk,-
 pkg   tk,tcl
 pkg   vim-gtk,gvim
-pkg   g++-multilib,gcc-libs-multilib
+pkg   g++-multilib,-
 pkg   btrfs-tools,btrfs-progs
 pkg   htop
 pkg   tree

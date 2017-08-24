@@ -6,7 +6,7 @@ suffixList="
 gcc
 g++
 c++
-clang-3.8
+clang
 "
 
 prefixList="
@@ -16,6 +16,7 @@ x86_64-apple-darwin12-
 x86_64-w64-mingw32-
 arm-xilinx-eabi-
 arm-xilinx-linux-gnueabi-
+arm-oemllib32-linux-gnueabi-
 "
 
 for p in $prefixList; do
@@ -44,4 +45,4 @@ for s in $suffixList; do
 		SUDO mv -v $bin{,.real}
 		SUDO ln -sv $HOME/myenv/tools/ccache-hook $bin
 	fi
-done	
+done
