@@ -172,7 +172,7 @@ gsmail() {
 }
 
 gl() {
-	git --no-pager log -n30 --pretty="%h | %<(16)%cr | %<(20)%cn | %<(70,trunc)%s" --date=local $@\
+	git --no-pager log -n30 --pretty="%h | %<(16)%cr | %<(20)%an | %<(70,trunc)%s" --date=local $@\
  		| sed "s@\($(git config user.name)\|$USER\\|$MYENV_NAME\)@[0;32m\1[0m@g"
 }
 
