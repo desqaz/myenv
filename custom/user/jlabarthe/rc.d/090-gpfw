@@ -10,9 +10,23 @@ b() {
 }
 
 gpcom() {
-	Type=$1
-	PortNumber=$2
-	[ -z $Type ] && Type=USB
-	[ -z $PortNumber ] && PortNumber=0
-	picocom -b 115200 --imap lfcrlf /dev/tty${Type}${PortNumber}
+	Type=USB
+	PortNumber=0
+	Loop=n
+	if [ "$1" = "-acm" ]; then Type=ACM; shift; fi;
+	if [ "$1" = "-loop" ]; then Loop=y; shift; fi;
+	if [ "$1" = "-1" ]; then PortNumber=1; shift; fi;
+	if [ "$Loop" = "y" ]; then
+		while [ 1 ]; do
+			picocom -b 115200 --imap lfcrlf /dev/tty${Type}${PortNumber}
+			if [ $? -eq 0 ]; then break; fi;
+			echo "Waiting for /dev/tty${Type}${PortNumber} to come back alive ..."
+			while [ 1 ]; do
+				if [ -e /dev/tty${Type}${PortNumber} ]; then break; fi;
+				sleep 0.5 
+			done
+		done
+	else
+		picocom -b 115200 --imap lfcrlf /dev/tty${Type}${PortNumber}
+	fi
 }

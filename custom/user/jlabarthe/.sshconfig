@@ -1,3 +1,8 @@
 Host github.com
     User git
     IdentityFile ~/.ssh/id_rsa_gp
+Host gitolite.gopro
+	Hostname 54.67.112.90
+    IdentityFile ~/.ssh/id_rsa_gp
+Host 54.67.112.90
+    IdentityFile ~/.ssh/id_rsa_gp

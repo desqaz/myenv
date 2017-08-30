@@ -133,16 +133,16 @@
       type = Terminal
       uuid = cd4064c2-fd1a-4a06-8052-dc66be0b9fef
     [[[terminal6]]]
-      order = 0
       command = watch -d -n 1 ccache -s
+      order = 0
       parent = child5
       profile = default
       type = Terminal
       uuid = 17be697f-37a7-46a9-b369-03ac28bc71df
     [[[terminal7]]]
-      order = 1
-#      command = sudo atop
+      #      command = sudo atop
       command = speedometer -r ens33 -t ens33
+      order = 1
       parent = child5
       profile = default
       type = Terminal
@@ -158,12 +158,11 @@
 [profiles]
   [[default]]
     allow_bold = False
+    background_color = "#282828"
     background_darkness = 0.7
-    background_image = None
-    background_type = transparent
+    cursor_color = "#ffffff"
     font = Noto Mono 10
-    foreground_color = "#ffffff"
-    scroll_on_output = False
+    foreground_color = "#ebdbb2"
     scrollback_infinite = True
     use_system_font = False
     word_chars = "-A-Za-z0-9,./?%&#:_{}+"
