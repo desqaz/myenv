@@ -1,7 +1,9 @@
 [global_config]
   custom_url_handler = chromium
   focus = mouse
+  handle_size = 6
   inactive_color_offset = 1.0
+  scroll_tabbar = True
   suppress_multiple_term_dialog = True
   tab_position = bottom
   title_font = Sans 8
@@ -17,6 +19,100 @@
     [[[window0]]]
       parent = ""
       type = Window
+  [[main]]
+    [[[child0]]]
+      fullscreen = False
+      last_active_term = 76eba1bb-fe3f-4dde-83fb-a9eb9c521997
+      last_active_window = True
+      maximised = True
+      order = 0
+      parent = ""
+      position = 1920:0
+      size = 3840, 2100
+      title = " /datas/myenv "
+      type = Window
+    [[[child1]]]
+      order = 0
+      parent = child0
+      position = 1918
+      ratio = 0.500130378096
+      type = HPaned
+    [[[child10]]]
+      order = 0
+      parent = child9
+      position = 1226
+      ratio = 0.63987473904
+      type = HPaned
+    [[[child2]]]
+      order = 0
+      parent = child1
+      position = 1048
+      ratio = 0.500238663484
+      type = VPaned
+    [[[child5]]]
+      order = 1
+      parent = child1
+      position = 455
+      ratio = 0.217183770883
+      type = VPaned
+    [[[child6]]]
+      order = 0
+      parent = child5
+      position = 1478
+      ratio = 0.77139874739
+      type = HPaned
+    [[[child9]]]
+      order = 1
+      parent = child5
+      position = 384
+      ratio = 0.234289200732
+      type = VPaned
+    [[[terminal11]]]
+      command = journalctl -f
+      order = 0
+      parent = child10
+      profile = default
+      type = Terminal
+      uuid = 63a9defc-811b-4197-bdcf-d867cfc3f00b
+    [[[terminal12]]]
+      command = ""
+      order = 1
+      parent = child10
+      profile = default
+      type = Terminal
+      uuid = 5b9db395-ce06-4037-aa26-04d3fcc3200e
+    [[[terminal13]]]
+      order = 1
+      parent = child9
+      profile = default
+      type = Terminal
+      uuid = 7fe350f9-3ced-4c71-bb8e-abed2b136fae
+    [[[terminal3]]]
+      order = 0
+      parent = child2
+      profile = default
+      type = Terminal
+      uuid = 85e76629-004d-44f2-881c-c9ea1027ad38
+    [[[terminal4]]]
+      order = 1
+      parent = child2
+      profile = default
+      type = Terminal
+      uuid = 76eba1bb-fe3f-4dde-83fb-a9eb9c521997
+    [[[terminal7]]]
+      command = sudo htop -d5
+      order = 0
+      parent = child6
+      profile = default
+      type = Terminal
+      uuid = dba27c72-e4a9-4a5b-aa45-11bb75cbed55
+    [[[terminal8]]]
+      command = watch -d -n 1 ccache -s
+      order = 1
+      parent = child6
+      profile = default
+      type = Terminal
+      uuid = 5c3c3cb1-5754-4d19-b645-6208b52d6df7
   [[mine]]
     [[[child0]]]
       fullscreen = False
@@ -60,6 +156,7 @@
       type = Terminal
       uuid = 85e76629-004d-44f2-881c-c9ea1027ad38
     [[[terminal4]]]
+      command = ""
       order = 1
       parent = child2
       profile = default
@@ -91,7 +188,6 @@
   [[default]]
     allow_bold = False
     background_darkness = 0.85
-    background_image = None
     background_type = transparent
     copy_on_selection = True
     cursor_color = "#aaaaaa"

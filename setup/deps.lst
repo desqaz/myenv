@@ -51,6 +51,9 @@ pkg   wine
 pkg   samba
 pkg   xorg-xdpyinfo
 pkg   picocom
+pkg   clang
+pkg   rsync
+pkg   pkgfile
 
 #
 # EASY_INSTALL
