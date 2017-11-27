@@ -55,6 +55,10 @@ Host github.com
     HostName github.com
     IdentityFile ~/.ssh/id_gpfw
 
+Host gitolite-mnz 54.67.112.90
+    HostName 54.67.112.90
+    IdentityFile ~/.ssh/id_gpfw
+
 Host jenkins-schest
 	HostName schest
 	User jenkins
