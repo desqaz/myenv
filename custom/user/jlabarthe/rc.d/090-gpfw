@@ -1,19 +1,21 @@
-export PATH=/datas/devkits/pybin-20141226-1810-4a17794:$PATH
+export PATH=/datas/devkits/pybin-20170509-2127-6708fb1:$PATH
 export PATH=/datas/devkits/gcc-arm-none-eabi-4_9-2015q3-m9m/bin:$PATH
 
 b() {
-	Type=USB
+	Type=ACM
 	PortNumber=0
 	if [ "$1" = "-acm" ]; then Type=ACM; shift; fi;
+	if [ "$1" = "-usb" ]; then Type=USB; shift; fi;
 	if [ "$1" = "-1" ]; then PortNumber=1; shift; fi;
 	echo "$@" > /dev/tty${Type}${PortNumber}
 }
 
 gpcom() {
-	Type=USB
+	Type=ACM
 	PortNumber=0
-	Loop=n
+	Loop=y
 	if [ "$1" = "-acm" ]; then Type=ACM; shift; fi;
+	if [ "$1" = "-usb" ]; then Type=USB; shift; fi;
 	if [ "$1" = "-loop" ]; then Loop=y; shift; fi;
 	if [ "$1" = "-1" ]; then PortNumber=1; shift; fi;
 	if [ "$Loop" = "y" ]; then
