@@ -30,6 +30,8 @@ if [[ $- == *i* ]]; then
 	export SH_PATH=$MYENV_ROOT/sh
 	export ZSH_PATH=$MYENV_ROOT/zsh
 
+	export GPG_TTY=$(tty)
+
 
 	# Shell variables
 	for f in $(find $SH_PATH -type d); do

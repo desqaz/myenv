@@ -3,7 +3,7 @@
 "-------------------------------------------------------------------------
 colorscheme desert
 
-set guifont=Monospace\ 8
+set guifont=Noto\ Mono\ 11
 
 " Font
-set gfn=Monospace\ 8
+set gfn=Noto\ Mono\ 11

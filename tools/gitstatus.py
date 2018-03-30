@@ -19,19 +19,30 @@ if 'fatal: Not a git repository' in error_string:
 
 branch = branch.strip()[11:]
 
-res, err = Popen(['git','diff','--name-status'], stdout=PIPE, stderr=PIPE).communicate()
+res, err = Popen(['git','-c','color.status=false','status','--short','--untracked-files=all', '--ignore-submodules=dirty'], stdout=PIPE, stderr=PIPE).communicate()
 err_string = err.decode('utf-8')
 if 'fatal' in err_string:
 	sys.exit(0)
-changed_files = [namestat[0] for namestat in res.splitlines()]
-staged_files = [namestat[0] for namestat in Popen(['git','diff', '--staged','--name-status'], stdout=PIPE).communicate()[0].splitlines()]
-nb_changed = len(changed_files) - changed_files.count('U')
-nb_U = staged_files.count('U')
-nb_staged = len(staged_files) - nb_U
+nb_changed   = 0
+nb_staged    = 0
+nb_U         = 0
+nb_untracked = 0
+statusList = [(line[0], line[1]) for line in res.splitlines()]
+for X,Y in statusList:
+    if X == 'U' or Y == 'U':
+        nb_U += 1
+    elif X not in [' ', '?', '!']:
+        nb_staged += 1
+        if Y not in [' ', '?', '!']:
+            nb_changed += 1
+    elif Y not in [' ', '?', '!']:
+        nb_changed += 1
+    elif  X == '?' or Y == '?':
+        nb_untracked += 1
+
 staged = str(nb_staged)
-conflicts = str(nb_U)
 changed = str(nb_changed)
-nb_untracked = len(Popen(['git','ls-files','--others','--exclude-standard'],stdout=PIPE).communicate()[0].splitlines())
+conflicts = str(nb_U)
 untracked = str(nb_untracked)
 if not nb_changed and not nb_staged and not nb_U and not nb_untracked:
 	clean = '1'
