@@ -50,7 +50,7 @@ alias gst='   git stash'
 alias gstp='  gst pop'
 alias grs='   git remote show origin' 
 
-alias 7tags='source $(7tags.sh)'
+alias 7tags='source $(7tags.py)'
 
 alias -g V=' | vi -R -'
 alias -g F=' | sed -e "s/\x1B\[[0-9;]*[mK]//g" '
