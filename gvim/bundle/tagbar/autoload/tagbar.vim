@@ -2170,7 +2170,6 @@ function! s:ExecuteCtagsOnFile(fname, realfname, typeinfo) abort
                           \ '--format=2',
                           \ '--excmd=pattern',
                           \ '--fields=nksSaf',
-                          \ '--extra=',
                           \ '--sort=no',
                           \ '--append=no'
                           \ ]

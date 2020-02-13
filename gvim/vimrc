@@ -21,12 +21,12 @@ set gfn=Monospace\ 10
 syntax on
 
 if $TAGS_HL != ""
-   au bufnewfile,bufread *.c,*.cc,*.h,*.cpp,*.patch  highlight link c_f Function
-   au bufnewfile,bufread *.c,*.cc,*.h,*.cpp,*.patch  highlight c_t gui=bold,italic
-   au bufnewfile,bufread *.c,*.cc,*.h,*.cpp,*.patch  highlight link c_d Tag
-   au bufnewfile,bufread *.c,*.cc,*.h,*.cpp,*.patch  highlight link c_m Tag
-   au bufnewfile,bufread *.c,*.cc,*.h,*.cpp,*.patch  highlight link c_e Tag
-   au bufnewfile,bufread *.c,*.cc,*.h,*.cpp,*.patch  source $TAGS_HL
+   au bufnewfile,bufread,FileChangedShellPost *.c,*.cc,*.h,*.cpp,*.patch  highlight link c_f Function
+   au bufnewfile,bufread,FileChangedShellPost *.c,*.cc,*.h,*.cpp,*.patch  highlight c_t gui=bold,italic
+   au bufnewfile,bufread,FileChangedShellPost *.c,*.cc,*.h,*.cpp,*.patch  highlight link c_d Tag
+   au bufnewfile,bufread,FileChangedShellPost *.c,*.cc,*.h,*.cpp,*.patch  highlight link c_m Tag
+   au bufnewfile,bufread,FileChangedShellPost *.c,*.cc,*.h,*.cpp,*.patch  highlight link c_e Tag
+   au bufnewfile,bufread,FileChangedShellPost *.c,*.cc,*.h,*.cpp,*.patch  source $TAGS_HL
 endif
 
 "-------------------------------------------------------------------------
@@ -168,7 +168,6 @@ map <F6>          ^3x$2h3x
 map <F7>          :bdelete<CR>
 map <F9>          :noh<CR>
 nmap <F10>        /[^\x00-\x7F]<CR>
-map <F12>         :!mk<CR>
 map <C-N>         :noh<CR>
 map <C-B>         :MRU<CR>
 map <C-Del>       :bdelete<CR>
@@ -394,6 +393,9 @@ au BufNewFile,BufRead Makefile*,GNUmakefile*,*.mk,*.patch,*.mak
 
 au BufNewFile,BufRead __Tag_List__
  \ set nospell 
+
+map <silent> <F11> "<Esc>:silent setlocal spell! spelllang=en<CR>"
+map <silent> <F12> "<Esc>:silent setlocal spell! spelllang=fr<CR>"
 
 let g:netrw_altv = 1
 let g:netrw_alto = 1
