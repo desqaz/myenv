@@ -12,6 +12,215 @@
     [[[window0]]]
       parent = ""
       type = Window
+  [[monitor]]
+    [[[child0]]]
+      fullscreen = False
+      last_active_window = True
+      maximised = True
+      order = 0
+      parent = ""
+      position = 3840:30
+      size = 3840, 2057
+      title = " -=[MYENV]=- "
+      type = Window
+    [[[child1]]]
+      active_page = 0
+      labels = None, None, None
+      last_active_term = eec55d58-35a6-4111-bef7-b671b5181b14, 159a0ae2-d6c6-4a60-a9f7-f345dba5b8ff, 2897848f-611c-4ab9-a53b-ff9b7be0b2c8
+      order = 0
+      parent = child0
+      type = Notebook
+    [[[child12]]]
+      order = 1
+      parent = child2
+      position = 1951
+      ratio = 0.508602711157
+      type = HPaned
+    [[[child15]]]
+      order = 1
+      parent = child1
+      position = 1132
+      ratio = 0.561507936508
+      type = VPaned
+    [[[child19]]]
+      fullscreen = False
+      last_active_term = 67233d68-47d7-4380-93ee-9c595232ce11
+      last_active_window = False
+      maximised = True
+      order = 0
+      parent = ""
+      position = 0:0
+      size = 3840, 2087
+      title = " -=[MYENV]=- "
+      type = Window
+    [[[child2]]]
+      order = 0
+      parent = child1
+      position = 1009
+      ratio = 0.500496031746
+      type = VPaned
+    [[[child20]]]
+      order = 0
+      parent = child19
+      position = 1043
+      ratio = 0.500239808153
+      type = VPaned
+    [[[child21]]]
+      order = 0
+      parent = child20
+      position = 2680
+      ratio = 0.698280354351
+      type = HPaned
+    [[[child22]]]
+      order = 0
+      parent = child21
+      position = 1728
+      ratio = 0.645257654966
+      type = HPaned
+    [[[child25]]]
+      order = 1
+      parent = child21
+      position = 365
+      ratio = 0.350624399616
+      type = VPaned
+    [[[child26]]]
+      order = 0
+      parent = child25
+      position = 685
+      ratio = 0.592048401037
+      type = HPaned
+    [[[child3]]]
+      order = 0
+      parent = child2
+      position = 2679
+      ratio = 0.698383733055
+      type = HPaned
+    [[[child30]]]
+      order = 1
+      parent = child20
+      position = 1952
+      ratio = 0.508598228244
+      type = HPaned
+    [[[child4]]]
+      order = 0
+      parent = child3
+      position = 1610
+      ratio = 0.60141949944
+      type = HPaned
+    [[[child7]]]
+      order = 1
+      parent = child3
+      position = 353
+      ratio = 0.350546176763
+      type = VPaned
+    [[[child8]]]
+      order = 0
+      parent = child7
+      position = 579
+      ratio = 0.500865051903
+      type = HPaned
+    [[[terminal10]]]
+      order = 1
+      parent = child8
+      profile = default
+      type = Terminal
+      uuid = 38bab22a-b19c-425b-9140-3623a08a6b7e
+    [[[terminal11]]]
+      order = 1
+      parent = child7
+      profile = default
+      type = Terminal
+      uuid = abec1e0e-0cb6-4c1f-b814-317592b3d5e3
+    [[[terminal13]]]
+      order = 0
+      parent = child12
+      profile = default
+      type = Terminal
+      uuid = eec55d58-35a6-4111-bef7-b671b5181b14
+    [[[terminal14]]]
+      order = 1
+      parent = child12
+      profile = default
+      type = Terminal
+      uuid = 67233d68-47d7-4380-93ee-9c595232ce11
+    [[[terminal16]]]
+      order = 0
+      parent = child15
+      profile = default
+      type = Terminal
+      uuid = 159a0ae2-d6c6-4a60-a9f7-f345dba5b8ff
+    [[[terminal17]]]
+      order = 1
+      parent = child15
+      profile = default
+      type = Terminal
+      uuid = c6816ecd-82f2-426e-af87-1ac35b2da53a
+    [[[terminal18]]]
+      order = 2
+      parent = child1
+      profile = default
+      type = Terminal
+      uuid = 2897848f-611c-4ab9-a53b-ff9b7be0b2c8
+    [[[terminal23]]]
+      order = 0
+      parent = child22
+      profile = default
+      type = Terminal
+      uuid = cd4064c2-fd1a-4a06-8052-dc66be0b9fef
+    [[[terminal24]]]
+      order = 1
+      parent = child22
+      profile = default
+      type = Terminal
+      uuid = 00a22ead-40f5-44c7-b627-7c7a50e8d535
+    [[[terminal27]]]
+      order = 0
+      parent = child26
+      profile = default
+      type = Terminal
+      uuid = 17be697f-37a7-46a9-b369-03ac28bc71df
+    [[[terminal28]]]
+      order = 1
+      parent = child26
+      profile = default
+      type = Terminal
+      uuid = 38bab22a-b19c-425b-9140-3623a08a6b7e
+    [[[terminal29]]]
+      order = 1
+      parent = child25
+      profile = default
+      type = Terminal
+      uuid = abec1e0e-0cb6-4c1f-b814-317592b3d5e3
+    [[[terminal31]]]
+      order = 0
+      parent = child30
+      profile = default
+      type = Terminal
+      uuid = eec55d58-35a6-4111-bef7-b671b5181b14
+    [[[terminal32]]]
+      order = 1
+      parent = child30
+      profile = default
+      type = Terminal
+      uuid = 67233d68-47d7-4380-93ee-9c595232ce11
+    [[[terminal5]]]
+      order = 0
+      parent = child4
+      profile = default
+      type = Terminal
+      uuid = cd4064c2-fd1a-4a06-8052-dc66be0b9fef
+    [[[terminal6]]]
+      order = 1
+      parent = child4
+      profile = default
+      type = Terminal
+      uuid = 8f8629f3-d336-4eed-a41d-bac709c470e9
+    [[[terminal9]]]
+      order = 0
+      parent = child8
+      profile = default
+      type = Terminal
+      uuid = 17be697f-37a7-46a9-b369-03ac28bc71df
   [[standard]]
     [[[child0]]]
       fullscreen = False
@@ -161,8 +370,9 @@
     background_color = "#282828"
     background_darkness = 0.7
     cursor_color = "#ffffff"
-    font = Noto Mono 10
+    font = DejaVu Sans Mono 10
     foreground_color = "#ebdbb2"
+    palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
     scrollback_infinite = True
     use_system_font = False
     word_chars = "-A-Za-z0-9,./?%&#:_{}+"

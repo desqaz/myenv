@@ -1,1 +1,1 @@
-export PATH=/usr/lib/ccache:$PATH
+export PATH=/usr/lib/ccache/bin:$PATH
