@@ -60,7 +60,7 @@ print_symbol_size()
       if test "$symbol" != ""
       then
          size=$((16#`echo $line | gawk '{print $5}'`))
-         printf "%10d (%s) %s\n" $size $section $(echo "$symbol" | demangle | sort -u)
+         printf "%10d (%s) %s\n" $size $section $(echo "$symbol" | c++filt | sort -u)
       fi
    done
 }
