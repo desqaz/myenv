@@ -1,2 +1,4 @@
-curl --progress-bar https://storage.googleapis.com/git-repo-downloads/repo > ~/.local/bin/repo || exit 1
-chmod a+x ~/.local/bin/repo
+if [ $myenvDistro != 'osx' ]; then
+    curl --progress-bar https://storage.googleapis.com/git-repo-downloads/repo > ~/.local/bin/repo || exit 1
+    chmod a+x ~/.local/bin/repo
+fi

@@ -6,3 +6,5 @@ declare -i vimH=${vimW}/3.5
 
 export MYENV_GVIM_GEOMETRY=${vimW}x${vimH}
 
+export PATH=/Applications/MacVim.app/Contents/bin/:$PATH
+

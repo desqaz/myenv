@@ -8,19 +8,23 @@ if [[ $- == *i* ]]; then
 
 	export TOOLS_ROOT=$MYENV_ROOT/tools
 	export TOOLS_BIN=$MYENV_ROOT/bin
+	export CARGO_BIN=$HOME/.cargo/bin
 	export PREBUILTS_BIN=$MYENV_ROOT/prebuilts/bin
 	export LOCAL_BIN=$HOME/.local/bin
 	export LOCAL_LIB=$HOME/.local/lib
 	export LOCAL_PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig
 	export LOCAL_MAN=$HOME/.local/share/man
+	export BINUTILS_BIN=/usr/local/opt/binutils/bin
+	export GETTEXT_BIN=/usr/local/opt/gettext/bin
+	export EXTRA_PKG_CONFIG_PATH=/usr/local/opt/ncurses/lib/pkgconfig
 
-	export MYPATH__PATH=$TOOLS_ROOT:$TOOLS_BIN:$PREBUILTS_BIN:$LOCAL_BIN
-	export PATH=$MYPATH__PATH:$PATH:/usr/sbin:/sbin
+	export MYPATH__PATH=$GETTEXT_BIN:$BINUTILS_BIN:$TOOLS_ROOT:$TOOLS_BIN:$PREBUILTS_BIN:$LOCAL_BIN:$CARGO_BIN
+	export PATH=$MYPATH__PATH:$PATH:/usr/local/sbin:/usr/sbin:/sbin
 
 	export MYPATH__LD_LIBRARY_PATH=$LOCAL_LIB
 	export LD_LIBRARY_PATH=$MYPATH__LD_LIBRARY_PATH:$LD_LIBRARY_PATH
 
-	export MYPATH__PKG_CONFIG_PATH=$LOCAL_PKG_CONFIG_PATH
+	export MYPATH__PKG_CONFIG_PATH=$LOCAL_PKG_CONFIG_PATH:$EXTRA_PKG_CONFIG_PATH
 	export PKG_CONFIG_PATH=$MYPATH__PKG_CONFIG_PATH:$PKG_CONFIG_PATH
 
 	export MYPATH__MANPATH=$LOCAL_MAN
@@ -31,7 +35,6 @@ if [[ $- == *i* ]]; then
 	export ZSH_PATH=$MYENV_ROOT/zsh
 
 	export GPG_TTY=$(tty)
-
 
 	# Shell variables
 	for f in $(find $SH_PATH -type d); do
@@ -62,5 +65,9 @@ if [[ $- == *i* ]]; then
 		. $file
 	done
 
+	test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
 	return 0
 fi
+
+export PATH="/usr/local/opt/gettext/bin:$PATH"

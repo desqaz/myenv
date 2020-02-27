@@ -97,9 +97,28 @@ if [ "$1" != "nopack" ]; then
 		   	pacman --color auto -Q "$1" 2>/dev/null
 	   	}
 		function packageSearch {
-		 	pacsearch "^$dep$"	
+		 	pacsearch "^$dep$"
 		}
 	fi
+
+	type brew 2> /dev/null
+	if [ $? -eq 0 ]; then
+		myenvDistro='osx'
+		function packageGet   {
+		   	brew install "$1"
+			return $?
+	   	}
+		function packageCheck {
+            brew list "$1" >/dev/null 2>/dev/null
+            if [ $? -eq 0 ]; then
+                echo "ok"
+            fi
+	   	}
+		function packageSearch {
+		 	 echo "$1"
+		}
+	fi
+
 	for depnames in $(cat $DepsLst | grep '^pkg' | awk '{print $2}'); do
 		depOk=0
 		for dep in $(echo $depnames | awk -F ',' '{for(i=1; i<=NF; i++){print $i}}'); do
@@ -112,7 +131,7 @@ if [ "$1" != "nopack" ]; then
 					packageGet $dep
 					if [ $? -eq 0 ]; then depOk=1; break; fi
 			   	fi
-			else 
+			else
 				echo "[0;1;36m$dep[0;36m already installed[0m"
 				depOk=1; break;
 			fi
@@ -122,49 +141,51 @@ if [ "$1" != "nopack" ]; then
 		fi
 	done
 
-	#
-	# easy_install package installation 
-	#
-	echo "[0;32mInstalling python easy_install deps[0m"
-	type easy_install > /dev/null 2> /dev/null
-	if [ $? -eq 0 ]; then
-		for dep in $(cat $DepsLst | grep -w '^eins' | awk '{print $2}'); do
-			SUDO easy_install -U $dep
-		done
-	fi
+    if [ $myenvDistro != 'osx' ]; then
+	    #
+	    # easy_install package installation
+	    #
+	    echo "[0;32mInstalling python easy_install deps[0m"
+	    type easy_install > /dev/null 2> /dev/null
+	    if [ $? -eq 0 ]; then
+	    	for dep in $(cat $DepsLst | grep -w '^eins' | awk '{print $2}'); do
+	    		SUDO easy_install -U $dep
+	    	done
+	    fi
 
-	#
-	# easy_install3 package installation 
-	#
-	echo "[0;32mInstalling python3 easy_install deps[0m"
-	type easy_install3 > /dev/null 2> /dev/null
-	if [ $? -eq 0 ]; then
-		for dep in $(cat $DepsLst | grep -w '^eins3' | awk '{print $2}'); do
-			SUDO easy_install3 -U $dep
-		done
-	fi
+	    #
+	    # easy_install3 package installation
+	    #
+	    echo "[0;32mInstalling python3 easy_install deps[0m"
+	    type easy_install3 > /dev/null 2> /dev/null
+	    if [ $? -eq 0 ]; then
+	    	for dep in $(cat $DepsLst | grep -w '^eins3' | awk '{print $2}'); do
+	    		SUDO easy_install3 -U $dep
+	    	done
+	    fi
 
-	#
-	# Pip package installation 
-	#
-	echo "[0;32mInstalling python pip deps[0m"
-	type pip > /dev/null 2> /dev/null
-	if [ $? -eq 0 ]; then
-		for dep in $(cat $DepsLst | grep -w '^pip' | awk '{print $2}'); do
-			SUDO pip install --upgrade $dep
-		done
-	fi
+	    #
+	    # Pip package installation
+	    #
+	    echo "[0;32mInstalling python pip deps[0m"
+	    type pip > /dev/null 2> /dev/null
+	    if [ $? -eq 0 ]; then
+	    	for dep in $(cat $DepsLst | grep -w '^pip' | awk '{print $2}'); do
+	    		SUDO pip install --upgrade $dep
+	    	done
+	    fi
 
-	#
-	# Pip3 package installation 
-	#
-	echo "[0;32mInstalling python3 pip deps[0m"
-	type pip3 > /dev/null 2> /dev/null
-	if [ $? -eq 0 ]; then
-		for dep in $(cat $DepsLst | grep -w '^pip3' | awk '{print $2}'); do
-			SUDO pip3 install --upgrade $dep
-		done
-	fi
+	    #
+	    # Pip3 package installation
+	    #
+	    echo "[0;32mInstalling python3 pip deps[0m"
+	    type pip3 > /dev/null 2> /dev/null
+	    if [ $? -eq 0 ]; then
+	    	for dep in $(cat $DepsLst | grep -w '^pip3' | awk '{print $2}'); do
+	    		SUDO pip3 install --upgrade $dep
+	    	done
+	    fi
+    fi
 fi
 
 #
@@ -177,7 +198,7 @@ for dep in $(find $myenvdepsdir -type f | sort -n 2>/dev/null); do
 done
 
 #
-# Extra command 
+# Extra command
 #
 echo "[0;32mExecuting extra cmd[0m"
 IFS=$'\n'

@@ -1,2 +1,2 @@
 ln -svf ~/myenv/custom/user/$USER/.rrc ~/.rrc
-ln -svf ~/myenv/custom/user/$USER/.yaourtrc ~/.yaourtrc
+

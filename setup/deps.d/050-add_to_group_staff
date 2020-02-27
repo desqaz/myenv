@@ -1,6 +1,8 @@
-if [ "$(groups | grep -w "staff")" = "" ]; then
-	echo "[0;32mAdding user to 'staff' group[0m"
-	SUDO usermod -a -G staff $USER
-else
-	echo "[0;36mUser already belong to 'staff' group[0m"
+if [ $myenvDistro != 'osx' ]; then
+    if [ "$(groups | grep -w "staff")" = "" ]; then
+    	echo "[0;32mAdding user to 'staff' group[0m"
+    	SUDO usermod -a -G staff $USER
+    else
+    	echo "[0;36mUser already belong to 'staff' group[0m"
+    fi
 fi

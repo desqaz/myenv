@@ -3,5 +3,3 @@
 . $ZSH_PATH/compcfg
 . $ZSH_PATH/bindkeys
 
-eval $(dircolors)
-
