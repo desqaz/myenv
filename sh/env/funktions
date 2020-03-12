@@ -197,7 +197,11 @@ gsms() {
 	echo "[0;1;36m>> Syncing submodules[0m"
 	git submodule sync --recursive || return  2
 	echo "[0;1;36m>> Updating submodules[0m"
-	git submodule update --init --recursive || return 3
+	if [ "$MYENV_GIT_REFERENCE_ROOT_DIR" != "" ]; then
+		git submodule update --init --recursive --reference=$MYENV_GIT_REFERENCE_ROOT_DIR || return 3
+	else
+		git submodule update --init --recursive || return 3
+	fi
 }
 
 l() {
