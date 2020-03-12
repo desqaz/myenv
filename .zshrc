@@ -16,9 +16,10 @@ if [[ $- == *i* ]]; then
 	export LOCAL_MAN=$HOME/.local/share/man
 	export BINUTILS_BIN=/usr/local/opt/binutils/bin
 	export GETTEXT_BIN=/usr/local/opt/gettext/bin
+	export PYTHON2_BIN=$HOME/Library/Python/2.7/bin/
 	export EXTRA_PKG_CONFIG_PATH=/usr/local/opt/ncurses/lib/pkgconfig
 
-	export MYPATH__PATH=$GETTEXT_BIN:$BINUTILS_BIN:$TOOLS_ROOT:$TOOLS_BIN:$PREBUILTS_BIN:$LOCAL_BIN:$CARGO_BIN
+	export MYPATH__PATH=$PYTHON2_BIN:$GETTEXT_BIN:$BINUTILS_BIN:$TOOLS_ROOT:$TOOLS_BIN:$PREBUILTS_BIN:$LOCAL_BIN:$CARGO_BIN
 	export PATH=$MYPATH__PATH:$PATH:/usr/local/sbin:/usr/sbin:/sbin
 
 	export MYPATH__LD_LIBRARY_PATH=$LOCAL_LIB
