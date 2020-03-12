@@ -1,1 +1,5 @@
-alias ij='java -jar /soft/ij.jar'
+if [ "$(uname -s)" = "Darwin" ]; then
+	alias ij='/usr/local/opt/openjdk/bin/java -jar $HOME/.local/bin/ij.jar'
+else
+	alias ij='java -jar /soft/ij.jar'
+fi
