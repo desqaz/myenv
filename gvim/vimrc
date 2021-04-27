@@ -322,8 +322,8 @@ highlight DiffText guifg=black
 "---------------------------------------------------------------------------
 "Toggle tab expansion
 "---------------------------------------------------------------------------
-set noexpandtab
-let g:isexpandtab = 0
+set expandtab
+let g:isexpandtab = 1
 function! ToggleExpandTab()
    if g:isexpandtab == 0
       set expandtab
