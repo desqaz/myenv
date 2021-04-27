@@ -61,5 +61,7 @@ if [[ $- == *i* ]]; then
 		. $file
 	done
 
+	neofetch
+
 	return 0
 fi
