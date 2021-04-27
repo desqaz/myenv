@@ -13,9 +13,9 @@ if [[ $- == *i* ]]; then
 	export LOCAL_LIB=$HOME/.local/lib
 	export LOCAL_PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig
 	export LOCAL_MAN=$HOME/.local/share/man
-	export CARGO_BIN=$HOME/.cargo/bin
+	#export CARGO_BIN=$HOME/.cargo/bin
 
-	export MYPATH__PATH=$TOOLS_ROOT:$TOOLS_BIN:$PREBUILTS_BIN:$LOCAL_BIN:$CARGO_BIN
+	export MYPATH__PATH=$TOOLS_ROOT:$TOOLS_BIN:$PREBUILTS_BIN:$LOCAL_BIN
 	export PATH=$MYPATH__PATH:$PATH:/usr/sbin:/sbin
 
 	export MYPATH__LD_LIBRARY_PATH=$LOCAL_LIB
