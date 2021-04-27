@@ -18,7 +18,22 @@
 	boc = "!f() { \
 		git branch --color=always -a -vvv | grep $(git rev-parse --short $1); \
 		}; f"
-	rg = grep --recurse-submodules  --line-number --column --color=auto --break
+    rg = grep --recurse-submodules  --line-number --column --color=auto --break
+    ver = rev-parse --short HEAD
+	lb = "!f() { \
+		if [ $# -ne 2 ]; then\
+			echo \"$0 branch1 branch2\";\
+			echo \"  It will show the commit that are in branch1 and not in branch2 and vice versa\";\
+			return 0;\
+		fi;\
+\
+		echo \">> Commit in $1 but not in $2 :\";\
+		git --no-pager log --pretty=\"%h | %<(16)%cr | %<(20)%an | %<(70,trunc)%s\" --date=local ${2}..${1};\
+\
+		echo \"\"\
+		echo \">> Commit in $2 but not in $1 :\";\
+		git --no-pager log --pretty=\"%h | %<(16)%cr | %<(20)%an | %<(70,trunc)%s\" --date=local ${1}..${2};\
+		}; f"
 [diff]
 	tool = bc3
 	#tool = vi
@@ -44,6 +59,16 @@
 	default = current
 [gui]
 	warndetachedcommit = true
+[guitool "Edit in gvim"]
+	cmd = gvim $FILENAME
+	needsFile = true
+[guitool "Blame in gvim"]
+	cmd = gvim $FILENAME +Gblame
+	needsFile = true
+[guitool "Remove local modification"]
+	cmd = git checkout -- $FILENAME
+	needsFile = true
+	confirm = true
 [core]
 	editor = vim
 	pager = diff-so-fancy | less --tabs=4 -RFX
