@@ -3,11 +3,52 @@
 "#####################
 
 " disable vi compatibility
-set nocp
+"set nocp
 
 " Pathogen
-so $GVIM_PATH/pathogen.vim
-execute pathogen#infect('$GVIM_PATH/bundle')
+"so $GVIM_PATH/pathogen.vim
+"execute pathogen#infect('$GVIM_PATH/bundle')
+
+"-------------------------------------------------------------------------
+" Vundle
+"-------------------------------------------------------------------------
+set nocompatible              " be iMproved, required
+filetype off                  " required
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'AnsiEsc.vim'
+Plugin 'DoxygenToolkit.vim'
+Plugin 'ScrollColors'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'gregsexton/gitv'
+" highlights
+" inkpot
+Plugin 'fholgado/minibufexpl.vim'
+Plugin 'yegappan/mru'
+" mustang-vim
+Plugin 'scrooloose/nerdtree'
+Plugin 'tyru/open-browser.vim'
+Plugin 'aklt/plantuml-syntax'
+Plugin 'weirongxu/plantuml-previewer.vim'
+Plugin 'ervandew/supertab'
+Plugin 'scrooloose/syntastic'
+Plugin 'godlygeek/tabular'
+Plugin 'majutsushi/tagbar'
+" unite.vim
+Plugin 'vim-airline/vim-airline'
+" vim-flatbuffers
+" vim-fugitive
+Plugin 'tpope/vim-fugitive'
+" vim-rtags
+" vim-vitamins
+Plugin 'YankRing.vim'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
 
 "-------------------------------------------------------------------------
 "Color and font
