@@ -7,6 +7,12 @@ export PYBIN_GLOBAL_OBJECT_DIR=$MYENV_REFERENCE_ROOT_DIR/pybin_objects
 
 export BANZAI_USE_CCACHE=y
 
+export MYENV_TTY_USB=/dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_FT4X0N2M-if00-port0
+
+t() {
+    echo "t" ' ' "$@" > $MYENV_TTY_USB
+}
+
 b() {
 	Type=ACM
 	PortNumber=0
