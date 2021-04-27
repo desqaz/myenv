@@ -53,7 +53,7 @@ alias grs='   git remote show origin'
 alias 7tags='source $(7tags.py)'
 
 alias zeh='cat ~/.zsh_eternal_history | vi -R -'
-alias gzeh='cat ~/.zsh_eternal_history | grep'
+alias gzeh='cat ~/.zsh_eternal_history | grep -a'
 
 alias -g V=' | vi -R -'
 alias -g F=' | sed -e "s/\x1B\[[0-9;]*[mK]//g" '
