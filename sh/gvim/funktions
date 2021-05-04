@@ -49,7 +49,7 @@ vip() {
 	if [ -z "$VIMPROJSERVERNAME" ]; then
 		echo "VIMPROJSERVERNAME env var not set (use 7tags before using vip)"
 	else
-		vi --servername $VIMPROJSERVERNAME --remote-silent "$@"
+		vi --servername $VIMPROJSERVERNAME --remote-silent $*
 	fi
 }
 
