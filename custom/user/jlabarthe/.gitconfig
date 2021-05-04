@@ -18,8 +18,8 @@
 	boc = "!f() { \
 		git branch --color=always -a -vvv | grep $(git rev-parse --short $1); \
 		}; f"
-    rg = grep --recurse-submodules  --line-number --column --color=auto --break
-    ver = rev-parse --short HEAD
+	rg = grep --recurse-submodules  --line-number --column --color=auto --break
+	ver = rev-parse --short HEAD
 	lb = "!f() { \
 		if [ $# -ne 2 ]; then\
 			echo \"$0 branch1 branch2\";\
