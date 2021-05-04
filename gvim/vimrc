@@ -49,6 +49,7 @@ Plugin 'YankRing.vim'
 "Plugin 'neoclide/coc.nvim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'embark-theme/vim'
+Plugin 'rafi/awesome-vim-colorschemes'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
