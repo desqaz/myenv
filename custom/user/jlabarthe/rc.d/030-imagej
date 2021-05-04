@@ -1,1 +1,1 @@
-alias ij='java -jar /soft/ij.jar'
+alias ij='java -jar /datas/ij.jar'
