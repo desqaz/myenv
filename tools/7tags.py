@@ -1,8 +1,11 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 def log(msg):
     from sys import stderr
-    print >> stderr, msg
+    print(msg, file=stderr)
+
+def quoteFile(filename):
+    return '"%s"' % filename if ' ' in filename else filename
 
 def doFilesList(WorkDir, TagsIgnoreFile, TagsAddFile, OutFilesList, ExtensionList):
     from os import walk as osw
@@ -66,8 +69,12 @@ def doFilesList(WorkDir, TagsIgnoreFile, TagsAddFile, OutFilesList, ExtensionLis
 
 def doCscopeDb(OutFilesList, OutCscopeDb):
     import subprocess
-    cmd = "cscope -Rkbc -i %s -f %s" % (OutFilesList, OutCscopeDb)
-    subprocess.check_call(cmd, shell=True)
+    cmd = "cscope -Rkbc -i - -f %s" % (OutCscopeDb)
+    p = subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE)
+    with open(OutFilesList) as fileslist:
+        for file in fileslist:
+            p.stdin.write(('%s\n' % quoteFile(file.strip())).encode())
+    p.stdin.close()
 
 def doCtagsTags(OutFilesList, OutCtagsTags):
     import subprocess
@@ -78,7 +85,7 @@ def doVimHighLight(OutCtagsTags, OutVimTagsHl):
     import re
     reg = re.compile(r'^(\w+)\t[^\"]*\"\t(t|f|d|e).*$')
     synList = []
-    with open(OutCtagsTags) as ctags:
+    with open(OutCtagsTags, encoding='latin-1') as ctags:
         for line in ctags:
             m = reg.match(line)
             if m:
@@ -138,7 +145,7 @@ if __name__ == "__main__":
     log(" + Write export variables")
     doWriteExportVar(WorkDir, VimTagsPath, OutCscopeDb, OutCtagsTags, OutVimTagsHl, OutExportVar)
 
-    print OutExportVar
+    print(OutExportVar)
 
     log("Done !")
 
