@@ -54,7 +54,16 @@
 [mergetool "bc3"]
 	cmd = git_mergetool_wrapper_bc "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
 	trustExitCode = true
-
+[guitool "Edit in gvim"]
+    cmd = gvim $FILENAME
+    needsFile = true
+[guitool "Blame in gvim"]
+    cmd = gvim $FILENAME +Gblame
+    needsFile = true
+[guitool "Remove local modification"]
+    cmd = git checkout -- $FILENAME
+    needsFile = true
+    confirm = true
 [push]
 	default = current
 [gui]
