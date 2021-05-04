@@ -24,6 +24,12 @@ b() {
 	echo "$@" > /dev/tty${Type}${PortNumber}
 }
 
+export MYENV_TTY_USB_DEF=/dev/serial/by-id/usb-FTDI_USB__-__Serial_Converter_FT3XNKVJ-if00-port0
+t() {
+    echo "t " "$@" > $MYENV_TTY_USB_DEF
+}
+
+
 bn() {
 	ssh root@192.168.0.202 /usr/local/gopro/bin/gpdevSendCmd TC \"$(echo $@)\"
 }
