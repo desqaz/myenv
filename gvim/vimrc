@@ -222,6 +222,7 @@ map <C-x>         :call CloseSomething()<CR>
 map <C-s>         :w!<CR>
 map <C-s>         :w!<CR>
 map <C-f>         :NERDTreeFind<CR>
+map <C-z>         :FZF $VIMPROJSERVERNAME<CR>
 
 map ,b            :!mk beautify-changes<CR><CR>
 map ,l            :so ~/.vimrc<CR>
