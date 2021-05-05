@@ -42,6 +42,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 " vim-flatbuffers
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 " vim-rtags
 " vim-vitamins
 Plugin 'YankRing.vim'
@@ -212,6 +213,7 @@ map <F4>          :TagbarToggle<CR>
 map <F5>          ^i/* <C-[>$a */<C-[>
 map <F6>          ^3x$2h3x
 map <F7>          :bdelete<CR>
+map <F8>          :NERDTreeToggle<CR>
 map <F9>          :noh<CR>
 nmap <F10>        /[^\x00-\x7F]<CR>
 map <C-N>         :noh<CR>
